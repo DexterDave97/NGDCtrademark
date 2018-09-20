@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/Bedroom.unity
     guid: 7ab9c59d74edb4d448f4025a5045bd3e
   - enabled: 1
     path: Assets/Scenes/CorriInTheHouse.unity
     guid: 112e311269e744b4db369d330eeade8c
+  - enabled: 1
+    path: Assets/Scenes/House.unity
+    guid: 3a6123b4e7bd8534ab096e81e181394e
   m_configObjects: {}
