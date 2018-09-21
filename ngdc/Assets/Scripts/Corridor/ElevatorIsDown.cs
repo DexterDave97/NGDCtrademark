@@ -5,6 +5,7 @@ using UnityEngine;
 public class ElevatorIsDown : MonoBehaviour {
     public LayerMask l;
     public static bool isDown;
+    [SerializeField] GameObject elevatorWallCollider;
     void Start()
     {
         isDown = false;
@@ -21,6 +22,7 @@ public class ElevatorIsDown : MonoBehaviour {
         if (rh2D)
         {            
             isDown = true;
+            Destroy(elevatorWallCollider);
         }
     }
 }
