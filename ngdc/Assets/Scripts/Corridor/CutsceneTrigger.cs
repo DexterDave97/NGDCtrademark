@@ -26,5 +26,7 @@ public class CutsceneTrigger : MonoBehaviour {
         cutsceneManager.SetActive(true);
         Cutscene.cutsceneIndex = 2;
         Cutscene.playCutscene = true;
+        Cutscene.sceneEnd = true;
+        Cutscene.nextSceneName = "ToCafe";
     }
 }

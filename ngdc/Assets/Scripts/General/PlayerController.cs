@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name), gameObject.transform.position.y, gameObject.transform.position.z);
         }
-        else
+        else if(Cutscene.firstScene)
         {
             StartCoroutine(TriggerCutscene());
         }
@@ -164,5 +164,6 @@ public class PlayerController : MonoBehaviour
         cutsceneManager.SetActive(true);
         Cutscene.cutsceneIndex = 1;
         Cutscene.playCutscene = true;
+        Cutscene.firstScene = false;
     }
 }

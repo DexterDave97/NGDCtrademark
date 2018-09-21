@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class Cutscene : MonoBehaviour
 {
@@ -10,7 +11,9 @@ public class Cutscene : MonoBehaviour
     public static Cutscene instance;
 
     public static int cutsceneIndex = 0, currentSprite = 0;
-    public static bool playCutscene;
+    public static bool playCutscene, sceneEnd;
+    public static string nextSceneName;
+    public static bool firstScene=true;
     GameObject cutsceneGameobject;
     Image panel;
     Animator fadePanel;
@@ -23,9 +26,9 @@ public class Cutscene : MonoBehaviour
 
     void Start()
     {
-        panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
+        
         cutsceneGameobject = GameObject.FindGameObjectWithTag("Cutscene");
-        fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
+        sceneEnd = false;
 
         playCutscene = false;
 
@@ -61,6 +64,13 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(firstScene);
+        if(Time.timeSinceLevelLoad <= 0.01f)
+        {
+            fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
+            panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
+        }
+
         if (playCutscene)
         {
             PlayerController.canmove = false;
@@ -80,6 +90,11 @@ public class Cutscene : MonoBehaviour
                     playCutscene = false;
                     StartCoroutine(TriggerCut());
                     //if (cutsceneIndex != 4)
+                    if(sceneEnd)
+                    {
+                        SceneManager.LoadScene(nextSceneName);
+                        sceneEnd = false;
+                    }
                     PlayerController.canmove = true;
                 }
             }
@@ -106,6 +121,11 @@ public class Cutscene : MonoBehaviour
         tCol2 = panel.color;
         tCol2.a = 0;
         panel.color = tCol2;
+        if (sceneEnd)
+        {
+            SceneManager.LoadScene(nextSceneName);
+            sceneEnd = false;
+        }
         yield return new WaitForSeconds(0.5f);
     }
 
