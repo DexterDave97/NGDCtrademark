@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 58350640968845182}
   - component: {fileID: 95334414777530994}
   - component: {fileID: 114351423850424670}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -140,8 +140,6 @@ MonoBehaviour:
   Obj:
     serializedVersion: 2
     m_Bits: 1024
-  building: {fileID: 0}
-  windowPane: {fileID: 0}
   moveSpeed: 5
 --- !u!212 &212896662687240350
 SpriteRenderer:

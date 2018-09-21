@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    [SerializeField] float camXPosMax, camXPosMin;
-    [SerializeField] GameObject player; // Use this for initialization
+    [SerializeField] GameObject player;
+    public float camXPosMax, camXPosMin;
+    public static CameraFollow camfol;
+
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
+        camfol = this;
     }
 	
-	// Update is called once per frame
 	void Update () {
         CamFollow();
 	}

@@ -30,7 +30,7 @@ public class Zoom : MonoBehaviour {
             PlayerController.canmove = false;
         }
         
-        else if (Input.GetKeyDown(KeyCode.E) && items.activeInHierarchy == true )
+        else if (Input.GetKeyDown(KeyCode.Escape) && items.activeInHierarchy == true )
         {
             items.SetActive(false);
             s.tx.text = null;

@@ -11,10 +11,9 @@ public class PlayerController : MonoBehaviour
     GameObject cutsceneManager;
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask Obj;
-    public GameObject building, windowPane;
-    public static float jumpSpeed = 2.5f, jumpHeight = 25f; // 1.3, 12
+    public static float jumpSpeed = 1.8f, jumpHeight = 20f; // 1.3, 12
     public static int Dir = 1;
-    private float move, lastMove, acc = 0.1f, yComponentOfP, jumpHeightTemp, runSpeed, maxMoveSpeed = 20f; // acc = runSpeed - intial speed / time taken 
+    private float move, lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 25f; // acc = runSpeed - intial speed / time taken 
     public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
@@ -24,7 +23,6 @@ public class PlayerController : MonoBehaviour
         runSpeed = moveSpeed;
         Dir = 0;
         canmove = true;
-        jumpHeightTemp = jumpHeight;
         playerRB = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
         playerSp = GetComponent<SpriteRenderer>();
@@ -42,8 +40,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.DrawRay(transform.position - new Vector3(0, 1.4f, 0), new Vector3(Dir, 0, 0), Color.cyan);
-
         move = Input.GetAxisRaw("Horizontal");
         JumpHeightDetermine();
         Ground();// Dir is here tho 
@@ -68,14 +64,16 @@ public class PlayerController : MonoBehaviour
 
     void JumpHeightDetermine()
     {
-        if (Physics2D.Raycast(transform.position - new Vector3(Dir * playerSp.bounds.extents.x, 1.4f, 0), new Vector3(Dir, 0, 0), 0.2f, Obj))
-            jumpHeight = jumpHeightTemp / 2;
-        else jumpHeight = jumpHeightTemp;
+        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 1.8f, Obj))
+            jumpHeight = 12.5f;
+        else jumpHeight = 25f;
     }
 
     void Ground()
     {
-        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y, 0), Vector3.down, 0.2f, ground))
+        Debug.DrawRay(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down,Color.cyan);
+        Debug.DrawRay(transform.position + new Vector3(0.5f, -playerSp.bounds.extents.y, 0), Vector3.down, Color.red);
+        if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.5f, 0), Vector3.down, 0.1f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y + 0.5f, 0), Vector3.down, 0.1f, ground))
         {
             isJumping = false;
             isGrounded = true;
@@ -148,7 +146,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetFloat("Velocity", 0);
         else playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
 
-        if (Physics2D.Raycast(transform.position - new Vector3(0, 1.4f, 0), new Vector3(Dir, 0, 0), 0.5f, Obj))
+        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 1.8f, Obj))
             playerAnim.SetFloat("Velocity", 0);
 
         if (isJumping == true || isGrounded == false)

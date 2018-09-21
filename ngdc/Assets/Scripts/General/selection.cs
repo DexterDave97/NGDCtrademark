@@ -56,14 +56,14 @@ public class selection : MonoBehaviour {
     {
         if (gb.activeInHierarchy == true)
         {
-            if (Input.GetKeyDown(KeyCode.Return) && skip == false)
+            if (Input.GetKeyDown(KeyCode.E) && skip == false)
             {
                 StopAllCoroutines();
                 StartCoroutine(rt.rollText(dailogues[index], tx));
                 skip = true;
             }
 
-            else if (Input.GetKeyDown(KeyCode.Return) && skip)
+            else if (Input.GetKeyDown(KeyCode.E) && skip)
             {
                 StopAllCoroutines();
                 tx.text = dailogues[index];

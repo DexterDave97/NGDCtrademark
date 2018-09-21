@@ -64,7 +64,6 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(firstScene);
         if(Time.timeSinceLevelLoad <= 0.01f)
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
@@ -94,6 +93,11 @@ public class Cutscene : MonoBehaviour
                     {
                         SceneManager.LoadScene(nextSceneName);
                         sceneEnd = false;
+                    }
+                    if(cutsceneIndex == 3)
+                    {
+                        CameraFollow.camfol.camXPosMin = 32.5f;
+                        CameraFollow.camfol.camXPosMax = 60f;
                     }
                     PlayerController.canmove = true;
                 }
