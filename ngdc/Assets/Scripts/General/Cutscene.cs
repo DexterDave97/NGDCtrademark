@@ -13,6 +13,7 @@ public class Cutscene : MonoBehaviour
     public static bool playCutscene;
     GameObject cutsceneGameobject;
     Image panel;
+    [SerializeField] Animator fadePanel;
 
     public List<Sprite> cutscene1 = new List<Sprite>();
     public List<Sprite> cutscene2 = new List<Sprite>();
@@ -61,7 +62,6 @@ public class Cutscene : MonoBehaviour
     {
         if (playCutscene)
         {
-            Debug.Log(cutsceneIndex);
             
             PlayerController.canmove = false;
 
@@ -80,20 +80,29 @@ public class Cutscene : MonoBehaviour
                     playCutscene = false;
                     if (cutsceneIndex != 4)
                         PlayerController.canmove = true;
+                    StartCoroutine(TriggerCut());
                 }
             }
 
-            Debug.Log(currentSprite);
-
             panel.sprite = GetCutscene(cutsceneIndex)[currentSprite];
+            Color tCol;
+            tCol = panel.color;
+            tCol.a = 1;
+            panel.color = tCol;
 
         }
         else
         {
             currentSprite = 0;
-            if(cutsceneGameobject == true)
+            if (cutsceneGameobject == true)
                 cutsceneGameobject.SetActive(false);
         }
+    }
+
+    IEnumerator TriggerCut()
+    {
+        fadePanel.SetBool("out", false);
+        yield return new WaitForSeconds(0.5f);
     }
 
     List<Sprite> GetCutscene(int x)
