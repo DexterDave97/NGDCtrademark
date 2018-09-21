@@ -11,6 +11,7 @@ public class Cutscene : MonoBehaviour
 
     public static int cutsceneIndex = 0, currentSprite = 0;
     public static bool playCutscene;
+    GameObject cutsceneGameobject;
     Image panel;
 
     public List<Sprite> cutscene1 = new List<Sprite>();
@@ -22,6 +23,7 @@ public class Cutscene : MonoBehaviour
     void Start()
     {
         panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
+        cutsceneGameobject = GameObject.FindGameObjectWithTag("Cutscene");
 
         playCutscene = false;
 
@@ -89,7 +91,8 @@ public class Cutscene : MonoBehaviour
         else
         {
             currentSprite = 0;
-            GameObject.FindGameObjectWithTag("Cutscene").SetActive(false);
+            if(cutsceneGameobject == true)
+                cutsceneGameobject.SetActive(false);
         }
     }
 
