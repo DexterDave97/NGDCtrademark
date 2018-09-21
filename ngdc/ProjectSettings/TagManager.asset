@@ -14,6 +14,7 @@ TagManager:
   - Door
   - DeadG
   - Cutscene
+  - FadePanel
   layers:
   - Default
   - TransparentFX

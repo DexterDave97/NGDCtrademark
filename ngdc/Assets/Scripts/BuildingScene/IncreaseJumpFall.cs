@@ -5,31 +5,29 @@ using UnityEngine;
 public class IncreaseJumpFall : MonoBehaviour
 {
     GameObject cutsceneManager;
-    private Rigidbody2D temp;
-    bool trig = false;
+    Animator fadePanel;
 
     private void Awake()
     {
         cutsceneManager = GameObject.FindGameObjectWithTag("Cutscene");
-        temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            trig = true;
+            StartCoroutine(TriggerCutscene());
         }
     }
-
-    private void Update()
+    
+    IEnumerator TriggerCutscene()
     {
-        if (trig)
-        {
-            trig = false;
-            cutsceneManager.SetActive(true);
-            Cutscene.cutsceneIndex = 5;
-            Cutscene.playCutscene = true;
-        }
+        fadePanel.SetBool("out", true);
+        yield return new WaitForSeconds(1);
+        cutsceneManager.SetActive(true);
+        Cutscene.cutsceneIndex = 5;
+        Cutscene.playCutscene = true;
+        Destroy(this.gameObject);
     }
 }

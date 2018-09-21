@@ -7,13 +7,14 @@ public class Suicided : MonoBehaviour
     GameObject player;
     bool triggered = false;
     [SerializeField] GameObject respawn, beti;
-    [SerializeField] Animator fadePanel;
+    Animator fadePanel;
     GameObject cutsceneManager;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         cutsceneManager = GameObject.FindGameObjectWithTag("Cutscene");
+        fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -41,7 +42,6 @@ public class Suicided : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(fadePanel.GetBool("out"));
         if (triggered)
         {
             if (Cutscene.playCutscene == false)

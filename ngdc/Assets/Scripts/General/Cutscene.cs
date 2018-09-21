@@ -13,7 +13,7 @@ public class Cutscene : MonoBehaviour
     public static bool playCutscene;
     GameObject cutsceneGameobject;
     Image panel;
-    [SerializeField] Animator fadePanel;
+    Animator fadePanel;
 
     public List<Sprite> cutscene1 = new List<Sprite>();
     public List<Sprite> cutscene2 = new List<Sprite>();
@@ -25,6 +25,7 @@ public class Cutscene : MonoBehaviour
     {
         panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
         cutsceneGameobject = GameObject.FindGameObjectWithTag("Cutscene");
+        fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
 
         playCutscene = false;
 
@@ -62,15 +63,14 @@ public class Cutscene : MonoBehaviour
     {
         if (playCutscene)
         {
-            
             PlayerController.canmove = false;
 
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyUp(KeyCode.A))
             {
                 currentSprite--;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyUp(KeyCode.D))
             {
                 currentSprite++;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
@@ -78,9 +78,9 @@ public class Cutscene : MonoBehaviour
                 {
                     currentSprite--;
                     playCutscene = false;
-                    if (cutsceneIndex != 4)
-                        PlayerController.canmove = true;
+                    //if (cutsceneIndex != 4)
                     StartCoroutine(TriggerCut());
+                    PlayerController.canmove = true;
                 }
             }
 

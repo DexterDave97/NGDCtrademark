@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRB;
     private Animator playerAnim;
     private SpriteRenderer playerSp;
+    Animator fadePanel;
+    GameObject cutsceneManager;
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask Obj;
     public GameObject building, windowPane;
@@ -26,8 +28,16 @@ public class PlayerController : MonoBehaviour
         playerRB = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
         playerSp = GetComponent<SpriteRenderer>();
+        fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
+        cutsceneManager = GameObject.FindGameObjectWithTag("Cutscene");
         if (LevelTransition.playerPos != null && PlayerPrefs.HasKey(SceneManager.GetActiveScene().name))
+        {
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name), gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+        else
+        {
+            StartCoroutine(TriggerCutscene());
+        }
     }
 
     private void FixedUpdate()
@@ -145,5 +155,14 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("Jumping", true);
         if (isJumping == false || isGrounded == true)
             playerAnim.SetBool("Jumping", false);
+    }
+
+    IEnumerator TriggerCutscene()
+    {
+        fadePanel.SetBool("out", false);
+        yield return new WaitForSeconds(0);
+        cutsceneManager.SetActive(true);
+        Cutscene.cutsceneIndex = 1;
+        Cutscene.playCutscene = true;
     }
 }
