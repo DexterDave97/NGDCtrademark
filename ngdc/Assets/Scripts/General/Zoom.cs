@@ -27,14 +27,14 @@ public class Zoom : MonoBehaviour {
         {
             rb2d.velocity = new Vector3(0, 0, 0);
             items.SetActive(true);
-            PlayerControl.canmove = false;
+            PlayerController.canmove = false;
         }
         
         else if (Input.GetKeyDown(KeyCode.E) && items.activeInHierarchy == true )
         {
             items.SetActive(false);
             s.tx.text = null;
-            PlayerControl.canmove = true;
+            PlayerController.canmove = true;
         }
     }
 }

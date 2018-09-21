@@ -12,19 +12,19 @@ public class SchoolCam : MonoBehaviour {
     void Start () {
         et = FindObjectOfType<ElevatorTrans>();
         player = GameObject.FindGameObjectWithTag("Player");
-        offset = player.transform.position.y - transform.position.y;
+        offset = -player.transform.position.y + transform.position.y;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(ElevatorTrans.ended)
         {
-            PlayerControl.canmove = true;
+            PlayerController.canmove = true;
             CamFollow();
         }
         else if (et.triggered)
         {
-            PlayerControl.canmove = false;
+            PlayerController.canmove = false;
         }
 	}
 
@@ -34,9 +34,9 @@ public class SchoolCam : MonoBehaviour {
         {
             transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
         }
-        else if(player.transform.position.x < camXPosMin && player.transform.position.y - offset < camYPosMax)
+        else if(player.transform.position.x < camXPosMin && player.transform.position.y + offset < camYPosMax)
         {
-            transform.position = new Vector3(transform.position.x, player.transform.position.y - offset, transform.position.z);
+            transform.position = new Vector3(transform.position.x, player.transform.position.y + offset, transform.position.z);
         }
     }
 }

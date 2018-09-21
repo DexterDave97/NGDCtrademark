@@ -8,10 +8,6 @@ public class ElevatorTrans : MonoBehaviour {
     [SerializeField] float finalCamPos;
     public bool triggered = false;
     public static bool ended;
-
-
-
-    private IEnumerator camCoroutine;
    
     // Use this for initialization
     void Start () {
