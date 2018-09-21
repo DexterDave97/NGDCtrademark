@@ -78,8 +78,8 @@ public class Cutscene : MonoBehaviour
                 {
                     currentSprite--;
                     playCutscene = false;
-                    //if (cutsceneIndex != 4)
                     StartCoroutine(TriggerCut());
+                    //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
                 }
             }
@@ -102,6 +102,10 @@ public class Cutscene : MonoBehaviour
     IEnumerator TriggerCut()
     {
         fadePanel.SetBool("out", false);
+        Color tCol2;
+        tCol2 = panel.color;
+        tCol2.a = 0;
+        panel.color = tCol2;
         yield return new WaitForSeconds(0.5f);
     }
 
