@@ -13,6 +13,7 @@ TagManager:
   - Daughter
   - Door
   - DeadG
+  - Cutscene
   layers:
   - Default
   - TransparentFX

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncreaseJumpFall : MonoBehaviour {
-
+public class IncreaseJumpFall : MonoBehaviour
+{
+    GameObject cutsceneManager;
     private Rigidbody2D temp;
-    private bool trig = false;
+    bool trig = false;
 
     private void Awake()
     {
+        cutsceneManager = GameObject.FindGameObjectWithTag("Cutscene");
         temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
     }
 
@@ -20,20 +22,14 @@ public class IncreaseJumpFall : MonoBehaviour {
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            trig = false;
-        }
-    }
-
     private void Update()
     {
-        if(trig)
+        if (trig)
         {
             trig = false;
-            temp.velocity = new Vector2(temp.velocity.x / 1.5f, temp.velocity.y);
+            cutsceneManager.SetActive(true);
+            Cutscene.cutsceneIndex = 5;
+            Cutscene.playCutscene = true;
         }
     }
 }
