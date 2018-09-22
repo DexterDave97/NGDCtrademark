@@ -910,6 +910,7 @@ MonoBehaviour:
   levelname: House
   changable: 0
   anim: {fileID: 2065454345}
+  shouldSave: 0
 --- !u!61 &724942767
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1223,7 +1224,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.5953274, y: 0}
+  m_Offset: {x: -1.0406799, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1234,7 +1235,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.5593452, y: 9.2}
+  m_Size: {x: 3.6686401, y: 9.2}
   m_EdgeRadius: 0
 --- !u!4 &870529135
 Transform:
@@ -2925,7 +2926,7 @@ GameObject:
   - component: {fileID: 2065454345}
   m_Layer: 5
   m_Name: Panel
-  m_TagString: Untagged
+  m_TagString: FadePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -24,6 +24,7 @@ public class SchoolCam : MonoBehaviour {
         }
         else if (et.triggered)
         {
+            player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             PlayerController.canmove = false;
         }
 	}

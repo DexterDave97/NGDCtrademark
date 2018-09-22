@@ -9,11 +9,9 @@ public class Cutscene : MonoBehaviour
 {
 
     public static Cutscene instance;
-
-    public static int cutsceneIndex = 0, currentSprite = 0;
+    public static int cutsceneIndex, currentSprite = 0;
     public static bool playCutscene, sceneEnd;
     public static string nextSceneName;
-    public static bool firstScene=true;
     GameObject cutsceneGameobject;
     Image panel;
     Animator fadePanel;
@@ -26,9 +24,18 @@ public class Cutscene : MonoBehaviour
 
     void Start()
     {
+        cutsceneIndex = 0;
+        fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
+        panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
+        cutsceneGameobject = panel.gameObject;
         sceneEnd = false;
-
-        playCutscene = false;
+        if (SceneManager.GetActiveScene().name == "House")
+        {
+            playCutscene = true;
+            cutsceneIndex = 1;
+        }
+        else
+            playCutscene = false;
 
         DontDestroyOnLoad(this);
         if (instance == null)
@@ -62,7 +69,7 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
-        if(Time.timeSinceLevelLoad <= 0.01f && SceneManager.GetActiveScene().name != "Bedroom")
+        if(Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
             panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
@@ -86,6 +93,7 @@ public class Cutscene : MonoBehaviour
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
+                   
                     currentSprite--;
                     playCutscene = false;
                     StartCoroutine(TriggerCut());

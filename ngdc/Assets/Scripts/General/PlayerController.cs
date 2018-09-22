@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name), gameObject.transform.position.y, gameObject.transform.position.z);
         }
-        else if(Cutscene.firstScene)
+        else if (SceneManager.GetActiveScene().name == "House")
         {
             StartCoroutine(TriggerCutscene());
         }
@@ -79,7 +79,6 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position + new Vector3(0.5f, -playerSp.bounds.extents.y, 0), Vector3.down, Color.red);
         if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground))
         {
-            Debug.Log("Hit");
             playerAnim.SetBool("Jumping", false);
             isJumping = false;
             isGrounded = true;
@@ -164,11 +163,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator TriggerCutscene()
     {
-        fadePanel.SetBool("out", false);
         fadePanel.SetBool("out", true);
-        yield return new WaitForSeconds(0);
+        yield return null;
         Cutscene.cutsceneIndex = 1;
         Cutscene.playCutscene = true;
-        Cutscene.firstScene = false;
     }
 }
