@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     Animator fadePanel;
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask Obj;
-    public static float jumpSpeed = 1.8f, jumpHeight = 20f; // 1.3, 12
+    public static float jumpSpeed = 1.5f, jumpHeight; // 1.3, 12
     public static int Dir = 1;
-    private float move, lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 25f; // acc = runSpeed - intial speed / time taken 
+    private float move, lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f; // acc = runSpeed - intial speed / time taken 
     public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
@@ -47,19 +47,19 @@ public class PlayerController : MonoBehaviour
         move = Input.GetAxisRaw("Horizontal");
         JumpHeightDetermine();
         Ground();// Dir is here tho 
-        if (runSpeed < 0)
+        /*if (runSpeed < 0)
         {
             runSpeed = moveSpeed;
             isMoving = false;
             Dir = 0;
-        }
+        }*/
         if (lastMove != move)
             runSpeed = moveSpeed;
         if (transform.position.y < yComponentOfP)
             playerRB.velocity = new Vector2(playerRB.velocity.x, playerRB.velocity.y * 1.05f);
         if (canmove == true && lockSuicide == false && isJumping == false && isGrounded == true)
             Movement(move);
-        if (jumpingAvailable == true && isGrounded == true && Input.GetKey(KeyCode.Space) == true)
+        if (jumpingAvailable == true && isGrounded == true && Input.GetKeyDown(KeyCode.Space) == true)
             Jumping();
         AnimationFunc();
         lastMove = move;
@@ -69,16 +69,18 @@ public class PlayerController : MonoBehaviour
     void JumpHeightDetermine()
     {
         if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 1.8f, Obj))
-            jumpHeight = 12.5f;
-        else jumpHeight = 25f;
+            jumpHeight = 10f;
+        else jumpHeight = 20f;
     }
 
     void Ground()
     {
         Debug.DrawRay(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down,Color.cyan);
         Debug.DrawRay(transform.position + new Vector3(0.5f, -playerSp.bounds.extents.y, 0), Vector3.down, Color.red);
-        if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.5f, 0), Vector3.down, 0.1f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y + 0.5f, 0), Vector3.down, 0.1f, ground))
+        if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground))
         {
+            Debug.Log("Hit");
+            playerAnim.SetBool("Jumping", false);
             isJumping = false;
             isGrounded = true;
 
@@ -96,7 +98,7 @@ public class PlayerController : MonoBehaviour
             runSpeed = Mathf.Clamp(runSpeed, runSpeed, maxMoveSpeed);
         }
 
-        if (runSpeed > moveSpeed && Input.GetKey(KeyCode.LeftShift) == false)
+        if (runSpeed > 10f && Input.GetKey(KeyCode.LeftShift) == false)
         {
             runSpeed -= acc;
             runSpeed = Mathf.Clamp(runSpeed, runSpeed, moveSpeed);
@@ -104,42 +106,48 @@ public class PlayerController : MonoBehaviour
 
         if (move == 0 && isMoving == true)
         {
-            runSpeed -= acc * 2;
+            runSpeed -= acc * 5;
             runSpeed = Mathf.Clamp(runSpeed, -0.1f, runSpeed);
         }
+        /*
+        if (Input.GetKeyDown(KeyCode.LeftShift) && lockRun == false)
+            runSpeed = maxMoveSpeed;
+        else runSpeed = moveSpeed;*/
 
-        if (move != 0)
-        {
-            isMoving = true;
-            playerRB.velocity = new Vector2((Dir * runSpeed), playerRB.velocity.y);
-        }
-        else if (Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == true)
-        {
-            playerRB.velocity = new Vector2(playerRB.velocity.x, playerRB.velocity.y);
-        }
-        else
-            playerRB.velocity = new Vector2(Dir * runSpeed, playerRB.velocity.y);
+        playerRB.velocity = new Vector2(Dir * runSpeed, playerRB.velocity.y);
     }
 
     void Jumping()
     {
         isJumping = true;
 
+        playerAnim.SetBool("Jumping", true);
+
         if (Input.GetKey(KeyCode.LeftShift) == true)
-            playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed * 0.6f, ((jumpHeight * 1.15f * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
+            playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * 1.25f * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
         else playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
     }
 
     void DirectionChange()
     {
+        if (move == 0 && Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == true)
+            return;
+        else if(move == 0)
+        {
+            isMoving = false;
+            Dir = 0;
+        }
+
         if (move == -1)
         {
             playerSp.flipX = true;
+            isMoving = true;
             Dir = -1;
         }
         if (move == +1)
         {
             playerSp.flipX = false;
+            isMoving = true;
             Dir = 1;
         }
     }
@@ -152,11 +160,6 @@ public class PlayerController : MonoBehaviour
 
         if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 1.8f, Obj))
             playerAnim.SetFloat("Velocity", 0);
-
-        if (isJumping == true || isGrounded == false)
-            playerAnim.SetBool("Jumping", true);
-        if (isJumping == false || isGrounded == true)
-            playerAnim.SetBool("Jumping", false);
     }
 
     IEnumerator TriggerCutscene()
