@@ -6,18 +6,18 @@ public class SchoolCam : MonoBehaviour {
     [SerializeField] float camXPosMax, camXPosMin, camYPosMax;
     [SerializeField] GameObject player;
     private float offset;
-    ElevatorTrans et;
+    ChangeToFireman et;
 
     // Use this for initialization
     void Start () {
-        et = FindObjectOfType<ElevatorTrans>();
+        et = FindObjectOfType<ChangeToFireman>();
         player = GameObject.FindGameObjectWithTag("Player");
         offset = -player.transform.position.y + transform.position.y;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(ElevatorTrans.ended)
+		if(ChangeToFireman.ended)
         {
             PlayerController.canmove = true;
             CamFollow();

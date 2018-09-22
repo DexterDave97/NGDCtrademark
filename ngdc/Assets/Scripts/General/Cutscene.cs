@@ -70,7 +70,7 @@ public class Cutscene : MonoBehaviour
         }
         for (int temp = 0; temp < 2; temp++)
         {
-            cutscene6.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 26) + ".png", typeof(Sprite)));
+            cutscene6.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 43) + ".png", typeof(Sprite)));
         }
         for (int temp = 0; temp < 10; temp++)
         {

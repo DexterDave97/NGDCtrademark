@@ -34,7 +34,15 @@ public class School4thfloor : MonoBehaviour {
     {
         fadePanel.SetBool("out", true);
         yield return new WaitForSeconds(1);
-        Cutscene.cutsceneIndex = 8;
+        if(doorCount==3)
+        {
+            Cutscene.cutsceneIndex = 8;
+        }
+        else
+        {
+            Cutscene.cutsceneIndex = 6;
+        }
+
         Cutscene.playCutscene = true;
         Destroy(this.gameObject);
     }
@@ -53,15 +61,7 @@ public class School4thfloor : MonoBehaviour {
                 if (hit == 3)
                 {
                     doorCount++;
-                    if (doorCount == 3)
-                    {
-                        StartCoroutine(TriggerCutscene());
-                    }
-                    else
-                    {
-                        Destroy(this.gameObject);
-                        PlayerController.canmove = true;
-                    }
+                    StartCoroutine(TriggerCutscene());
                 }
             }
             else if (i == 0)
@@ -73,7 +73,6 @@ public class School4thfloor : MonoBehaviour {
         if (trig && Input.GetKeyDown(KeyCode.E))
         {
             trig = false;
-
             hitcall();
         }
     }

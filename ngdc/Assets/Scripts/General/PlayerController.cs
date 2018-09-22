@@ -17,13 +17,35 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
 
+    private void Awake()
+    {
+        playerAnim = GetComponent<Animator>();
+        if (SceneManager.GetActiveScene().buildIndex >= 0 && SceneManager.GetActiveScene().buildIndex <= 2)
+        {
+            playerAnim.SetBool("VTrigger", false);
+            playerAnim.SetBool("FireTrigger", false);
+            playerAnim.SetBool("Falling", false);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex >= 3 && SceneManager.GetActiveScene().buildIndex <= 7)
+        {
+            playerAnim.SetBool("VTrigger", true);
+            playerAnim.SetBool("FireTrigger", false);
+            playerAnim.SetBool("Falling", false);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex >= 8 && SceneManager.GetActiveScene().buildIndex <= 9)
+        {
+            playerAnim.SetBool("VTrigger", false);
+            playerAnim.SetBool("FireTrigger", true);
+            playerAnim.SetBool("Falling", false);
+        }
+    }
+
     void Start()
     {
         runSpeed = moveSpeed;
         Dir = 0;
         canmove = true;
         playerRB = GetComponent<Rigidbody2D>();
-        playerAnim = GetComponent<Animator>();
         playerSp = GetComponent<SpriteRenderer>();
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
         if (LevelTransition.playerPos != null && PlayerPrefs.HasKey(SceneManager.GetActiveScene().name))
@@ -48,6 +70,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.DrawRay(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.left, Color.red);
+        Debug.DrawRay(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.right, Color.blue);
+
         move = Input.GetAxisRaw("Horizontal");
         JumpHeightDetermine();
         Ground();// Dir is here tho 
@@ -72,7 +97,6 @@ public class PlayerController : MonoBehaviour
 
     void JumpHeightDetermine()
     {
-        Debug.DrawRay(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), new Vector3(Dir, 0, 0), Color.blue);
         if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), new Vector3(Dir, 0, 0), 2.2f, Obj))
         {
             jumpHeight = 10f;
@@ -83,9 +107,8 @@ public class PlayerController : MonoBehaviour
 
     void Ground()
     {
-        Debug.DrawRay(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down,Color.cyan);
-        Debug.DrawRay(transform.position + new Vector3(0.5f, -playerSp.bounds.extents.y, 0), Vector3.down, Color.red);
-        if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground))
+        if(Physics2D.Linecast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.5f, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y - 0.5f, 0), ground) || Physics2D.Linecast(transform.position + new Vector3(0.5f,- playerSp.bounds.extents.y - 0.5f, 0), transform.position + new Vector3(0.5f,- playerSp.bounds.extents.y + 0.5f, 0), ground))
+        //if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground))
         {
             playerAnim.SetBool("Jumping", false);
             isJumping = false;
@@ -116,12 +139,10 @@ public class PlayerController : MonoBehaviour
             runSpeed -= acc * 5;
             runSpeed = Mathf.Clamp(runSpeed, -0.1f, runSpeed);
         }
-        /*
-        if (Input.GetKeyDown(KeyCode.LeftShift) && lockRun == false)
-            runSpeed = maxMoveSpeed;
-        else runSpeed = moveSpeed;*/
 
-        playerRB.velocity = new Vector2(Dir * runSpeed, playerRB.velocity.y);
+        if(Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+            playerRB.velocity = new Vector2(playerRB.velocity.x, playerRB.velocity.y);
+        else playerRB.velocity = new Vector2(Dir * runSpeed, playerRB.velocity.y);
     }
 
     void Jumping()
@@ -137,33 +158,32 @@ public class PlayerController : MonoBehaviour
 
     void DirectionChange()
     {
-        if (move == 0 && Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == true)
-            return;
-        else if(move == 0)
+        if(move == 0)
         {
             isMoving = false;
             Dir = 0;
         }
 
-        if (move == 1)
+        if (move == -1 && !Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.left, 2.2f, Obj))
         {
-            Dir = 1;
-            playerSp.flipX = false;
+            isMoving = true;
+            Dir = 0;
         }
-
+        if (move == 1 && !Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.right, 2, Obj))
+        {
+            isMoving = true;
+            Dir = 0;
+        }
+        
         if (move == -1)
         {
             Dir = -1;
             playerSp.flipX = true;
         }
-
-        if (move == -1 && !Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), new Vector3(Dir, 0, 0), 2.2f, Obj))
+        if (move == 1)
         {
-            isMoving = true;
-        }
-        if (move == +1 && !Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), new Vector3(Dir, 0, 0), 2.2f, Obj))
-        {
-            isMoving = true;
+            Dir = 1;
+            playerSp.flipX = false;
         }
     }
 

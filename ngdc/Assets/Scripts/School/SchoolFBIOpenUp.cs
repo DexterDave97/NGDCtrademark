@@ -36,51 +36,42 @@ public class SchoolFBIOpenUp : MonoBehaviour {
         yield return new WaitForSeconds(1);
         if (doorCount != 4)
             Cutscene.cutsceneIndex = 6;
-        else Cutscene.cutsceneIndex = 7;
+        else
+            Cutscene.cutsceneIndex = 7;
         Cutscene.playCutscene = true;
         Destroy(this.gameObject);
     }
 
     private void Update()
     {
-        if (qt != null && hit<3)
+        if (qt != null && hit < 3)
         {
             int i = qt.PointerHit();
             if (i == 1)
             {
                 hit++;
                 Destroy(qt.gameObject);
-                if(hit<3)
+                if (hit < 3)
                     hitcall();
-                if(hit==3)
+                if (hit == 3)
                 {
                     doorCount++;
-                    if (doorCount != 3)
-                    {
-                        StartCoroutine(TriggerCutscene());
-                    }
-                    else
-                    {
-
-                        Destroy(this.gameObject);
-                        PlayerController.canmove = true;
-                    }
+                    StartCoroutine(TriggerCutscene());
                 }
-            }
-            else if (i == 0)
-            {
-                miss++;
+                else if (i == 0)
+                {
+                    miss++;
+                }
             }
         }
 
         if (trig && Input.GetKeyDown(KeyCode.E))
         {
             trig = false;
-
             hitcall();
-        }        
-    }
+        }
 
+    }
     void hitcall()
     {
         qt = Instantiate(sliderPrefab, FindObjectOfType<Canvas>().transform).GetComponent<QTSlider>();
