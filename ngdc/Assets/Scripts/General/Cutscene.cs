@@ -21,6 +21,8 @@ public class Cutscene : MonoBehaviour
     public List<Sprite> cutscene3 = new List<Sprite>();
     public List<Sprite> cutscene4 = new List<Sprite>();
     public List<Sprite> cutscene5 = new List<Sprite>();
+    public List<Sprite> cutscene6 = new List<Sprite>();
+    public List<Sprite> cutscene7 = new List<Sprite>();
 
     void Start()
     {
@@ -65,11 +67,19 @@ public class Cutscene : MonoBehaviour
         {
             cutscene5.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 24) + ".png", typeof(Sprite)));
         }
+        for (int temp = 0; temp < 2; temp++)
+        {
+            cutscene6.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 26) + ".png", typeof(Sprite)));
+        }
+        for (int temp = 0; temp < 10; temp++)
+        {
+            cutscene7.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 26) + ".png", typeof(Sprite)));
+        }
     }
 
     private void Update()
     {
-        if(Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom")
+        if(Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
             panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
@@ -158,6 +168,10 @@ public class Cutscene : MonoBehaviour
                 return cutscene4;
             case 5:
                 return cutscene5;
+            case 6:
+                return cutscene6;
+            case 7:
+                return cutscene7;
             default:
                 return null;
         }

@@ -34,7 +34,9 @@ public class SchoolFBIOpenUp : MonoBehaviour {
     {
         fadePanel.SetBool("out", true);
         yield return new WaitForSeconds(1);
-        Cutscene.cutsceneIndex = 3;
+        if (doorCount != 4)
+            Cutscene.cutsceneIndex = 6;
+        else Cutscene.cutsceneIndex = 7;
         Cutscene.playCutscene = true;
         Destroy(this.gameObject);
     }
@@ -54,7 +56,16 @@ public class SchoolFBIOpenUp : MonoBehaviour {
                 if(hit==3)
                 {
                     doorCount++;
-                    StartCoroutine(TriggerCutscene());
+                    if (doorCount != 3)
+                    {
+                        StartCoroutine(TriggerCutscene());
+                    }
+                    else
+                    {
+
+                        Destroy(this.gameObject);
+                        PlayerController.canmove = true;
+                    }
                 }
             }
             else if (i == 0)
@@ -66,6 +77,7 @@ public class SchoolFBIOpenUp : MonoBehaviour {
         if (trig && Input.GetKeyDown(KeyCode.E))
         {
             trig = false;
+
             hitcall();
         }        
     }

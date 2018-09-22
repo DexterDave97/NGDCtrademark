@@ -20,6 +20,10 @@ public class Death : MonoBehaviour
             player.transform.position = respawn.transform.position + new Vector3(0, (respawn.transform.localScale.y / 2) + player.GetComponent<SpriteRenderer>().bounds.extents.y, 0);
             PlayerController.Dir = 0;
             Camera.main.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+            Parallax[] arr = new Parallax[2];
+            arr = GameObject.FindObjectsOfType<Parallax>();
+            for (int i = 0; i < arr.Length; i++)
+                arr[i].dead = true;
         }
     }
 }

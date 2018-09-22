@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     Animator fadePanel;
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask Obj;
-    public static float jumpSpeed = 1.5f, jumpHeight; // 1.3, 12
+    public static float jumpSpeed = 1.5f, jumpHeight, move; // 1.3, 12
     public static int Dir = 1;
-    private float move, lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f; // acc = runSpeed - intial speed / time taken 
+    private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f; // acc = runSpeed - intial speed / time taken 
     public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     void JumpHeightDetermine()
     {
-        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 1.8f, Obj))
+        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 0.5f, Obj))
             jumpHeight = 10f;
         else jumpHeight = 20f;
     }
@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetFloat("Velocity", 0);
         else playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
 
-        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 1.8f, Obj))
+        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 0.5f, Obj))
             playerAnim.SetFloat("Velocity", 0);
     }
 

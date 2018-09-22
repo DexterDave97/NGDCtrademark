@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BuildingsAfterCafe.unity
     guid: 25b85ee6c63f7e444b77d4880a620258
+  - enabled: 1
+    path: Assets/Scenes/SchoolBedroom.unity
+    guid: 510a532b4e245fd4db9d30e629404b6e
+  - enabled: 1
+    path: Assets/Scenes/SchoolHouse.unity
+    guid: 1bc9e792fc87bb042bb4695f09684bd0
+  - enabled: 1
+    path: Assets/Scenes/School.unity
+    guid: 38a987875dc889643beb0b1d044cc287
   m_configObjects: {}
