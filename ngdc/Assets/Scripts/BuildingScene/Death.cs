@@ -7,7 +7,7 @@ public class Death : MonoBehaviour
     GameObject player;
     [SerializeField] GameObject respawn;
 
-    private void Awake()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }

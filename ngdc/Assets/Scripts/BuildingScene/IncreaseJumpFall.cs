@@ -6,7 +6,7 @@ public class IncreaseJumpFall : MonoBehaviour
 {
     Animator fadePanel;
 
-    private void Awake()
+    private void Start()
     {
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
     }

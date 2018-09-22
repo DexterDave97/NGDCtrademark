@@ -9,7 +9,7 @@ public class SuicideEdge : MonoBehaviour {
     [SerializeField] GameObject respawn, beti;
     Animator fadePanel;
 
-    private void Awake()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
