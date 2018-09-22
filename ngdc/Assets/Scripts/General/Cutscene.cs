@@ -23,6 +23,7 @@ public class Cutscene : MonoBehaviour
     public List<Sprite> cutscene5 = new List<Sprite>();
     public List<Sprite> cutscene6 = new List<Sprite>();
     public List<Sprite> cutscene7 = new List<Sprite>();
+    public List<Sprite> cutscene8 = new List<Sprite>();
 
     void Start()
     {
@@ -74,6 +75,10 @@ public class Cutscene : MonoBehaviour
         for (int temp = 0; temp < 10; temp++)
         {
             cutscene7.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 26) + ".png", typeof(Sprite)));
+        }
+        for (int temp = 0; temp < 7; temp++)
+        {
+            cutscene8.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 36) + ".png", typeof(Sprite)));
         }
     }
 
@@ -172,6 +177,8 @@ public class Cutscene : MonoBehaviour
                 return cutscene6;
             case 7:
                 return cutscene7;
+            case 8:
+                return cutscene8;
             default:
                 return null;
         }
