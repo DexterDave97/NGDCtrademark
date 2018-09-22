@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(!canmove)
+        {
+            playerRB.velocity = Vector3.zero;
+        }
         if(Time.timeSinceLevelLoad < 0.01f)
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
     }
