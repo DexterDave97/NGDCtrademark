@@ -6,8 +6,8 @@ public class Parallax : MonoBehaviour {
 
     float move, temp;
     [SerializeField] float moveSpeed;
-    int x = 0;
     public bool dead;
+    public static float xval;
     Vector3 hew;
 
     private void Start()
@@ -20,14 +20,14 @@ public class Parallax : MonoBehaviour {
     {
         move = PlayerController.move;
 
-        if (dead)
+        if (dead && PlayerController.isMoving)
         {
             hew.x = temp;
-            transform.position = hew; x++;
+            transform.position = hew;
             dead = false;
         }
 
-        if (move != 0)
+        if (move != 0 && PlayerController.isMoving)
         {
             if(move == 1 && PlayerController.canmove)
                 hew.x -= moveSpeed * 0.01f;

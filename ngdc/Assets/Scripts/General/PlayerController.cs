@@ -72,8 +72,12 @@ public class PlayerController : MonoBehaviour
 
     void JumpHeightDetermine()
     {
-        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 0.5f, Obj))
+        Debug.DrawRay(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), new Vector3(Dir, 0, 0), Color.blue);
+        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), new Vector3(Dir, 0, 0), 2.2f, Obj))
+        {
             jumpHeight = 10f;
+            isMoving = false;
+        }
         else jumpHeight = 20f;
     }
 
@@ -141,17 +145,25 @@ public class PlayerController : MonoBehaviour
             Dir = 0;
         }
 
+        if (move == 1)
+        {
+            Dir = 1;
+            playerSp.flipX = false;
+        }
+
         if (move == -1)
         {
-            playerSp.flipX = true;
-            isMoving = true;
             Dir = -1;
+            playerSp.flipX = true;
         }
-        if (move == +1)
+
+        if (move == -1 && !Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), new Vector3(Dir, 0, 0), 2.2f, Obj))
         {
-            playerSp.flipX = false;
             isMoving = true;
-            Dir = 1;
+        }
+        if (move == +1 && !Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), new Vector3(Dir, 0, 0), 2.2f, Obj))
+        {
+            isMoving = true;
         }
     }
 
@@ -161,7 +173,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetFloat("Velocity", 0);
         else playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
 
-        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 0.5f, Obj))
+        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 2.2f, Obj))
             playerAnim.SetFloat("Velocity", 0);
     }
 
