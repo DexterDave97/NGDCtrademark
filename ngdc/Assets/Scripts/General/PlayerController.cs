@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public static float jumpSpeed = 1.5f, jumpHeight, move; // 1.3, 12
     public static int Dir = 1;
     private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f; // acc = runSpeed - intial speed / time taken 
-    public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
+    public static bool lockRun = true, jumpingAvailable = true, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
 
@@ -60,9 +60,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(!canmove)
+        if(!canmove && !PlayerController.lockSuicide)
         {
-            playerRB.velocity = Vector3.zero;
+            playerRB.velocity = new Vector3(0, playerRB.velocity.y, 0);
         }
         if(Time.timeSinceLevelLoad < 0.01f)
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
@@ -107,9 +107,14 @@ public class PlayerController : MonoBehaviour
 
     void Ground()
     {
-        if(Physics2D.Linecast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.5f, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y - 0.5f, 0), ground) || Physics2D.Linecast(transform.position + new Vector3(0.5f,- playerSp.bounds.extents.y - 0.5f, 0), transform.position + new Vector3(0.5f,- playerSp.bounds.extents.y + 0.5f, 0), ground))
+        Debug.DrawLine(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.001f, 0));
+        Debug.DrawLine(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(- 0.5f, playerSp.bounds.extents.y - 0.001f, 0));
+
+        if (Physics2D.Linecast(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.001f, 0), ground) || 
+            Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(- 0.5f, playerSp.bounds.extents.y - 0.001f, 0), ground))
         //if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground))
         {
+            Debug.Log("Grounded");
             playerAnim.SetBool("Jumping", false);
             isJumping = false;
             isGrounded = true;

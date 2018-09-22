@@ -168,7 +168,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102712092306799308}
   m_Solo: 0
@@ -294,7 +294,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102018445971475740}
   m_Solo: 0
@@ -318,7 +318,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102092695687963860}
   m_Solo: 0
@@ -342,7 +342,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102503480006631846}
   m_Solo: 0
@@ -396,7 +396,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102988056504703068}
   m_Solo: 0
@@ -450,7 +450,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102717386713010462}
   m_Solo: 0
@@ -474,7 +474,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102988056504703068}
   m_Solo: 0
@@ -498,7 +498,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102717386713010462}
   m_Solo: 0
@@ -522,7 +522,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   - m_ConditionMode: 2
     m_ConditionEvent: Jumping
     m_EventTreshold: 0
@@ -549,7 +549,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.5
+    m_EventTreshold: 0.01
   - m_ConditionMode: 2
     m_ConditionEvent: Jumping
     m_EventTreshold: 0

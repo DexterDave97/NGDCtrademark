@@ -22,6 +22,7 @@ public class ElevatorIsDown : MonoBehaviour {
         if (rh2D)
         {            
             isDown = true;
+            PlayerController.canmove = true;
             Destroy(elevatorWallCollider);
         }
     }

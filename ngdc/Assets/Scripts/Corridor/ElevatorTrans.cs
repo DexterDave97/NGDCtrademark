@@ -26,6 +26,8 @@ public class ElevatorTrans : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             triggered = true;
+            PlayerController.canmove = false;
+            col.GetComponent<SpriteRenderer>().flipX = false;
         }
 
         fade1.SetBool("inEle", true);
