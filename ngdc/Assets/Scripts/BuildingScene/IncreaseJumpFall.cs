@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class IncreaseJumpFall : MonoBehaviour
 {
-    GameObject cutsceneManager;
     Animator fadePanel;
 
     private void Awake()
     {
-        cutsceneManager = GameObject.FindGameObjectWithTag("Cutscene");
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
     }
 
@@ -25,7 +23,6 @@ public class IncreaseJumpFall : MonoBehaviour
     {
         fadePanel.SetBool("out", true);
         yield return new WaitForSeconds(1);
-        cutsceneManager.SetActive(true);
         Cutscene.cutsceneIndex = 5;
         Cutscene.playCutscene = true;
         Destroy(this.gameObject);

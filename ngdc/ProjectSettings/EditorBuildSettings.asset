@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ToCafe.unity
     guid: 0503b80bac2f3aa4d94f555d2234477f
+  - enabled: 1
+    path: Assets/Scenes/BuildingsAfterCafe.unity
+    guid: 25b85ee6c63f7e444b77d4880a620258
   m_configObjects: {}

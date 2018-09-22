@@ -16,7 +16,6 @@ public class Death : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("YOU DIED !!!");
             player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             player.transform.position = respawn.transform.position + new Vector3(0, (respawn.transform.localScale.y / 2) + player.GetComponent<SpriteRenderer>().bounds.extents.y, 0);
             PlayerController.Dir = 0;

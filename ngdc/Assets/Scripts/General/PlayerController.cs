@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private SpriteRenderer playerSp;
     Animator fadePanel;
-    GameObject cutsceneManager;
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask Obj;
     public static float jumpSpeed = 1.8f, jumpHeight = 20f; // 1.3, 12
@@ -27,7 +26,6 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerSp = GetComponent<SpriteRenderer>();
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
-        cutsceneManager = GameObject.FindGameObjectWithTag("Cutscene");
         if (LevelTransition.playerPos != null && PlayerPrefs.HasKey(SceneManager.GetActiveScene().name))
         {
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name), gameObject.transform.position.y, gameObject.transform.position.z);
@@ -36,6 +34,12 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(TriggerCutscene());
         }
+    }
+
+    private void Update()
+    {
+        if(Time.timeSinceLevelLoad < 0.01f)
+            fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -158,8 +162,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator TriggerCutscene()
     {
         fadePanel.SetBool("out", false);
+        fadePanel.SetBool("out", true);
         yield return new WaitForSeconds(0);
-        cutsceneManager.SetActive(true);
         Cutscene.cutsceneIndex = 1;
         Cutscene.playCutscene = true;
         Cutscene.firstScene = false;

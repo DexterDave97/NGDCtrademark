@@ -8,13 +8,8 @@ public class LevelTransition : MonoBehaviour {
     [SerializeField] bool changable;
     public Animator anim;
     public static string playerPos;
-
-	// Use this for initialization
-	void start () {
-       
-    }
-	
-	// Update is called once per frame
+    public bool shouldSave;
+    
 	void Update () {
         
 		if(changable && Input.GetKeyDown(KeyCode.E))
@@ -30,7 +25,8 @@ public class LevelTransition : MonoBehaviour {
         playerPos = SceneManager.GetActiveScene().name;
         anim.SetBool("out", true);
         yield return new WaitForSeconds(0.5f);
-        PlayerPrefs.SetFloat(playerPos, transform.position.x);
+        if(shouldSave)
+            PlayerPrefs.SetFloat(playerPos, transform.position.x);
         SceneManager.LoadScene(levelname);
     }
 

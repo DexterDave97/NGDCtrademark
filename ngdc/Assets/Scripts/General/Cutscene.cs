@@ -26,8 +26,6 @@ public class Cutscene : MonoBehaviour
 
     void Start()
     {
-        
-        cutsceneGameobject = GameObject.FindGameObjectWithTag("Cutscene");
         sceneEnd = false;
 
         playCutscene = false;
@@ -64,14 +62,17 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
-        if(Time.timeSinceLevelLoad <= 0.01f)
+        if(Time.timeSinceLevelLoad <= 0.01f && SceneManager.GetActiveScene().name != "Bedroom")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
             panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
+            cutsceneGameobject = panel.gameObject;
         }
 
         if (playCutscene)
         {
+            panel.enabled = true;
+
             PlayerController.canmove = false;
 
             if (Input.GetKeyUp(KeyCode.A))
@@ -88,17 +89,19 @@ public class Cutscene : MonoBehaviour
                     currentSprite--;
                     playCutscene = false;
                     StartCoroutine(TriggerCut());
-                    //if (cutsceneIndex != 4)
-                    if(sceneEnd)
+                    if (sceneEnd)
                     {
                         SceneManager.LoadScene(nextSceneName);
                         sceneEnd = false;
                     }
                     if(cutsceneIndex == 3)
                     {
+                        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(26, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
+                        Camera.main.transform.position = new Vector3(32.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
                         CameraFollow.camfol.camXPosMin = 32.5f;
-                        CameraFollow.camfol.camXPosMax = 60f;
+                        CameraFollow.camfol.camXPosMax = 42.5f;
                     }
+                    //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
                 }
             }
@@ -114,7 +117,7 @@ public class Cutscene : MonoBehaviour
         {
             currentSprite = 0;
             if (cutsceneGameobject == true)
-                cutsceneGameobject.SetActive(false);
+                panel.enabled = false;
         }
     }
 

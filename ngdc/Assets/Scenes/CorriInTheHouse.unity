@@ -603,6 +603,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212896662687240350, guid: b65d828ec918d0141ad8ec7c5163144c,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b65d828ec918d0141ad8ec7c5163144c, type: 2}
   m_IsPrefabAsset: 0
@@ -1584,6 +1589,7 @@ MonoBehaviour:
   levelname: House
   changable: 0
   anim: {fileID: 321694448}
+  shouldSave: 1
 --- !u!61 &1280424217
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1708,7 +1714,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.000000029802322, y: 0.01}
+  m_Offset: {x: -0.03298588, y: 0.00999999}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1719,7 +1725,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 1.0386841}
+  m_Size: {x: 1.0659715, y: 1.0386841}
   m_EdgeRadius: 0
 --- !u!23 &1347051938
 MeshRenderer:
@@ -1799,7 +1805,7 @@ GameObject:
   - component: {fileID: 1355584826}
   - component: {fileID: 1355584825}
   - component: {fileID: 1355584827}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: left_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
