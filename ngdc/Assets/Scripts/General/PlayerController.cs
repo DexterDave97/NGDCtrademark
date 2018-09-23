@@ -21,17 +21,17 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerAnim = GetComponent<Animator>();
-        if (SceneManager.GetActiveScene().buildIndex >= 0 && SceneManager.GetActiveScene().buildIndex <= 2)
+        if (SceneManager.GetActiveScene().buildIndex >= 1 && SceneManager.GetActiveScene().buildIndex <= 3)
         {
             playerAnim.SetBool("VTrigger", false);
             playerAnim.SetBool("FireTrigger", false);
         }
-        else if (SceneManager.GetActiveScene().buildIndex >= 3 && SceneManager.GetActiveScene().buildIndex <= 8)
+        else if (SceneManager.GetActiveScene().buildIndex >= 4 && SceneManager.GetActiveScene().buildIndex <= 9)
         {
             playerAnim.SetBool("VTrigger", true);
             playerAnim.SetBool("FireTrigger", false);
         }
-        else if (SceneManager.GetActiveScene().buildIndex >= 9 && SceneManager.GetActiveScene().buildIndex <= 10)
+        else if (SceneManager.GetActiveScene().buildIndex >= 10 && SceneManager.GetActiveScene().buildIndex <= 11)
         {
             playerAnim.SetBool("VTrigger", false);
             playerAnim.SetBool("FireTrigger", true);

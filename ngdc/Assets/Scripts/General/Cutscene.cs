@@ -74,15 +74,15 @@ public class Cutscene : MonoBehaviour
         }
         for (int temp = 0; temp < 2; temp++)
         {
-            cutscene6.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 43) + ".png", typeof(Sprite)));
+            cutscene6.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 90) + ".png", typeof(Sprite)));
         }
-        for (int temp = 0; temp < 10; temp++)
+        for (int temp = 0; temp < 11; temp++)
         {
             cutscene7.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 26) + ".png", typeof(Sprite)));
         }
-        for (int temp = 0; temp < 7; temp++)
+        for (int temp = 0; temp < 8; temp++)
         {
-            cutscene8.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 36) + ".png", typeof(Sprite)));
+            cutscene8.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 37) + ".png", typeof(Sprite)));
         }
     }
 
@@ -125,6 +125,7 @@ public class Cutscene : MonoBehaviour
                 {
                     currentSprite--;
                     playCutscene = false;
+                    maxScene = 0;
                     StartCoroutine(TriggerCut());
                     if (sceneEnd)
                     {
@@ -138,6 +139,15 @@ public class Cutscene : MonoBehaviour
                         CameraFollow.camfol.camXPosMin = 32.5f;
                         CameraFollow.camfol.camXPosMax = 42.5f;
                     }
+                    if(cutsceneIndex == 7)
+                    {
+                        SceneManager.LoadScene("MainMenu");
+                    }
+                    if(cutsceneIndex == 8)
+                    {
+                        SceneManager.LoadScene("MainMenu");
+                    }
+
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
                 }
