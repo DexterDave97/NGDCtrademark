@@ -5,6 +5,7 @@ using UnityEngine;
 public class School4thfloor : MonoBehaviour {
     public static int doorCount;
     Animator fadePanel;
+    Animator DavidAim;
     QTSlider qt;
     bool trig;
     int hit = 0, miss = -1;
@@ -13,6 +14,7 @@ public class School4thfloor : MonoBehaviour {
 
     private void Start()
     {
+        DavidAim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         doorCount = 0;
         trig = false;
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
@@ -33,15 +35,13 @@ public class School4thfloor : MonoBehaviour {
     IEnumerator TriggerCutscene()
     {
         fadePanel.SetBool("out", true);
+        DavidAim.SetBool("DoorHit", true);
         yield return new WaitForSeconds(1);
-        if(doorCount==3)
-        {
+        DavidAim.SetBool("DoorHit", false);
+        if (doorCount==3)
             Cutscene.cutsceneIndex = 8;
-        }
         else
-        {
             Cutscene.cutsceneIndex = 6;
-        }
 
         Cutscene.playCutscene = true;
         Destroy(this.gameObject);
@@ -79,7 +79,21 @@ public class School4thfloor : MonoBehaviour {
 
     void hitcall()
     {
-        qt = Instantiate(sliderPrefab, FindObjectOfType<Canvas>().transform).GetComponent<QTSlider>();
+        if (hit == 0)
+        {
+            qt = Instantiate(sliderPrefab, FindObjectOfType<Canvas>().transform).GetComponent<QTSlider>();
+        }
+        if (hit != 0)
+        {
+            DavidAim.SetBool("DoorHit", true);
+            Invoke("InvokingFun", 0.7f);
+        }
         PlayerController.canmove = false;
+    }
+
+    void InvokingFun()
+    {
+        DavidAim.SetBool("DoorHit", false);
+        qt = Instantiate(sliderPrefab, FindObjectOfType<Canvas>().transform).GetComponent<QTSlider>();
     }
 }

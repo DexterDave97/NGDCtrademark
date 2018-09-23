@@ -16,6 +16,7 @@ public class Cutscene : MonoBehaviour
     GameObject cutsceneGameobject;
     Image panel;
     Animator fadePanel;
+    bool timebool;
 
     public List<Sprite> cutscene1 = new List<Sprite>();
     public List<Sprite> cutscene2 = new List<Sprite>();
@@ -28,7 +29,7 @@ public class Cutscene : MonoBehaviour
 
     void Start()
     {
-        timeLol = Time.time;
+        timebool = true;
         cutsceneIndex = 0;
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
         panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
@@ -98,6 +99,12 @@ public class Cutscene : MonoBehaviour
 
         if (playCutscene)
         {
+            if(timebool)
+            {
+                timeLol = Time.time;
+                timebool = false;
+            }
+
             panel.enabled = true;
 
             PlayerController.canmove = false;
@@ -110,6 +117,7 @@ public class Cutscene : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.D) && ((Time.time - timeLol) > 1.2f))
             {
                 timeLol = Time.time;
+                timebool = true;
                 currentSprite++;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
