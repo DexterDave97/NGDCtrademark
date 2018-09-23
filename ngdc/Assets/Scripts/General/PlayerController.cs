@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public static float jumpSpeed = 1.5f, jumpHeight, move; // 1.3, 12
     public static int Dir = 1;
     private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f; // acc = runSpeed - intial speed / time taken 
+    private bool lockShiftJump;
     public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
@@ -42,7 +43,10 @@ public class PlayerController : MonoBehaviour
         runSpeed = moveSpeed;
         Dir = 0;
         canmove = true;
-        playerRB = GetComponent<Rigidbody2D>();
+        if (SceneManager.GetActiveScene().name == "")
+            lockShiftJump = true;
+        else lockShiftJump = false;
+    playerRB = GetComponent<Rigidbody2D>();
         playerSp = GetComponent<SpriteRenderer>();
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
         if (LevelTransition.playerPos != null && PlayerPrefs.HasKey(SceneManager.GetActiveScene().name))
@@ -152,7 +156,7 @@ public class PlayerController : MonoBehaviour
 
         playerAnim.SetBool("Jumping", true);
 
-        if (Input.GetKey(KeyCode.LeftShift) == true)
+        if (Input.GetKey(KeyCode.LeftShift) == true && lockShiftJump)
             playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * 1.05f * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
         else playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
     }
