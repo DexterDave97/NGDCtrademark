@@ -6,6 +6,7 @@ public class ElevatorButton : MonoBehaviour
 {
 
     public Animator anim;
+    public Animator Lift;
     [SerializeField] bool switchable;
     // Use this for initialization
     void Start()
@@ -19,7 +20,15 @@ public class ElevatorButton : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && switchable)
         {
             anim.SetBool("click", true);
+            Lift.SetBool("CallElevator", true);
+            PlayerController.canmove = false;
+            Invoke("TempFun", 2);
         }
+    }
+
+    void TempFun()
+    {
+        PlayerController.canmove = true;
     }
 
     void OnTriggerEnter2D(Collider2D col)

@@ -24,19 +24,16 @@ public class PlayerController : MonoBehaviour
         {
             playerAnim.SetBool("VTrigger", false);
             playerAnim.SetBool("FireTrigger", false);
-            playerAnim.SetBool("Falling", false);
         }
         else if (SceneManager.GetActiveScene().buildIndex >= 3 && SceneManager.GetActiveScene().buildIndex <= 7)
         {
             playerAnim.SetBool("VTrigger", true);
             playerAnim.SetBool("FireTrigger", false);
-            playerAnim.SetBool("Falling", false);
         }
         else if (SceneManager.GetActiveScene().buildIndex >= 8 && SceneManager.GetActiveScene().buildIndex <= 9)
         {
             playerAnim.SetBool("VTrigger", false);
             playerAnim.SetBool("FireTrigger", true);
-            playerAnim.SetBool("Falling", false);
         }
     }
 
@@ -197,9 +194,10 @@ public class PlayerController : MonoBehaviour
         if (shouldSuicideBool == true)
             playerAnim.SetFloat("Velocity", 0);
         else playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
-
-        if (Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Dir * Vector3.one, 2.2f, Obj))
-            playerAnim.SetFloat("Velocity", 0);
+        /*
+        if (move == -1 && Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.left, 2.2f, Obj) ||
+            move == 1 && Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.right, 2, Obj))
+            playerAnim.SetFloat("Velocity", 0);*/
     }
 
     IEnumerator TriggerCutscene()

@@ -41,7 +41,7 @@ public class ElevatorMove : MonoBehaviour {
         float speed = 0.2f;
         if (elevator.transform.position.y < -150)
             speed -= Time.fixedDeltaTime * 7;
-        elevator.transform.position = Vector3.MoveTowards(elevator.transform.position, new Vector3(elevator.transform.position.x, -161f, elevator.transform.position.z), speed);
+        elevator.transform.position = Vector3.MoveTowards(elevator.transform.position, new Vector3(elevator.transform.position.x, -161.5f, elevator.transform.position.z), speed);
     }
 
     void OnTriggerEnter2D(Collider2D col)
