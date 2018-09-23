@@ -25,6 +25,8 @@ public class IncreaseJumpFall : MonoBehaviour
         yield return new WaitForSeconds(1);
         Cutscene.cutsceneIndex = 5;
         Cutscene.playCutscene = true;
+        Cutscene.sceneEnd = true;
+        Cutscene.nextSceneName = "FallingBuildingScene";
         Destroy(this.gameObject);
     }
 }

@@ -8,21 +8,20 @@ public class ElevatorButton : MonoBehaviour
     public Animator anim;
     public Animator Lift;
     [SerializeField] bool switchable;
-    // Use this for initialization
     void Start()
     {
         switchable = false;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && switchable)
         {
             anim.SetBool("click", true);
-            Lift.SetBool("CallElevator", true);
+            if(Cutscene.cutsceneIndex < 3)
+                Lift.SetBool("CallElevator", true);
             PlayerController.canmove = false;
-            Invoke("TempFun", 2);
+            Invoke("TempFun", 1.2f);
         }
     }
 

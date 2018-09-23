@@ -87,7 +87,8 @@ public class Cutscene : MonoBehaviour
         if(Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
-            panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
+            if(SceneManager.GetActiveScene().name != "FallingBuildingScene")
+                panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
             cutsceneGameobject = panel.gameObject;
         }
 
@@ -108,7 +109,6 @@ public class Cutscene : MonoBehaviour
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
-                   
                     currentSprite--;
                     playCutscene = false;
                     StartCoroutine(TriggerCut());

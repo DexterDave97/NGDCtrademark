@@ -25,12 +25,12 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("VTrigger", false);
             playerAnim.SetBool("FireTrigger", false);
         }
-        else if (SceneManager.GetActiveScene().buildIndex >= 3 && SceneManager.GetActiveScene().buildIndex <= 7)
+        else if (SceneManager.GetActiveScene().buildIndex >= 3 && SceneManager.GetActiveScene().buildIndex <= 8)
         {
             playerAnim.SetBool("VTrigger", true);
             playerAnim.SetBool("FireTrigger", false);
         }
-        else if (SceneManager.GetActiveScene().buildIndex >= 8 && SceneManager.GetActiveScene().buildIndex <= 9)
+        else if (SceneManager.GetActiveScene().buildIndex >= 9 && SceneManager.GetActiveScene().buildIndex <= 10)
         {
             playerAnim.SetBool("VTrigger", false);
             playerAnim.SetBool("FireTrigger", true);
@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour
             Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(- 0.5f, playerSp.bounds.extents.y - 0.001f, 0), ground))
         //if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground))
         {
-            Debug.Log("Grounded");
             playerAnim.SetBool("Jumping", false);
             isJumping = false;
             isGrounded = true;
