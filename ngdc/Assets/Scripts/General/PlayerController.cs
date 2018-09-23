@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public static int Dir = 1;
     private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f;
     private bool lockShiftJump;
-    public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
+    public static bool lockRun = false, jumpingAvailable = true, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
 
@@ -86,10 +86,10 @@ public class PlayerController : MonoBehaviour
             Movement(move);
         if (jumpingAvailable == true && isGrounded == true && Input.GetKeyDown(KeyCode.Space) == true)
             Jumping();
-        if (transform.position.y > yComponentOfP && Time.timeSinceLevelLoad > 0.05f)
+        /*if (transform.position.y > yComponentOfP && Time.timeSinceLevelLoad > 0.05f)
         {
             playerAnim.SetBool("Jumping", true);
-        }
+        }*/
         AnimationFunc();
         lastMove = move;
         yComponentOfP = transform.position.y;
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
                 isJumping = false;
                 isGrounded = true;
 
-                if (canmove)
+                //if (canmove)
                     DirectionChange();
             }
         }
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetFloat("Velocity", 0);
             isGrounded = true;
 
-            if (canmove)
+            //if (canmove)
                 DirectionChange();
         }
     }
@@ -127,9 +127,9 @@ public class PlayerController : MonoBehaviour
             if (collision.gameObject.layer == 9)
             {
                 isGrounded = false;
+                playerAnim.SetBool("Jumping", true);
             }
         }
-
     }
 
     void JumpHeightDetermine()
@@ -142,14 +142,11 @@ public class PlayerController : MonoBehaviour
         else jumpHeight = 30f;
 
         if (SceneManager.GetActiveScene().name != "BuildingsAfterCafe")
-            jumpHeight = 20f;
+            jumpHeight = 25f;
     }
 
     void Ground()
     {
-        Debug.DrawLine(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.001f, 0));
-        Debug.DrawLine(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(- 0.5f, playerSp.bounds.extents.y - 0.001f, 0));
-
         if (Physics2D.Linecast(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.001f, 0), ground) ||
             Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(-0.5f, playerSp.bounds.extents.y - 0.001f, 0), ground))
         {
