@@ -107,7 +107,7 @@ public class Cutscene : MonoBehaviour
                 currentSprite--;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
             }
-            if (Input.GetKeyUp(KeyCode.D) && ((Time.time - timeLol) > 1.7f))
+            if (Input.GetKeyUp(KeyCode.D) && ((Time.time - timeLol) > 1.2f))
             {
                 timeLol = Time.time;
                 currentSprite++;

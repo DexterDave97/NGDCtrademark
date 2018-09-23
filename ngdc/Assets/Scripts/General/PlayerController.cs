@@ -109,6 +109,15 @@ public class PlayerController : MonoBehaviour
                     DirectionChange();
             }
         }
+
+        if(collision.gameObject.layer == 10)
+        {
+            playerAnim.SetFloat("Velocity", 0);
+            isGrounded = true;
+
+            if (canmove)
+                DirectionChange();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
