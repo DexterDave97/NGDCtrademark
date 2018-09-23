@@ -367,6 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 812486531}
   player: {fileID: 0}
+  offset: 3
 --- !u!61 &214984704
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -725,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -739,13 +740,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 100
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: option 1
+  m_Text: Trophies & Medals
 --- !u!222 &466570647
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -839,6 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 812486531}
   player: {fileID: 0}
+  offset: 3
 --- !u!23 &528668912
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1688,7 +1690,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1871,7 +1873,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e1c009808ffd7864e9a12b0c417c46b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3012d5626166dd449a604ff3682895aa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2452,7 +2454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2466,13 +2468,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 100
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: option 3
+  m_Text: Claire's Photograph
 --- !u!222 &1005940866
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2699,7 +2701,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 699, y: -6.7001}
-  m_SizeDelta: {x: 232, y: 58.1}
+  m_SizeDelta: {x: 249.9, y: 65.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1118638484
 MonoBehaviour:
@@ -3025,6 +3027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 812486531}
   player: {fileID: 0}
+  offset: 3
 --- !u!114 &1410421728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3056,15 +3059,19 @@ MonoBehaviour:
   gb: {fileID: 823809160}
   highlight: {fileID: 778871916}
   tx: {fileID: 699795130}
+  first: {fileID: 466570646}
+  NextText: {fileID: 1741768863}
   dailogues:
-  - tere lund me book dalunga
-  - teri maa ke gand me hukka dal ke phukunga
-  - gand to teri maa ki mar hi chuki hai
+  - 'David: Why do I even bother with this, I want it out of my sight but what kind
+    of difference would it even make ? *sigh*'
+  - 'David: I''m not a big fan of news cutouts but she told me to keep it ..... Just
+    for her ...'
+  - 'David: Oh Clarry .... my baby .... daddy misses you everyday .... daddy misses
+    your smile ... Oh God ! .. No.'
   gbArr:
   - {fileID: 2097993211}
   - {fileID: 1729803421}
   - {fileID: 1619897838}
-  rt: {fileID: 1410421730}
   skip: 0
 --- !u!114 &1410421730
 MonoBehaviour:
@@ -3443,7 +3450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3457,13 +3464,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 100
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: option 2
+  m_Text: Newspaper Cutout
 --- !u!222 &1741768864
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4179,6 +4186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 812486531}
   player: {fileID: 0}
+  offset: 3
 --- !u!1 &2097993211
 GameObject:
   m_ObjectHideFlags: 0

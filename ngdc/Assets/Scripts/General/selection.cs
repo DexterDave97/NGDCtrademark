@@ -6,17 +6,22 @@ using UnityEngine.UI;
 public class selection : MonoBehaviour {
     [SerializeField] int index = 0;
     [SerializeField] float offset;
+
     public GameObject sel,gb,highlight;
-    public Text tx;
+    public Text tx,first, NextText;
     public string[] dailogues;
     public GameObject[] gbArr;
-    public RollText rt;
     public bool skip = false;
 
 	// Use this for initialization
 	void Start () {
         tx.text = null;
-	}
+        Vector3[] baseCorner = new Vector3[4];
+        NextText.rectTransform.GetWorldCorners(baseCorner);
+        Vector3[] baseCorner2 = new Vector3[4];
+        first.rectTransform.GetWorldCorners(baseCorner);
+        offset = first.transform.position.y - NextText.transform.position.y;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -59,7 +64,7 @@ public class selection : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E) && skip == false)
             {
                 StopAllCoroutines();
-                StartCoroutine(rt.rollText(dailogues[index], tx));
+                StartCoroutine(RollText.rollText(dailogues[index], tx));
                 skip = true;
             }
 

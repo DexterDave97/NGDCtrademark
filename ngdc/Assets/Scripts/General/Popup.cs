@@ -6,6 +6,7 @@ using UnityEngine;
 public class Popup : MonoBehaviour {
     [SerializeField] public Image button;
     [SerializeField] public GameObject player;
+    [SerializeField] float offset = 3f;
 
     // Use this for initialization
     void Start () {
@@ -19,7 +20,7 @@ public class Popup : MonoBehaviour {
     }
     void Update()
     {
-        Vector3 buttonPos = new Vector3(player.transform.position.x, player.transform.position.y + 3f,0);
+        Vector3 buttonPos = new Vector3(player.transform.position.x, player.transform.position.y + offset,0);
         button.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(buttonPos);
     }
    
