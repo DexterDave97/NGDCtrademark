@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
             jumpHeight = 10f;
             isMoving = false;
         }
-        else jumpHeight = 20f;
+        else jumpHeight = 30f;
     }
 
     void Ground()
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         playerAnim.SetBool("Jumping", true);
 
         if (Input.GetKey(KeyCode.LeftShift) == true)
-            playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * 1.25f * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
+            playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * 1.05f * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
         else playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
     }
 

@@ -52,7 +52,4 @@ public class ElevatorMove : MonoBehaviour {
             GetComponent<BoxCollider2D>().enabled = false;
         }
     }
-
-
-
 }

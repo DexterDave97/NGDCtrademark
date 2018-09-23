@@ -88,8 +88,10 @@ public class Cutscene : MonoBehaviour
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
             if(SceneManager.GetActiveScene().name != "FallingBuildingScene")
+            {
                 panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
-            cutsceneGameobject = panel.gameObject;
+                cutsceneGameobject = panel.gameObject;
+            }
         }
 
         if (playCutscene)
