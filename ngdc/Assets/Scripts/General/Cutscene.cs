@@ -12,6 +12,7 @@ public class Cutscene : MonoBehaviour
     public static int cutsceneIndex, currentSprite = 0;
     public static bool playCutscene, sceneEnd;
     public static string nextSceneName;
+    private float timeLol;
     GameObject cutsceneGameobject;
     Image panel;
     Animator fadePanel;
@@ -27,12 +28,13 @@ public class Cutscene : MonoBehaviour
 
     void Start()
     {
+        timeLol = Time.time;
         cutsceneIndex = 0;
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
         panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
         cutsceneGameobject = panel.gameObject;
         sceneEnd = false;
-        if (SceneManager.GetActiveScene().name == "House")
+        if (SceneManager.GetActiveScene().name == "House" && LevelTransition.playerPos == null)
         {
             playCutscene = true;
             cutsceneIndex = 1;
@@ -105,8 +107,9 @@ public class Cutscene : MonoBehaviour
                 currentSprite--;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
             }
-            if (Input.GetKeyUp(KeyCode.D))
+            if (Input.GetKeyUp(KeyCode.D) && ((Time.time - timeLol) > 1.7f))
             {
+                timeLol = Time.time;
                 currentSprite++;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)

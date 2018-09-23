@@ -131,10 +131,8 @@ MonoBehaviour:
   pointer: {fileID: 1695172780526916}
   pointerSpeed: 3
   pointerLimit: 370
-  qtActive: 1
-  pointerHitZoneMin: 1.4
-  pointerHitZoneMax: 2.8
   hitZone: {fileID: 114844011234728688}
+  qTBase: {fileID: 114424854002910774}
 --- !u!114 &114844011234728688
 MonoBehaviour:
   m_ObjectHideFlags: 1

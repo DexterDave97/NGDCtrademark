@@ -9,22 +9,24 @@ public class QTSlider : MonoBehaviour {
     [SerializeField] private float pointerLimit = 0.5f;
     private float pointerHitZoneMin;
     private float pointerHitZoneMax;
-    [SerializeField] private Image hitZone;
+    [SerializeField] private Image hitZone, qTBase;
 
     private float pointerPosAngle;
 
     // Use this for initialization
     void Start () {
-        
+        Vector3[] baseCorner = new Vector3[4];
+        qTBase.rectTransform.GetWorldCorners(baseCorner);
         hitZone.rectTransform.sizeDelta = new Vector2(Random.Range(5, 11) * 10, hitZone.rectTransform.sizeDelta.y);
-        hitZone.rectTransform.position = new Vector2(Random.Range(Screen.width/2-pointerLimit + hitZone.rectTransform.rect.width / 2 + 50f, Screen.width / 2 + pointerLimit - hitZone.rectTransform.rect.width / 2 - 50f), hitZone.rectTransform.position.y);
+        hitZone.rectTransform.position = new Vector2(Random.Range(baseCorner[0].x + hitZone.rectTransform.rect.width / 2 + 50f, baseCorner[2].x - hitZone.rectTransform.rect.width / 2 - 50f), hitZone.rectTransform.position.y);
         pointerPosAngle = 0;
-        Vector3[] fourCornersArray = new Vector3[4];
-        hitZone.rectTransform.GetWorldCorners(fourCornersArray);
+        Vector3[] hitZoneCorner = new Vector3[4];
+        
+        hitZone.rectTransform.GetWorldCorners(hitZoneCorner);
         if (hitZone != null)
         {
-            pointerHitZoneMin = fourCornersArray[0].x - 50f;
-            pointerHitZoneMax = fourCornersArray[2].x + 50f;
+            pointerHitZoneMin = hitZoneCorner[0].x - 50f;
+            pointerHitZoneMax = hitZoneCorner[2].x + 50f;
         }
     }
 	

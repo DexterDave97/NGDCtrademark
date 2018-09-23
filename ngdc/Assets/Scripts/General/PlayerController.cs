@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask Obj;
     public static float jumpSpeed = 1.5f, jumpHeight, move; // 1.3, 12
     public static int Dir = 1;
-    private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f; // acc = runSpeed - intial speed / time taken 
+    private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f;
     private bool lockShiftJump;
-    public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
+    public static bool lockRun = false, jumpingAvailable = true, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
 
@@ -43,17 +43,17 @@ public class PlayerController : MonoBehaviour
         runSpeed = moveSpeed;
         Dir = 0;
         canmove = true;
-        if (SceneManager.GetActiveScene().name == "")
+        if (SceneManager.GetActiveScene().name == "BuildingsAfterCafe")
             lockShiftJump = true;
         else lockShiftJump = false;
-    playerRB = GetComponent<Rigidbody2D>();
+        playerRB = GetComponent<Rigidbody2D>();
         playerSp = GetComponent<SpriteRenderer>();
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
         if (LevelTransition.playerPos != null && PlayerPrefs.HasKey(SceneManager.GetActiveScene().name))
         {
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name), gameObject.transform.position.y, gameObject.transform.position.z);
         }
-        else if (SceneManager.GetActiveScene().name == "House")
+        else if (SceneManager.GetActiveScene().name == "House" && LevelTransition.playerPos == null)
         {
             StartCoroutine(TriggerCutscene());
         }
@@ -76,13 +76,8 @@ public class PlayerController : MonoBehaviour
 
         move = Input.GetAxisRaw("Horizontal");
         JumpHeightDetermine();
-        Ground();// Dir is here tho 
-        /*if (runSpeed < 0)
-        {
-            runSpeed = moveSpeed;
-            isMoving = false;
-            Dir = 0;
-        }*/
+        if(SceneManager.GetActiveScene().name != "School")
+            Ground();// Dir is here tho 
         if (lastMove != move)
             runSpeed = moveSpeed;
         if (transform.position.y < yComponentOfP)
@@ -91,9 +86,41 @@ public class PlayerController : MonoBehaviour
             Movement(move);
         if (jumpingAvailable == true && isGrounded == true && Input.GetKeyDown(KeyCode.Space) == true)
             Jumping();
+        if (transform.position.y > yComponentOfP && Time.timeSinceLevelLoad > 0.05f)
+        {
+            playerAnim.SetBool("Jumping", true);
+        }
         AnimationFunc();
         lastMove = move;
         yComponentOfP = transform.position.y;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(SceneManager.GetActiveScene().name == "School")
+        {
+            if(collision.gameObject.layer == 9)
+            {
+                playerAnim.SetBool("Jumping", false);
+                isJumping = false;
+                isGrounded = true;
+
+                if (canmove)
+                    DirectionChange();
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (SceneManager.GetActiveScene().name == "School")
+        {
+            if (collision.gameObject.layer == 9)
+            {
+                isGrounded = false;
+            }
+        }
+
     }
 
     void JumpHeightDetermine()
@@ -104,6 +131,9 @@ public class PlayerController : MonoBehaviour
             isMoving = false;
         }
         else jumpHeight = 30f;
+
+        if (SceneManager.GetActiveScene().name != "BuildingsAfterCafe")
+            jumpHeight = 20f;
     }
 
     void Ground()
@@ -111,18 +141,21 @@ public class PlayerController : MonoBehaviour
         Debug.DrawLine(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.001f, 0));
         Debug.DrawLine(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(- 0.5f, playerSp.bounds.extents.y - 0.001f, 0));
 
-        if (Physics2D.Linecast(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.001f, 0), ground) || 
-            Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(- 0.5f, playerSp.bounds.extents.y - 0.001f, 0), ground))
-        //if (Physics2D.Raycast(transform.position - new Vector3(0.5f, playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground) || Physics2D.Raycast(transform.position + new Vector3(0.5f, - playerSp.bounds.extents.y, 0), Vector3.down, 0.01f, ground))
+        if (Physics2D.Linecast(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.001f, 0), ground) ||
+            Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(-0.5f, playerSp.bounds.extents.y - 0.001f, 0), ground))
         {
             playerAnim.SetBool("Jumping", false);
+            yComponentOfP = transform.position.y;
             isJumping = false;
             isGrounded = true;
 
             if (canmove)
                 DirectionChange();
         }
-        else isGrounded = false;
+        else
+        {
+            isGrounded = false;
+        }
     }
 
     void Movement(float move)
@@ -153,9 +186,6 @@ public class PlayerController : MonoBehaviour
     void Jumping()
     {
         isJumping = true;
-
-        playerAnim.SetBool("Jumping", true);
-
         if (Input.GetKey(KeyCode.LeftShift) == true && lockShiftJump)
             playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * 1.05f * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
         else playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
@@ -197,10 +227,7 @@ public class PlayerController : MonoBehaviour
         if (shouldSuicideBool == true)
             playerAnim.SetFloat("Velocity", 0);
         else playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
-        /*
-        if (move == -1 && Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.left, 2.2f, Obj) ||
-            move == 1 && Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.right, 2, Obj))
-            playerAnim.SetFloat("Velocity", 0);*/
+
     }
 
     IEnumerator TriggerCutscene()

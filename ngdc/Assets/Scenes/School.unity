@@ -1041,7 +1041,7 @@ GameObject:
   - component: {fileID: 724942768}
   - component: {fileID: 724942767}
   - component: {fileID: 724942766}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: door (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1909,11 +1909,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4637541359731430, guid: b65d828ec918d0141ad8ec7c5163144c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 34.85
+      value: 34.64
       objectReference: {fileID: 0}
     - target: {fileID: 4637541359731430, guid: b65d828ec918d0141ad8ec7c5163144c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -1.73
       objectReference: {fileID: 0}
     - target: {fileID: 4637541359731430, guid: b65d828ec918d0141ad8ec7c5163144c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1953,6 +1953,11 @@ Prefab:
         type: 2}
       propertyPath: m_SortingOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 212896662687240350, guid: b65d828ec918d0141ad8ec7c5163144c,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b65d828ec918d0141ad8ec7c5163144c, type: 2}
@@ -2495,7 +2500,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 33e662b7f974a7a45878953517005ab5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2570,7 +2575,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a12c8d4874dbfa3448fa344fff717729, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
