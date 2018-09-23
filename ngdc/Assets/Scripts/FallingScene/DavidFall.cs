@@ -9,27 +9,14 @@ public class DavidFall : MonoBehaviour {
     [SerializeField] Animator fadePanel;
     public float var;
     Rigidbody2D play;
-    public bool trig;
 
     private void Start()
     {
         play = GetComponent<Rigidbody2D>();
-        if (trig)
-            play.velocity = Vector3.down * var;
-        else
-        {
-            play.velocity = Vector3.left * var;
-            StartCoroutine(Hello());
-        }
+        play.velocity = Vector3.down * var;
     }
     public void changeScene()
     {
         TriggerNextScene.zoomCam = true;
-    }    
-
-    IEnumerator Hello()
-    {
-        yield return new WaitForSeconds(2);
-        Destroy(this.gameObject);
     }
 }
