@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Cutscene : MonoBehaviour
 {
-
     public static Cutscene instance;
     public static int cutsceneIndex, currentSprite = 0;
     public static bool playCutscene, sceneEnd;
@@ -16,6 +15,7 @@ public class Cutscene : MonoBehaviour
     GameObject cutsceneGameobject;
     Image panel;
     Animator fadePanel;
+    int maxScene;
     bool timebool;
 
     public List<Sprite> cutscene1 = new List<Sprite>();
@@ -31,6 +31,7 @@ public class Cutscene : MonoBehaviour
     {
         timebool = true;
         cutsceneIndex = 0;
+        maxScene = 0;
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
         panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
         cutsceneGameobject = panel.gameObject;
@@ -114,7 +115,7 @@ public class Cutscene : MonoBehaviour
                 currentSprite--;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
             }
-            if (Input.GetKeyUp(KeyCode.D) && ((Time.time - timeLol) > 1.2f))
+            if (Input.GetKeyUp(KeyCode.D) && currentSprite < maxScene)
             {
                 timeLol = Time.time;
                 timebool = true;
@@ -131,6 +132,34 @@ public class Cutscene : MonoBehaviour
                         sceneEnd = false;
                     }
                     if(cutsceneIndex == 3)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(26, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
+                        Camera.main.transform.position = new Vector3(32.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+                        CameraFollow.camfol.camXPosMin = 32.5f;
+                        CameraFollow.camfol.camXPosMax = 42.5f;
+                    }
+                    //if (cutsceneIndex != 4)
+                    PlayerController.canmove = true;
+                }
+            }
+            else if(Input.GetKeyUp(KeyCode.D) && currentSprite >= maxScene && ((Time.time - timeLol) > 1.2f))
+            {
+                timeLol = Time.time;
+                timebool = true;
+                currentSprite++;
+                maxScene = currentSprite;
+                currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
+                if (currentSprite == GetCutscene(cutsceneIndex).Count)
+                {
+                    currentSprite--;
+                    playCutscene = false;
+                    StartCoroutine(TriggerCut());
+                    if (sceneEnd)
+                    {
+                        SceneManager.LoadScene(nextSceneName);
+                        sceneEnd = false;
+                    }
+                    if (cutsceneIndex == 3)
                     {
                         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(26, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
                         Camera.main.transform.position = new Vector3(32.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
