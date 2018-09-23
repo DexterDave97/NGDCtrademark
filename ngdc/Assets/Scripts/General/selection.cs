@@ -32,7 +32,7 @@ public class selection : MonoBehaviour {
             highlight.transform.position = gbArr[index].transform.position;
             if (index < 2)
             {
-                if (Input.GetKeyDown(KeyCode.DownArrow))
+                if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") < 0)
                 {
                     index++;
                     sel.transform.position = new Vector3(sel.transform.position.x, sel.transform.position.y - offset, 0);
@@ -42,7 +42,7 @@ public class selection : MonoBehaviour {
 
             if (index > 0)
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
+                if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0)
                 {
                     index--;
                     sel.transform.position = new Vector3(sel.transform.position.x, sel.transform.position.y + offset, 0);

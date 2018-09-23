@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class DavidFall : MonoBehaviour {
 
+    [SerializeField] Animator fadePanel;
     public float var;
     Rigidbody2D play;
     public bool trig;
@@ -19,6 +22,10 @@ public class DavidFall : MonoBehaviour {
             StartCoroutine(Hello());
         }
     }
+    public void changeScene()
+    {
+        TriggerNextScene.zoomCam = true;
+    }    
 
     IEnumerator Hello()
     {

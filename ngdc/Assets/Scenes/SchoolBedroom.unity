@@ -2083,7 +2083,7 @@ MonoBehaviour:
   levelname: SchoolHouse
   changable: 0
   anim: {fileID: 499852106}
-  shouldSave: 0
+  shouldSave: 1
 --- !u!1 &2020058125
 GameObject:
   m_ObjectHideFlags: 0
