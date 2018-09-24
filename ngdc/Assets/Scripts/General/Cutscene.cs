@@ -125,7 +125,6 @@ public class Cutscene : MonoBehaviour
                 {
                     currentSprite--;
                     playCutscene = false;
-                    maxScene = 0;
                     StartCoroutine(TriggerCut());
                     if (sceneEnd)
                     {
@@ -182,6 +181,7 @@ public class Cutscene : MonoBehaviour
         else
         {
             currentSprite = 0;
+            maxScene = 0;
             if (cutsceneGameobject == true)
                 panel.enabled = false;
         }
