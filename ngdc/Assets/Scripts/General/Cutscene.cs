@@ -205,6 +205,7 @@ public class Cutscene : MonoBehaviour
         }
         if (cutsceneIndex == 8)
         {
+            PlayerController.jumpingAvailable = false;
             SceneManager.LoadScene("BuildingEnding");
         }
         yield return new WaitForSeconds(0.5f);
