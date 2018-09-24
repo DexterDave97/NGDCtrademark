@@ -51,47 +51,47 @@ public class Cutscene : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-
+        /*
         for (int temp = 0; temp < 3; temp++)
         {
-            cutscene1.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 1) + ".png", typeof(Sprite)));
+            cutscene1.Add(Resources.Load<Sprite>("Ch1-" + (temp + 1) + ".png" ));
         }
         for (int temp = 0; temp < 5; temp++)
         {
-            cutscene2.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 4) + ".png", typeof(Sprite)));
+            cutscene2.Add(Resources.Load<Sprite>("Ch1-" + (temp + 4) + ".png" ));
         }
         for (int temp = 0; temp < 6; temp++)
         {
-            cutscene3.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 9) + ".png", typeof(Sprite)));
+            cutscene3.Add(Resources.Load<Sprite>("Ch1-" + (temp + 9) + ".png" ));
         }
         for (int temp = 0; temp < 9; temp++)
         {
-            cutscene4.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 15) + ".png", typeof(Sprite)));
+            cutscene4.Add(Resources.Load<Sprite>("Ch1-" + (temp + 15) + ".png" ));
         }
         for (int temp = 0; temp < 2; temp++)
         {
-            cutscene5.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 24) + ".png", typeof(Sprite)));
+            cutscene5.Add(Resources.Load<Sprite>("Ch1-" + (temp + 24) + ".png" ));
         }
         for (int temp = 0; temp < 2; temp++)
         {
-            cutscene6.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 90) + ".png", typeof(Sprite)));
+            cutscene6.Add(Resources.Load<Sprite>("Ch1-" + (temp + 90) + ".png" ));
         }
         for (int temp = 0; temp < 11; temp++)
         {
-            cutscene7.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 26) + ".png", typeof(Sprite)));
+            cutscene7.Add(Resources.Load<Sprite>("Ch1-" + (temp + 26) + ".png" ));
         }
         for (int temp = 0; temp < 8; temp++)
         {
-            cutscene8.Add((Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Scenes/Ch1-" + (temp + 37) + ".png", typeof(Sprite)));
-        }
+            cutscene8.Add(Resources.Load<Sprite>("Ch1-" + (temp + 37) + ".png" ));
+        }*/
     }
 
     private void Update()
     {
-        if(Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom")
+        if(Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
-            if(SceneManager.GetActiveScene().name != "FallingBuildingScene")
+            if(SceneManager.GetActiveScene().name != "FallingBuildingScene" && SceneManager.GetActiveScene().name != "BuildingEnding")
             {
                 panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
                 cutsceneGameobject = panel.gameObject;
@@ -139,15 +139,6 @@ public class Cutscene : MonoBehaviour
                         CameraFollow.camfol.camXPosMin = 32.5f;
                         CameraFollow.camfol.camXPosMax = 42.5f;
                     }
-                    if(cutsceneIndex == 7)
-                    {
-                        SceneManager.LoadScene("MainMenu");
-                    }
-                    if(cutsceneIndex == 8)
-                    {
-                        SceneManager.LoadScene("MainMenu");
-                    }
-
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
                 }
@@ -207,6 +198,14 @@ public class Cutscene : MonoBehaviour
         {
             SceneManager.LoadScene(nextSceneName);
             sceneEnd = false;
+        }
+        if (cutsceneIndex == 7)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+        if (cutsceneIndex == 8)
+        {
+            SceneManager.LoadScene("BuildingEnding");
         }
         yield return new WaitForSeconds(0.5f);
     }

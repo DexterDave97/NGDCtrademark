@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         {
             jumpingAvailable = false;
             lockRun = true;
+            shouldSuicideBool = false;
             StartCoroutine(TriggerCutscene());
         }
     }
@@ -64,75 +65,69 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if(!canmove && !PlayerController.lockSuicide)
-        {
             playerRB.velocity = new Vector3(0, playerRB.velocity.y, 0);
-        }
+
         if(Time.timeSinceLevelLoad < 0.01f)
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        Debug.DrawRay(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.left, Color.red);
-        Debug.DrawRay(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.right, Color.blue);
-
         move = Input.GetAxisRaw("Horizontal");
         JumpHeightDetermine();
-        if(SceneManager.GetActiveScene().name != "School")
-            Ground();// Dir is here tho 
+
+        //if (SceneManager.GetActiveScene().name != "School")
+            Ground();
+        //else if(isGrounded)
+          //  DirectionChange();
+
         if (lastMove != move)
             runSpeed = moveSpeed;
+
         if (transform.position.y < yComponentOfP)
             playerRB.velocity = new Vector2(playerRB.velocity.x, playerRB.velocity.y * 1.05f);
+
         if (canmove == true && lockSuicide == false && isJumping == false && isGrounded == true)
             Movement(move);
+
         if (jumpingAvailable == true && isGrounded == true && Input.GetKeyDown(KeyCode.Space) == true)
             Jumping();
-        /*if (transform.position.y > yComponentOfP && Time.timeSinceLevelLoad > 0.05f)
-        {
+
+        if (transform.position.y > yComponentOfP/* && SceneManager.GetActiveScene().name != "School"Time.timeSinceLevelLoad > 0.05f*/)
             playerAnim.SetBool("Jumping", true);
-        }*/
+
         AnimationFunc();
         lastMove = move;
         yComponentOfP = transform.position.y;
     }
-
-    private void OnCollisionStay2D(Collision2D collision)
+    /*
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(SceneManager.GetActiveScene().name == "School")
         {
-            if(collision.gameObject.layer == 9)
+            if(collision.IsTouchingLayers(9))
             {
+                Debug.Log("Entered");
                 playerAnim.SetBool("Jumping", false);
                 isJumping = false;
                 isGrounded = true;
-
-                //if (canmove)
-                    DirectionChange();
+                
             }
-        }
-
-        if(collision.gameObject.layer == 10)
-        {
-            playerAnim.SetFloat("Velocity", 0);
-            isGrounded = true;
-
-            //if (canmove)
-                DirectionChange();
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (SceneManager.GetActiveScene().name == "School")
         {
-            if (collision.gameObject.layer == 9)
+            if (collision.IsTouchingLayers(9) && collision.tag != "DoorAtSchool")
             {
+                Debug.Log("Exited");
                 isGrounded = false;
                 playerAnim.SetBool("Jumping", true);
             }
         }
-    }
+    }*/
 
     void JumpHeightDetermine()
     {
@@ -149,8 +144,10 @@ public class PlayerController : MonoBehaviour
 
     void Ground()
     {
-        if (Physics2D.Linecast(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.001f, 0), ground) ||
-            Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(-0.5f, playerSp.bounds.extents.y - 0.001f, 0), ground))
+        RaycastHit2D hit1 = Physics2D.Linecast(transform.position - new Vector3(0.5f, 0, 0), transform.position - new Vector3(0.5f, playerSp.bounds.extents.y + 0.01f, 0), ground);
+        RaycastHit2D hit2 = Physics2D.Linecast(transform.position + new Vector3(0.5f, 0, 0), transform.position - new Vector3(-0.5f, playerSp.bounds.extents.y + 0.01f, 0), ground);
+
+        if (hit1 || hit2)
         {
             playerAnim.SetBool("Jumping", false);
             yComponentOfP = transform.position.y;
@@ -194,7 +191,7 @@ public class PlayerController : MonoBehaviour
     void Jumping()
     {
         isJumping = true;
-        if (Input.GetKey(KeyCode.LeftShift) == true && lockShiftJump)
+        if (Input.GetKey(KeyCode.LeftShift) && lockShiftJump)
             playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * 1.05f * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
         else playerRB.velocity = new Vector2(playerRB.velocity.x * jumpSpeed, ((jumpHeight * Mathf.Sin(35f * Mathf.Deg2Rad)) - (9.8f * Time.deltaTime)));
     }
@@ -206,7 +203,7 @@ public class PlayerController : MonoBehaviour
             isMoving = false;
             Dir = 0;
         }
-
+        
         if (move == -1 && !Physics2D.Raycast(transform.position - new Vector3(0, playerSp.bounds.extents.y - 0.5f, 0), Vector3.left, 2.2f, Obj))
         {
             isMoving = true;
@@ -223,6 +220,7 @@ public class PlayerController : MonoBehaviour
             Dir = -1;
             playerSp.flipX = true;
         }
+
         if (move == 1)
         {
             Dir = 1;

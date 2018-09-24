@@ -2835,6 +2835,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1626424175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1759407955942422, guid: b65d828ec918d0141ad8ec7c5163144c,
+    type: 2}
+  m_PrefabInternal: {fileID: 296447490}
 --- !u!1 &1743996835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2866,6 +2871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1773289716e57438c77b53d500c2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pop: {fileID: 262849299}
   anim: {fileID: 1355584827}
   Lift: {fileID: 1434705596}
   switchable: 0
@@ -2906,8 +2912,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 262849299}
-  player: {fileID: 0}
-  offset: 0
+  player: {fileID: 1626424175}
+  offset: 3
 --- !u!23 &1743996839
 MeshRenderer:
   m_ObjectHideFlags: 0

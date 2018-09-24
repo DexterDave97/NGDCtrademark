@@ -8,17 +8,19 @@ public class Parallax : MonoBehaviour {
     [SerializeField] float moveSpeed;
     public bool dead;
     public static float xval;
+    Rigidbody2D player;
     Vector3 hew;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         hew = transform.position;
         temp = hew.x;
     }
 
     private void Update()
     {
-        move = PlayerController.move;
+        move = player.velocity.x;
 
         if (dead && PlayerController.isMoving)
         {
@@ -29,9 +31,9 @@ public class Parallax : MonoBehaviour {
 
         if (move != 0 && PlayerController.isMoving)
         {
-            if(move == 1 && PlayerController.canmove)
+            if(move > 0 && PlayerController.canmove)
                 hew.x -= moveSpeed * 0.01f;
-            if(move == -1 && PlayerController.canmove)
+            if(move < 0 && PlayerController.canmove)
                 hew.x += moveSpeed * 0.01f;
 
             transform.position = hew;

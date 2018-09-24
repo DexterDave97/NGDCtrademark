@@ -16,10 +16,6 @@ public class selection : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         tx.text = null;
-        Vector3[] baseCorner = new Vector3[4];
-        NextText.rectTransform.GetWorldCorners(baseCorner);
-        Vector3[] baseCorner2 = new Vector3[4];
-        first.rectTransform.GetWorldCorners(baseCorner);
         offset = first.transform.position.y - NextText.transform.position.y;
     }
 	

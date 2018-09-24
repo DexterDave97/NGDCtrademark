@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ElevatorButton : MonoBehaviour
 {
-
+    [SerializeField] Image pop;
     public Animator anim;
     public Animator Lift;
     [SerializeField] bool switchable;
@@ -17,6 +18,7 @@ public class ElevatorButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && switchable)
         {
+            pop.enabled = false;
             anim.SetBool("click", true);
             if(Cutscene.cutsceneIndex < 3)
                 Lift.SetBool("CallElevator", true);

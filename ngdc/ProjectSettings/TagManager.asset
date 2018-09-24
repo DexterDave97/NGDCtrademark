@@ -13,6 +13,7 @@ TagManager:
   - DeadG
   - Cutscene
   - FadePanel
+  - DoorAtSchool
   layers:
   - Default
   - TransparentFX

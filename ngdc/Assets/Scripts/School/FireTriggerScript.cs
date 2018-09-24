@@ -12,6 +12,7 @@ public class FireTriggerScript : MonoBehaviour {
         if(collision.tag == "Player" && !trig)
         {
             trig = true;
+            this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 

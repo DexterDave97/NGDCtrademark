@@ -14,4 +14,15 @@ public class UIBUTTON : MonoBehaviour {
     {
         Application.Quit();
     }
+
+    public void ToCredit()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "Credits")
+            SceneManager.LoadScene("MainMenu");
+    }
 }
