@@ -8,6 +8,7 @@ public class KidActivate : MonoBehaviour {
     {
         if (col.tag == "Player")
         {
+            GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<Sounds>().audioDict["Corridor"][4]);
             kid.SetActive(true);
             Destroy(this.gameObject);
         }

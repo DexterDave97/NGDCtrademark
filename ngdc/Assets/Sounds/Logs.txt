@@ -1,0 +1,7 @@
+21:17  Added Elevator going down sound 
+	File Name-'elevator going down sound effect(lamagod.com)'
+	Location-ouroboros\Sound Effects\Elevator
+       
+21:18	Added Door Opening Sound effect
+	File Name- 'Door Open'
+	Location- ouroboros\Sound Effects

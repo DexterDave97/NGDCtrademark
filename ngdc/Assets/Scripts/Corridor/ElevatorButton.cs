@@ -18,6 +18,9 @@ public class ElevatorButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && switchable)
         {
+            GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<Sounds>().audioDict["Corridor"][0]);
+            Invoke("eleDoorSound", 0.5f);
+            this.gameObject.SetActive(false);
             pop.enabled = false;
             anim.SetBool("click", true);
             if(Cutscene.cutsceneIndex < 3)
@@ -25,6 +28,11 @@ public class ElevatorButton : MonoBehaviour
             PlayerController.canmove = false;
             Invoke("TempFun", 1.2f);
         }
+    }
+
+    void eleDoorSound()
+    {
+        FindObjectOfType<AudioSource>().PlayOneShot(FindObjectOfType<Sounds>().audioDict["Corridor"][1]);
     }
 
     void TempFun()

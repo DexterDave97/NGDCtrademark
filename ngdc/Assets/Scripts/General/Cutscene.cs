@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Cutscene : MonoBehaviour
 {
+    public AudioSource audioSc1, audioSc2;
     public static Cutscene instance;
     public static int cutsceneIndex, currentSprite = 0;
     public static bool playCutscene, sceneEnd;
@@ -17,7 +18,7 @@ public class Cutscene : MonoBehaviour
     Animator fadePanel;
     int maxScene;
     bool timebool;
-
+    private Sounds audioList;
     public List<Sprite> cutscene1 = new List<Sprite>();
     public List<Sprite> cutscene2 = new List<Sprite>();
     public List<Sprite> cutscene3 = new List<Sprite>();
@@ -29,6 +30,9 @@ public class Cutscene : MonoBehaviour
 
     void Start()
     {
+        audioList = FindObjectOfType<Sounds>();
+        audioSc1 = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>();
+        audioSc2 = GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>(); ;
         timebool = true;
         cutsceneIndex = 0;
         maxScene = 0;
@@ -96,6 +100,20 @@ public class Cutscene : MonoBehaviour
                 panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
                 cutsceneGameobject = panel.gameObject;
             }
+        }
+        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name == "CorriInTheHouse")
+        {
+            audioSc1.clip = audioList.audioDict["BGM"][1];
+            audioSc1.Play();
+
+            audioSc2.clip = audioList.audioDict["Corridor"][3];
+            audioSc2.Play();
+        }
+
+        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name == "ToCafe")
+        {
+            audioSc1.clip = audioList.audioDict["BGM"][2];
+            audioSc1.Play();
         }
 
         if (playCutscene)
@@ -165,6 +183,23 @@ public class Cutscene : MonoBehaviour
                         Camera.main.transform.position = new Vector3(32.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
                         CameraFollow.camfol.camXPosMin = 32.5f;
                         CameraFollow.camfol.camXPosMax = 42.5f;
+                    }
+
+                    if (cutsceneIndex == 1)
+                    {
+                        AudioClip clip = audioList.audioDict["BGM"][0];
+                        audioSc1.clip = clip;
+                        audioSc1.Play();
+                    }
+                    if (cutsceneIndex == 2)
+                    {
+                        audioSc1.clip = audioList.audioDict["BGM"][2];
+                        audioSc1.Play();
+                    }
+                    if (cutsceneIndex == 3)
+                    {
+                        audioSc1.clip = audioList.audioDict["BGM"][3];
+                        audioSc1.Play();
                     }
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
