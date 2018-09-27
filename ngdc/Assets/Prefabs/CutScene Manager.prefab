@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1284715184978704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,57 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb9757c9619f7848b36c464e20cfa01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutscene1:
-  - {fileID: 21300000, guid: 4278816c9a6728a43a95f02312a31112, type: 3}
-  - {fileID: 21300000, guid: b95f4e01a63f20247b0daeaf05ba0d9d, type: 3}
-  - {fileID: 21300000, guid: d9bc37990c22b514a8ec5f6b13143858, type: 3}
-  cutscene2:
-  - {fileID: 21300000, guid: 0b8a63a542b238d48919a23511df95f9, type: 3}
-  - {fileID: 21300000, guid: 28b44b0a24b511c4e9da3137eee828cc, type: 3}
-  - {fileID: 21300000, guid: d9e25bc71ebf4c741a5667eefbb8965a, type: 3}
-  - {fileID: 21300000, guid: eb45825cc728b9141bdcf64540bc2de9, type: 3}
-  - {fileID: 21300000, guid: 6439160f2caf9d749a9999a9f6165215, type: 3}
-  cutscene3:
-  - {fileID: 21300000, guid: d3165ad929a79104f810e333366a516c, type: 3}
-  - {fileID: 21300000, guid: 6e524f739febcd747ad83bed768712c6, type: 3}
-  - {fileID: 21300000, guid: be1b1517f6ffaf0458746466d1cd7db6, type: 3}
-  - {fileID: 21300000, guid: dbfc9823810df1641a65f360a9467593, type: 3}
-  - {fileID: 21300000, guid: 384c083cac6ca0744a0183822e2a4fc4, type: 3}
-  - {fileID: 21300000, guid: 2f0424b802c211d4b929497aae00d004, type: 3}
-  cutscene4:
-  - {fileID: 21300000, guid: ee5a4bd3eb41ba3418e6cc304084ee7e, type: 3}
-  - {fileID: 21300000, guid: a43c1c32d7af22545b7c39c07ac56e57, type: 3}
-  - {fileID: 21300000, guid: 4ace0f55bc8d6d44fbd57e3b6453dea6, type: 3}
-  - {fileID: 21300000, guid: e6e4917f7178015428e99f9d2b8990cd, type: 3}
-  - {fileID: 21300000, guid: a8dc1fca3ec712f488453eb8182673b2, type: 3}
-  - {fileID: 21300000, guid: 3e3a020d3ce77c240a115dc8a4cfcb9d, type: 3}
-  - {fileID: 21300000, guid: 2e350c122da65d24a8d7000829f94d90, type: 3}
-  - {fileID: 21300000, guid: 751510f0011550044986329ada8762e8, type: 3}
-  - {fileID: 21300000, guid: eec4b4cf644086b43b27473a0d5164f4, type: 3}
-  cutscene5:
-  - {fileID: 21300000, guid: c6bdf3bf73363be4e95fc6158db8a736, type: 3}
-  - {fileID: 21300000, guid: cb2c9c51386b7444f87168071575b300, type: 3}
-  cutscene6:
-  - {fileID: 21300000, guid: 152874757b43e7f4d8a072f90e1d124e, type: 3}
-  - {fileID: 21300000, guid: e3e947a92a3036b4d8f46d4457cb43d6, type: 3}
-  cutscene7:
-  - {fileID: 21300000, guid: bf2c175f4d16d5443b4f4dce4d364c6b, type: 3}
-  - {fileID: 21300000, guid: 5d6d85ddddab61d41a8853dea5fb7a6d, type: 3}
-  - {fileID: 21300000, guid: d4ed8d97d0a779b4298ad1ca96d0979a, type: 3}
-  - {fileID: 21300000, guid: 78daa0517b4c2d244b551efd37aacc6e, type: 3}
-  - {fileID: 21300000, guid: 666330314ae4f414295695c3c7379d6a, type: 3}
-  - {fileID: 21300000, guid: b5ce37d4b90a17648a1a9a3ef08665a1, type: 3}
-  - {fileID: 21300000, guid: f03c90fb1346f27479128336ca4c2063, type: 3}
-  - {fileID: 21300000, guid: 7ac2442c8773b484abfe343266c9b1b9, type: 3}
-  - {fileID: 21300000, guid: e5244a21782aff84cabc5e9e13a737e0, type: 3}
-  - {fileID: 21300000, guid: 15d4af937d184f84fa1f1e026f852353, type: 3}
-  - {fileID: 21300000, guid: 970fb9b501bbc124999e6924c0234c0e, type: 3}
-  cutscene8:
-  - {fileID: 21300000, guid: 08056a0a02127424b9ae1b83cc2c243e, type: 3}
-  - {fileID: 21300000, guid: 1fb8762ca539ee7418ffe72e768e06f7, type: 3}
-  - {fileID: 21300000, guid: 6c115919e8469da418f9e767ebc9c938, type: 3}
-  - {fileID: 21300000, guid: da48d93b0669aea4991517fe246d1030, type: 3}
-  - {fileID: 21300000, guid: 4a9987d05f7538d46a8865c55a20fbfd, type: 3}
-  - {fileID: 21300000, guid: eb9f0ac484a839548a5465ee04a49626, type: 3}
-  - {fileID: 21300000, guid: 53569ef866586fa4ebd3c38be0ff0dd0, type: 3}
-  - {fileID: 21300000, guid: fd030d9da00afbe40a750d744d3806c0, type: 3}
+  audioSc1: {fileID: 0}
+  audioSc2: {fileID: 0}
+  cutscene1: []
+  cutscene2: []
+  cutscene3: []
+  cutscene4: []
+  cutscene5: []
+  cutscene6: []
+  cutscene7: []
+  cutscene8: []

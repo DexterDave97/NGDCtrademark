@@ -14,6 +14,7 @@ public class LevelTransition : MonoBehaviour {
         
 		if(changable && Input.GetKeyDown(KeyCode.E))
         {
+            GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<Sounds>().audioDict["SFX"][0]);
             changable = false;
             StopAllCoroutines();
             StartCoroutine(loadLevel());

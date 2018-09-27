@@ -16,6 +16,7 @@ TagManager:
   - DoorAtSchool
   - Secondary Audio
   - Primary Audio
+  - Footstep
   layers:
   - Default
   - TransparentFX

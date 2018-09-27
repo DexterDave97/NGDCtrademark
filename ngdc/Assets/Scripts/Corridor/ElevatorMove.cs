@@ -37,7 +37,7 @@ public class ElevatorMove : MonoBehaviour {
         }
         if (ElevatorIsDown.isDown)
         {
-            ac.Stop();            
+            ac.clip = null;
             player.transform.parent = null;
             switchable = false;
         }

@@ -16,8 +16,8 @@ public class Cutscene : MonoBehaviour
     GameObject cutsceneGameobject;
     Image panel;
     Animator fadePanel;
-    int maxScene;
-    bool timebool;
+    int maxScene, sceneAudioIndexOffset = 0;
+    bool timebool,played;
     private Sounds audioList;
     public List<Sprite> cutscene1 = new List<Sprite>();
     public List<Sprite> cutscene2 = new List<Sprite>();
@@ -34,6 +34,7 @@ public class Cutscene : MonoBehaviour
         audioSc1 = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>();
         audioSc2 = GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>(); ;
         timebool = true;
+        played = false;
         cutsceneIndex = 0;
         maxScene = 0;
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
@@ -55,39 +56,39 @@ public class Cutscene : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-        /*
+        
         for (int temp = 0; temp < 3; temp++)
         {
-            cutscene1.Add(Resources.Load<Sprite>("Ch1-" + (temp + 1) + ".png" ));
+            cutscene1.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 1)));
         }
         for (int temp = 0; temp < 5; temp++)
         {
-            cutscene2.Add(Resources.Load<Sprite>("Ch1-" + (temp + 4) + ".png" ));
+            cutscene2.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 4)));
         }
         for (int temp = 0; temp < 6; temp++)
         {
-            cutscene3.Add(Resources.Load<Sprite>("Ch1-" + (temp + 9) + ".png" ));
+            cutscene3.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 9)));
         }
         for (int temp = 0; temp < 9; temp++)
         {
-            cutscene4.Add(Resources.Load<Sprite>("Ch1-" + (temp + 15) + ".png" ));
+            cutscene4.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 15)));
         }
         for (int temp = 0; temp < 2; temp++)
         {
-            cutscene5.Add(Resources.Load<Sprite>("Ch1-" + (temp + 24) + ".png" ));
+            cutscene5.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 24)));
         }
         for (int temp = 0; temp < 2; temp++)
         {
-            cutscene6.Add(Resources.Load<Sprite>("Ch1-" + (temp + 90) + ".png" ));
+            cutscene6.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 90)));
         }
         for (int temp = 0; temp < 11; temp++)
         {
-            cutscene7.Add(Resources.Load<Sprite>("Ch1-" + (temp + 26) + ".png" ));
+            cutscene7.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 26)));
         }
         for (int temp = 0; temp < 8; temp++)
         {
-            cutscene8.Add(Resources.Load<Sprite>("Ch1-" + (temp + 37) + ".png" ));
-        }*/
+            cutscene8.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 37)));
+        }
     }
 
     private void Update()
@@ -118,6 +119,12 @@ public class Cutscene : MonoBehaviour
 
         if (playCutscene)
         {
+            if(!played)
+            {
+                played = true;
+                audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
+            }
+            audioSc1.Pause();
             if(timebool)
             {
                 timeLol = Time.time;
@@ -130,14 +137,17 @@ public class Cutscene : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.A))
             {
+                sceneAudioIndexOffset--;
                 currentSprite--;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
+                audioSc2.Play();
+                audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
             }
             if (Input.GetKeyUp(KeyCode.D) && currentSprite < maxScene)
             {
                 timeLol = Time.time;
                 timebool = true;
-                currentSprite++;
+                currentSprite++;                
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
@@ -161,12 +171,15 @@ public class Cutscene : MonoBehaviour
                 }
             }
             else if(Input.GetKeyUp(KeyCode.D) && currentSprite >= maxScene && ((Time.time - timeLol) > 1.2f))
-            {
+            {                
                 timeLol = Time.time;
                 timebool = true;
                 currentSprite++;
                 maxScene = currentSprite;
+                sceneAudioIndexOffset++;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
+                audioSc2.Play();
+                audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
                     currentSprite--;
@@ -215,6 +228,9 @@ public class Cutscene : MonoBehaviour
         }
         else
         {
+            audioSc1.UnPause();
+            sceneAudioIndexOffset = 0;
+            played = false;
             currentSprite = 0;
             maxScene = 0;
             if (cutsceneGameobject == true)
@@ -268,6 +284,31 @@ public class Cutscene : MonoBehaviour
                 return cutscene8;
             default:
                 return null;
+        }
+    }
+
+    int GetSceneAudioIndex(int x)
+    {
+        switch (x)
+        {
+            case 1:
+                return 0;
+            case 2:
+                return 3;
+            case 3:
+                return 8;
+            case 4:
+                return 14;
+            case 5:
+                return 23;
+            case 6:
+                return -1;
+            case 7:
+                return -1;
+            case 8:
+                return -1;
+            default:
+                return -1;
         }
     }
 }

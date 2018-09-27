@@ -231,9 +231,16 @@ public class PlayerController : MonoBehaviour
     void AnimationFunc()
     {
         if (shouldSuicideBool == true)
+        {
+            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
             playerAnim.SetFloat("Velocity", 0);
-        else playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
-
+        }
+        else
+        {
+            playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
+            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
+            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetBool("Jumping", isJumping);
+        }
     }
 
     IEnumerator TriggerCutscene()
