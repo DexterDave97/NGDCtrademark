@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeToFireman : MonoBehaviour {
     public Animator camAnim, fade1, fade2;
     public Camera mainCam;
-    [SerializeField] float finalCamPos;
+    [SerializeField] float finalCamPos, finalCamSize;
     public bool triggered = false;
     public static bool ended;
 
@@ -38,9 +38,9 @@ public class ChangeToFireman : MonoBehaviour {
 
     public void moveCam()
     {
-        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, new Vector3(finalCamPos, mainCam.transform.position.y, mainCam.transform.position.z), 0.05f);
-        mainCam.orthographicSize = Vector3.Lerp(Vector3.right * mainCam.orthographicSize, Vector3.right * 6.1f, 0.05f).x;
-        if (mainCam.orthographicSize <= 6.15f)
+        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, new Vector3(finalCamPos, 1.5f, mainCam.transform.position.z), 0.05f);
+        mainCam.orthographicSize = Vector3.Lerp(Vector3.right * mainCam.orthographicSize, Vector3.right * finalCamSize, 0.05f).x;
+        if (mainCam.orthographicSize <= (finalCamSize + 0.05f))
         {
             ended = true;
         }

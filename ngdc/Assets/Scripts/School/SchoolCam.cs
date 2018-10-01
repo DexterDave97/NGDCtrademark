@@ -12,7 +12,7 @@ public class SchoolCam : MonoBehaviour {
     void Start () {
         et = FindObjectOfType<ChangeToFireman>();
         player = GameObject.FindGameObjectWithTag("Player");
-        offset = -player.transform.position.y + transform.position.y;
+        offset = -player.transform.position.y + transform.position.y + 2.1f;
 	}
 	
 	// Update is called once per frame
