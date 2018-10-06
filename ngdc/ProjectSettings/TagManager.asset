@@ -17,6 +17,9 @@ TagManager:
   - Secondary Audio
   - Primary Audio
   - Footstep
+  - Death1
+  - Death2
+  - Death3
   layers:
   - Default
   - TransparentFX

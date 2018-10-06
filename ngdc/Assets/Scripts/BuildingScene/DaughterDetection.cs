@@ -11,6 +11,9 @@ public class DaughterDetection : MonoBehaviour {
             PlayerController.canmove = true;
             PlayerController.jumpingAvailable = true;
             PlayerController.lockRun = false;
+            PlayerController.lives = 0;
+            GameObject.FindGameObjectWithTag("Death2").GetComponent<Animator>().SetBool("out", false);
+            GameObject.FindGameObjectWithTag("Death1").GetComponent<Animator>().SetBool("out", false);
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }

@@ -9,6 +9,8 @@ public class FireKill : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
+            PlayerController.lives++;
+            if (PlayerController.lives < 4)
             SceneManager.LoadScene("School");
         }
     }

@@ -13,11 +13,17 @@ public class Cutscene : MonoBehaviour
     public static bool playCutscene, sceneEnd;
     public static string nextSceneName;
     private float timeLol;
+    Color d11, d22, d33;
     GameObject cutsceneGameobject;
+    Animator d1, d2, d3;
     Image panel;
     Animator fadePanel;
     int maxScene, sceneAudioIndexOffset = 0;
     bool timebool,played;
+    float timealert = 0;
+    bool locked = true;
+    public static bool dying = false;
+    float a1, a2, a3;
     private Sounds audioList;
     public List<Sprite> cutscene1 = new List<Sprite>();
     public List<Sprite> cutscene2 = new List<Sprite>();
@@ -32,7 +38,7 @@ public class Cutscene : MonoBehaviour
     {
         audioList = FindObjectOfType<Sounds>();
         audioSc1 = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>();
-        audioSc2 = GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>(); ;
+        audioSc2 = GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>();
         timebool = true;
         played = false;
         cutsceneIndex = 0;
@@ -93,7 +99,20 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
-        if(Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu")
+        if (SceneManager.GetActiveScene().name == "ToCafe")
+        {
+            d1 = GameObject.FindGameObjectWithTag("Death1").GetComponent<Animator>();
+            d2 = GameObject.FindGameObjectWithTag("Death2").GetComponent<Animator>();
+            d3 = GameObject.FindGameObjectWithTag("Death3").GetComponent<Animator>();
+            d11 = d1.gameObject.GetComponent<Image>().color;
+            d22 = d2.gameObject.GetComponent<Image>().color;
+            d33 = d3.gameObject.GetComponent<Image>().color;
+            a1 = d11.a;
+            a2 = d22.a;
+            a3 = d33.a;
+        }
+
+        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
             if(SceneManager.GetActiveScene().name != "FallingBuildingScene" && SceneManager.GetActiveScene().name != "BuildingEnding")
@@ -110,6 +129,9 @@ public class Cutscene : MonoBehaviour
             audioSc2.clip = audioList.audioDict["Corridor"][3];
             audioSc2.Play();
         }
+
+        if(dying)
+            DeathIsComing();
 
         if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name == "ToCafe")
         {
@@ -166,6 +188,7 @@ public class Cutscene : MonoBehaviour
                         PlayerController.lockRun = false;
                         CameraFollow.camfol.camXPosMin = 32.5f;
                         CameraFollow.camfol.camXPosMax = 93.5f;
+
                     }
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
@@ -238,6 +261,101 @@ public class Cutscene : MonoBehaviour
             if (cutsceneGameobject == true)
                 panel.enabled = false;
         }
+    }
+
+    void DeathIsComing()
+    {
+        /*if((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.LeftShift)))
+        {
+            timealert = 0;
+            locked = true;
+            if (d33.a == 1)
+                d3.SetBool("out", false);
+            if(d33.a == 0)
+            {
+                d2.SetBool("out", false);
+            }
+        }
+        else
+        {
+            if (d11.a == 0)
+                d1.SetBool("out", true);
+            if (d11.a == 1)
+            {
+                d2.SetBool("out", true);
+                if (d22.a == 1)
+                {
+                    d3.SetBool("out", true);
+                    if (d33.a == 1)
+                    {
+                        if (locked)
+                        {
+                            timealert = Time.time;
+                            locked = false;
+                        }
+                        if (timealert + 1.5f < Time.time)
+                        {
+                            GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>().SetBool("out", true);
+                            StartCoroutine("ChangeScene");
+                        }
+                    }
+                }
+            }
+        }*/
+        if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.LeftShift)))
+        {
+            timealert = 0;
+            locked = true;
+            if (a3 >= 1)
+            {
+                a3 = a3 - 0.1f;
+            }
+            if (a3 <= 0)
+            {
+                a3 = 0;
+                a2 = a2 - 0.1f;
+            }
+            d33.a = a3;
+            d22.a = a2;
+        }
+        else
+        {
+            d1.SetBool("out", true);
+            if (a1 >= 1)
+            {
+                a1 = 1;
+                a2 = a2 + 0.1f;
+                if (a2 >= 1)
+                {
+                    a2 = 1;
+                    a3 = a3 + 0.1f;
+                    if (a3 >= 1)
+                    {
+                        a3 = 1;
+                        d33.a = a3;
+                        if (locked)
+                        {
+                            timealert = Time.time;
+                            locked = false;
+                        }
+                        if (timealert + 1.5f < Time.time)
+                        {
+                            GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>().SetBool("out", true);
+                            StartCoroutine("ChangeScene");
+                        }
+                    }
+                    d33.a = a3;
+                }
+                d22.a = a2;
+            }
+        }
+        Debug.Log(a1+" "+a2+" "+a3);
+    }
+
+    IEnumerator ChangeScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("MainMenu");
     }
 
     IEnumerator TriggerCut()

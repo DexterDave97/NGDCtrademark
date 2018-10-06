@@ -60,7 +60,10 @@ public class TriggerNextScene : MonoBehaviour {
     void Update()
     {
         if(zoomCam && !ended)
+        {
+            PlayerController.lives = 0;
             cameraZoomOnFace();
+        }
     }
 }
 

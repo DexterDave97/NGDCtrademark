@@ -8,10 +8,11 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private SpriteRenderer playerSp;
     Animator fadePanel;
+    Animator d1, d2, d3;
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask Obj;
     public static float jumpSpeed = 1.5f, jumpHeight, move; // 1.3, 12
-    public static int Dir = 1;
+    public static int Dir = 1, lives = 0;
     private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f;
     private bool lockShiftJump;
     public static bool lockRun = false, jumpingAvailable = true, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
@@ -35,6 +36,13 @@ public class PlayerController : MonoBehaviour
         {
             playerAnim.SetBool("VTrigger", false);
             playerAnim.SetBool("FireTrigger", true);
+        }
+
+        if(SceneManager.GetActiveScene().buildIndex > 4 && SceneManager.GetActiveScene().buildIndex < 12)
+        {
+            d1 = GameObject.FindGameObjectWithTag("Death1").GetComponent<Animator>();
+            d2 = GameObject.FindGameObjectWithTag("Death2").GetComponent<Animator>();
+            d3 = GameObject.FindGameObjectWithTag("Death3").GetComponent<Animator>();
         }
     }
 
@@ -62,9 +70,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.8f); 
+        SceneManager.LoadScene("MainMenu");
+    }
+
     private void Update()
     {
-        if(!canmove && !PlayerController.lockSuicide)
+        if (lives > 3)
+        {
+            fadePanel.SetBool("out", true);
+            StartCoroutine("Delay");
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex > 4 && SceneManager.GetActiveScene().buildIndex < 12)
+        {
+            if (lives > 0)
+            {
+                d1.SetBool("out", true);
+                if (lives > 1)
+                {
+                    d2.SetBool("out", true);
+                    if (lives > 2)
+                    {
+                        d3.SetBool("out", true);
+                    }
+                }
+            }
+        }
+
+        if (!canmove && !PlayerController.lockSuicide)
             playerRB.velocity = new Vector3(0, playerRB.velocity.y, 0);
 
         if(Time.timeSinceLevelLoad < 0.01f)
@@ -243,14 +279,14 @@ public class PlayerController : MonoBehaviour
     {
         if (shouldSuicideBool == true)
         {
-            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
+            //GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
             playerAnim.SetFloat("Velocity", 0);
         }
         else
         {
             playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
-            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
-            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetBool("Jumping", isJumping);
+            /*GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
+            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetBool("Jumping", isJumping);*/
         }
     }
 
