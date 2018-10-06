@@ -163,8 +163,9 @@ public class Cutscene : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(26, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
                         Camera.main.transform.position = new Vector3(32.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+                        PlayerController.lockRun = false;
                         CameraFollow.camfol.camXPosMin = 32.5f;
-                        CameraFollow.camfol.camXPosMax = 42.5f;
+                        CameraFollow.camfol.camXPosMax = 93.5f;
                     }
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
@@ -194,8 +195,9 @@ public class Cutscene : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(26, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
                         Camera.main.transform.position = new Vector3(32.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+                        PlayerController.lockRun = false;
                         CameraFollow.camfol.camXPosMin = 32.5f;
-                        CameraFollow.camfol.camXPosMax = 42.5f;
+                        CameraFollow.camfol.camXPosMax = 93.5f;
                     }
 
                     if (cutsceneIndex == 1)

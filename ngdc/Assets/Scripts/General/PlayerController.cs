@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public static int Dir = 1;
     private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f;
     private bool lockShiftJump;
-    public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
+    public static bool lockRun = false, jumpingAvailable = true, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
 
@@ -165,6 +165,17 @@ public class PlayerController : MonoBehaviour
 
     void Movement(float move)
     {
+        if (SceneManager.GetActiveScene().name == "ToCafe")
+        {
+            playerAnim.SetBool("CafeRunTrigger", true);
+            maxMoveSpeed = 7;
+        }
+        else
+        {
+            playerAnim.SetBool("CafeRunTrigger", false);
+            maxMoveSpeed = 12;
+        }
+
         if (Input.GetKey(KeyCode.LeftShift) == true && lockRun == false)
         {
             runSpeed += acc;
