@@ -7,6 +7,7 @@ public class SchoolCam : MonoBehaviour {
     [SerializeField] GameObject player;
     private float offset;
     ChangeToFireman et;
+    bool canMoveChanger = false;
 
     // Use this for initialization
     void Start () {
@@ -19,7 +20,11 @@ public class SchoolCam : MonoBehaviour {
 	void Update () {
 		if(ChangeToFireman.ended)
         {
-            PlayerController.canmove = true;
+            if (!canMoveChanger)
+            {
+                PlayerController.canmove = true;
+                canMoveChanger = true;
+            }
             CamFollow();
         }
         else if (et.triggered)

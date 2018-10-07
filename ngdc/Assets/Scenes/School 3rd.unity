@@ -150,7 +150,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4025395114106658, guid: d361d23dbed9f9f419c78214dda44acc, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4025395114106658, guid: d361d23dbed9f9f419c78214dda44acc, type: 2}
       propertyPath: m_LocalScale.x
@@ -1146,7 +1146,7 @@ RectTransform:
   - {fileID: 278642920}
   - {fileID: 1839105105}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1309,7 +1309,7 @@ Transform:
   - {fileID: 1024835954}
   - {fileID: 365145581}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &827025543
 GameObject:
@@ -1569,7 +1569,7 @@ GameObject:
   - component: {fileID: 905096815}
   - component: {fileID: 905096816}
   m_Layer: 0
-  m_Name: NewTeacher
+  m_Name: Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1586,7 +1586,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &905096815
 MonoBehaviour:
@@ -1602,13 +1602,13 @@ MonoBehaviour:
   dailogues:
   - 'Teacher: Thank God, Mr. Freeman you are here !'
   - 'David: It''s gonna be alright ma''am. I need you to tell me where the kids are,
-    Clarry is with them as well I hope.'
-  - 'Teacher: All the kids are trapped inside those doors. I tried opening them, they
-    won''t budge and your daughter is stuck in 4th floor. I''m scared I couldn''t
-    do anything. Please save them.'
+    Claire is with them as well I hope.'
+  - Teacher:There could be kids stuck on the upper floors. I'm scared I couldn't do
+    anything. Please save them.
   - 'David: Don''t worry ma''am, just stand by near the end of the corridor. I will
     get the kids out. There are crane stations near the windows of this school. We
     will extract you from there.'
+  r: {fileID: 0}
   tx: {fileID: 1839105103}
 --- !u!114 &905096816
 MonoBehaviour:
@@ -1621,6 +1621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39d5193d0d11b649816e6c22cb9f96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ended: 0
 --- !u!1 &943464137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1691,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &943464141
 MonoBehaviour:
@@ -2019,7 +2020,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1229765290
 BoxCollider2D:
@@ -2528,6 +2529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fa6bbf54f59b74db1f862a92a6ae72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 0
   player: {fileID: 0}
   camXPosMax: 16.7
   camXPosMin: -11.5
@@ -2624,7 +2626,7 @@ Transform:
   - {fileID: 997654071}
   - {fileID: 2015263284}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1907171439
 GameObject:
@@ -2658,6 +2660,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1931654287
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4132423767226326, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132423767226326, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 540
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132423767226326, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132423767226326, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132423767226326, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132423767226326, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132423767226326, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132423767226326, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc24beec40d50824d8df735d36aa183c, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1984492508
 Prefab:
   m_ObjectHideFlags: 0
@@ -2695,7 +2739,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4560832116553854, guid: e3a8ec87669592e4ab7ee9207bc59254, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1381529755125316, guid: e3a8ec87669592e4ab7ee9207bc59254, type: 2}
       propertyPath: m_IsActive

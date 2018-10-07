@@ -6,7 +6,7 @@ public class DaughterDetection : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Daughter")
+        if (other.tag == "Player")
         {
             PlayerController.canmove = true;
             PlayerController.jumpingAvailable = true;

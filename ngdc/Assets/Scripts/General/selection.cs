@@ -12,9 +12,11 @@ public class selection : MonoBehaviour {
     public string[] dailogues;
     public GameObject[] gbArr;
     public bool skip = false;
+    public RollText r;
 
 	// Use this for initialization
 	void Start () {
+        r = GetComponent<RollText>();
         tx.text = null;
         offset = first.transform.position.y - NextText.transform.position.y;
     }
@@ -60,7 +62,7 @@ public class selection : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E) && skip == false)
             {
                 StopAllCoroutines();
-                StartCoroutine(RollText.rollText(dailogues[index], tx));
+                StartCoroutine(r.rollText(dailogues[index], tx));
                 skip = true;
             }
 

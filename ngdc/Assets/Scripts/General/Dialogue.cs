@@ -3,51 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TeacherDialogue : MonoBehaviour {
+public class Dialogue : MonoBehaviour {
 
     public string[] dailogues;
+    public RollText r;
     public Text tx;
     int index = 0;
     float timer = 0;
-    bool trig = true;
+    bool trig = true, start = false;
+    public bool willStopPlayer = false;
+
+    void Start()
+    {
+        r.GetComponent<RollText>();
+    }
 
     private void Update()
     {
-        if(index <= dailogues.Length)
+        if (index <= dailogues.Length)
             Trig();
         timer -= Time.deltaTime;
-        if(timer <= 0)
+        if (timer <= 0)
         {
             timer = 0;
         }
     }
 
     private void Trig()
-    {
-        RaycastHit2D col = Physics2D.Raycast(transform.position, Vector3.up);
+    { 
+        RaycastHit2D col = Physics2D.Raycast(transform.position, -Vector3.up);
+        if (col.collider.tag == "Player" && !start)
+        {            
+            start = true;
+        }
 
-        if (col.collider.tag == "Player")
+        if (start)
         {
-            Debug.Log("Hmm");
             if(trig && timer == 0)
             {
-                PlayerController.canmove = false;
+                Debug.Log("hi");
+                if(willStopPlayer)
+                    PlayerController.canmove = false;
                 if (index == dailogues.Length)
                 {
+                    index++;
                     tx.text = "";
                     PlayerController.canmove = true;
                 }
                 else
                 {
-                    StartCoroutine(RollText.rollText(dailogues[index], tx));
+                    StartCoroutine(r.rollText(dailogues[index], tx));
                     trig = false;
                 }
             }
-            if(RollText.ended)
+            if(r.ended)
             {
                 index++;
                 trig = true;
-                RollText.ended = false;
+                r.ended = false;
                 timer = 2;
             }
         }

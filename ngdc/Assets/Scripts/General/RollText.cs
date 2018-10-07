@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RollText : MonoBehaviour {
-    public static bool ended;
+    public bool ended;
 
-    public static IEnumerator rollText(string sentence,Text tx)
+    public IEnumerator rollText(string sentence,Text tx)
     {
         tx.text = "";
         foreach (char letter in sentence.ToCharArray())
@@ -14,7 +14,7 @@ public class RollText : MonoBehaviour {
             tx.text += letter;
             if (tx.text == sentence)
             {
-                ended = true;
+                ended= true;
             }
             yield return new WaitForSeconds(0.03f);
             
