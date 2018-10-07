@@ -112,9 +112,6 @@ public class Cutscene : MonoBehaviour
             d11 = d1.gameObject.GetComponent<Image>().color;
             d22 = d2.gameObject.GetComponent<Image>().color;
             d33 = d3.gameObject.GetComponent<Image>().color;
-            /*a1 = d11.a;
-            a2 = d22.a;
-            a3 = d33.a;*/
 
             if (dying)
                 DeathIsComing();
@@ -194,7 +191,10 @@ public class Cutscene : MonoBehaviour
                         PlayerController.lockRun = false;
                         CameraFollow.camfol.camXPosMin = 32.5f;
                         CameraFollow.camfol.camXPosMax = 93.5f;
-
+                    }
+                    if (cutsceneIndex == 9)
+                    {
+                        SceneManager.LoadScene("PianoScene");
                     }
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
@@ -244,6 +244,10 @@ public class Cutscene : MonoBehaviour
                     {
                         audioSc1.clip = audioList.audioDict["BGM"][3];
                         audioSc1.Play();
+                    }
+                    if(cutsceneIndex == 9)
+                    {
+                        SceneManager.LoadScene("PianoScene");
                     }
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
