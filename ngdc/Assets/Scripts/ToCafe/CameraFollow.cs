@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
+    public float offset;
     [SerializeField] GameObject player;
     public float camXPosMax, camXPosMin;
     public static CameraFollow camfol;
@@ -21,7 +22,7 @@ public class CameraFollow : MonoBehaviour {
     {
         if (player.transform.position.x <= camXPosMax && player.transform.position.x >= camXPosMin)
         {
-            transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = new Vector3(player.transform.position.x + offset, transform.position.y, transform.position.z);
         }
     }
 }

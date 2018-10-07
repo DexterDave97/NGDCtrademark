@@ -114,6 +114,7 @@ public class Cutscene : MonoBehaviour
             if (dying)
                 DeathIsComing();
         }
+        else dying = false;
 
         if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu")
         {

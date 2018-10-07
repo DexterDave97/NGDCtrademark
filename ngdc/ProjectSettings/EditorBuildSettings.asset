@@ -45,6 +45,12 @@ EditorBuildSettings:
     path: Assets/Scenes/BuildingEnding.unity
     guid: 1e523c5c2dfb71d40b1431adfa4dc8d4
   - enabled: 1
+    path: Assets/Scenes/HouseAfterFire.unity
+    guid: f0f39bf45ffa9f843b91890c196d5ebc
+  - enabled: 1
+    path: Assets/Scenes/BedroomAfterFire.unity
+    guid: e6b049add1db793428bea47049c51772
+  - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: c58b385b3422efc4d91211d08d5e55e4
   m_configObjects: {}
