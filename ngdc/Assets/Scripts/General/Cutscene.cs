@@ -25,6 +25,7 @@ public class Cutscene : MonoBehaviour
     public static bool dying = false;
     //float a1, a2, a3;
     private Sounds audioList;
+    [SerializeField] GameObject white;
     public List<Sprite> cutscene1 = new List<Sprite>();
     public List<Sprite> cutscene2 = new List<Sprite>();
     public List<Sprite> cutscene3 = new List<Sprite>();
@@ -112,16 +113,13 @@ public class Cutscene : MonoBehaviour
             d11 = d1.gameObject.GetComponent<Image>().color;
             d22 = d2.gameObject.GetComponent<Image>().color;
             d33 = d3.gameObject.GetComponent<Image>().color;
-            /*a1 = d11.a;
-            a2 = d22.a;
-            a3 = d33.a;*/
 
             if (dying)
                 DeathIsComing();
         }
         else dying = false;
 
-        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu")
+        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "PianoScene")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
             if(SceneManager.GetActiveScene().name != "FallingBuildingScene" && SceneManager.GetActiveScene().name != "BuildingEnding")
@@ -194,7 +192,10 @@ public class Cutscene : MonoBehaviour
                         PlayerController.lockRun = false;
                         CameraFollow.camfol.camXPosMin = 32.5f;
                         CameraFollow.camfol.camXPosMax = 93.5f;
-
+                    }
+                    if (cutsceneIndex == 9)
+                    {
+                        SceneManager.LoadScene("PianoScene");
                     }
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
@@ -227,6 +228,12 @@ public class Cutscene : MonoBehaviour
                         PlayerController.lockRun = false;
                         CameraFollow.camfol.camXPosMin = 32.5f;
                         CameraFollow.camfol.camXPosMax = 93.5f;
+                    }
+                    if (cutsceneIndex == 9)
+                    {
+                        white.SetActive(true);
+                        white.GetComponent<Animator>().SetBool("out", true);
+                        StartCoroutine("Piano");
                     }
 
                     if (cutsceneIndex == 1)
@@ -317,6 +324,12 @@ public class Cutscene : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    IEnumerator Piano()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("PianoScene");
     }
 
     IEnumerator TriggerCut()
