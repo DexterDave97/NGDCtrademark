@@ -20,10 +20,10 @@ public class Cutscene : MonoBehaviour
     Animator fadePanel;
     int maxScene, sceneAudioIndexOffset = 0;
     bool timebool,played;
-    float timealert = 0;
+    float timealert = 0, inputtime = 0;
     bool locked = true;
     public static bool dying = false;
-    float a1, a2, a3;
+    //float a1, a2, a3;
     private Sounds audioList;
     public List<Sprite> cutscene1 = new List<Sprite>();
     public List<Sprite> cutscene2 = new List<Sprite>();
@@ -107,9 +107,12 @@ public class Cutscene : MonoBehaviour
             d11 = d1.gameObject.GetComponent<Image>().color;
             d22 = d2.gameObject.GetComponent<Image>().color;
             d33 = d3.gameObject.GetComponent<Image>().color;
-            a1 = d11.a;
+            /*a1 = d11.a;
             a2 = d22.a;
-            a3 = d33.a;
+            a3 = d33.a;*/
+
+            if (dying)
+                DeathIsComing();
         }
 
         if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu")
@@ -129,9 +132,6 @@ public class Cutscene : MonoBehaviour
             audioSc2.clip = audioList.audioDict["Corridor"][3];
             audioSc2.Play();
         }
-
-        if(dying)
-            DeathIsComing();
 
         if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name == "ToCafe")
         {
@@ -265,8 +265,9 @@ public class Cutscene : MonoBehaviour
 
     void DeathIsComing()
     {
-        /*if((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.LeftShift)))
+        if((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.LeftShift)))
         {
+            inputtime = Time.time;
             timealert = 0;
             locked = true;
             if (d33.a == 1)
@@ -276,8 +277,9 @@ public class Cutscene : MonoBehaviour
                 d2.SetBool("out", false);
             }
         }
-        else
+        else if (inputtime + 1 < Time.time)
         {
+            inputtime = 0;
             if (d11.a == 0)
                 d1.SetBool("out", true);
             if (d11.a == 1)
@@ -301,38 +303,45 @@ public class Cutscene : MonoBehaviour
                     }
                 }
             }
-        }*/
+        }
+        /*d1.SetBool("out", true);
         if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.LeftShift)))
         {
             timealert = 0;
             locked = true;
             if (a3 >= 1)
             {
-                a3 = a3 - 0.1f;
+                a3 = 1;
+                a3 = d33.a - 0.1f;
             }
             if (a3 <= 0)
             {
                 a3 = 0;
-                a2 = a2 - 0.1f;
+                a2 = d33.a - 0.1f;
             }
             d33.a = a3;
             d22.a = a2;
         }
         else
         {
-            d1.SetBool("out", true);
             if (a1 >= 1)
             {
+                Debug.Log(d11.a + " " + d22.a + " " + d33.a);
                 a1 = 1;
-                a2 = a2 + 0.1f;
+                a2 = d22.a + 0.1f;
+                GameObject.FindGameObjectWithTag("Death1").GetComponent<Image>().color = new Color(0, 0, 0, a1);
+                GameObject.FindGameObjectWithTag("Death2").GetComponent<Image>().color = new Color (0, 0, 0, a2);
                 if (a2 >= 1)
                 {
                     a2 = 1;
-                    a3 = a3 + 0.1f;
+                    a3 = d33.a + 0.1f;
+                    GameObject.FindGameObjectWithTag("Death2").GetComponent<Image>().color = new Color(0, 0, 0, a2);
+                    GameObject.FindGameObjectWithTag("Death3").GetComponent<Image>().color = new Color(0, 0, 0, a3);
                     if (a3 >= 1)
                     {
                         a3 = 1;
                         d33.a = a3;
+                        GameObject.FindGameObjectWithTag("Death3").GetComponent<Image>().color = new Color(0, 0, 0, a3);
                         if (locked)
                         {
                             timealert = Time.time;
@@ -344,12 +353,9 @@ public class Cutscene : MonoBehaviour
                             StartCoroutine("ChangeScene");
                         }
                     }
-                    d33.a = a3;
                 }
-                d22.a = a2;
             }
-        }
-        Debug.Log(a1+" "+a2+" "+a3);
+        }*/
     }
 
     IEnumerator ChangeScene()

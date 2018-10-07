@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public static int Dir = 1, lives = 0;
     private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f;
     private bool lockShiftJump;
-    public static bool lockRun = false, jumpingAvailable = true, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
+    public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
 
@@ -279,14 +279,14 @@ public class PlayerController : MonoBehaviour
     {
         if (shouldSuicideBool == true)
         {
-            //GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
+            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
             playerAnim.SetFloat("Velocity", 0);
         }
         else
         {
             playerAnim.SetFloat("Velocity", Mathf.Abs(playerRB.velocity.x));
-            /*GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
-            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetBool("Jumping", isJumping);*/
+            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetFloat("Velocity", playerAnim.GetFloat("Velocity"));
+            GameObject.FindGameObjectWithTag("Footstep").GetComponent<Animator>().SetBool("Jumping", isJumping);
         }
     }
 
