@@ -33,6 +33,7 @@ public class Cutscene : MonoBehaviour
     public List<Sprite> cutscene6 = new List<Sprite>();
     public List<Sprite> cutscene7 = new List<Sprite>();
     public List<Sprite> cutscene8 = new List<Sprite>();
+    public List<Sprite> cutscene9 = new List<Sprite>();
 
     void Start()
     {
@@ -94,6 +95,10 @@ public class Cutscene : MonoBehaviour
         for (int temp = 0; temp < 8; temp++)
         {
             cutscene8.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 37)));
+        }
+        for (int temp = 0; temp < 8; temp++)
+        {
+            cutscene9.Add(Resources.Load<Sprite>("Ch1/Ch1-" + (temp + 45)));
         }
     }
 
@@ -306,58 +311,6 @@ public class Cutscene : MonoBehaviour
                 }
             }
         }
-        /*d1.SetBool("out", true);
-        if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.LeftShift)))
-        {
-            timealert = 0;
-            locked = true;
-            if (a3 >= 1)
-            {
-                a3 = 1;
-                a3 = d33.a - 0.1f;
-            }
-            if (a3 <= 0)
-            {
-                a3 = 0;
-                a2 = d33.a - 0.1f;
-            }
-            d33.a = a3;
-            d22.a = a2;
-        }
-        else
-        {
-            if (a1 >= 1)
-            {
-                Debug.Log(d11.a + " " + d22.a + " " + d33.a);
-                a1 = 1;
-                a2 = d22.a + 0.1f;
-                GameObject.FindGameObjectWithTag("Death1").GetComponent<Image>().color = new Color(0, 0, 0, a1);
-                GameObject.FindGameObjectWithTag("Death2").GetComponent<Image>().color = new Color (0, 0, 0, a2);
-                if (a2 >= 1)
-                {
-                    a2 = 1;
-                    a3 = d33.a + 0.1f;
-                    GameObject.FindGameObjectWithTag("Death2").GetComponent<Image>().color = new Color(0, 0, 0, a2);
-                    GameObject.FindGameObjectWithTag("Death3").GetComponent<Image>().color = new Color(0, 0, 0, a3);
-                    if (a3 >= 1)
-                    {
-                        a3 = 1;
-                        d33.a = a3;
-                        GameObject.FindGameObjectWithTag("Death3").GetComponent<Image>().color = new Color(0, 0, 0, a3);
-                        if (locked)
-                        {
-                            timealert = Time.time;
-                            locked = false;
-                        }
-                        if (timealert + 1.5f < Time.time)
-                        {
-                            GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>().SetBool("out", true);
-                            StartCoroutine("ChangeScene");
-                        }
-                    }
-                }
-            }
-        }*/
     }
 
     IEnumerator ChangeScene()
@@ -410,6 +363,8 @@ public class Cutscene : MonoBehaviour
                 return cutscene7;
             case 8:
                 return cutscene8;
+            case 9:
+                return cutscene9;
             default:
                 return null;
         }
