@@ -8,7 +8,7 @@ public class Kid : MonoBehaviour
     [SerializeField] private SpriteRenderer rend;
     private Color temp;
     float a;
-
+    // Use this for initialization
     void Start()
     {
         a = 0;
@@ -17,7 +17,7 @@ public class Kid : MonoBehaviour
         transform.localPosition = new Vector3(startPos, transform.localPosition.y, transform.localPosition.z);
     }
 
-
+    // Update is called once per frame
     void Update()
     {
         Movement();

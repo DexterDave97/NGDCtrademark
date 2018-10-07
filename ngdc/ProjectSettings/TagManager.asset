@@ -20,7 +20,6 @@ TagManager:
   - Death1
   - Death2
   - Death3
-  - FadePanel2
   layers:
   - Default
   - TransparentFX
