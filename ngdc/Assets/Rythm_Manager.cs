@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rythm_Manager : MonoBehaviour {
 
+    public float offset = 20f;
     [SerializeField]
     GameObject W, A, D;
     [SerializeField]
@@ -11,16 +12,16 @@ public class Rythm_Manager : MonoBehaviour {
 
     Vector3 Worg, Aorg, Dorg;
 
-    public static bool Whit, Ahit, Dhit;
-    public static bool lockW = false, lockA = false, lockD = false;
+    bool Whit, Ahit, Dhit;
+    bool lockW = false, lockA = false, lockD = false;
 
     float timeW, timeA, timeD;
 
     private void Awake()
     {
-        Worg = W.GetComponent<RectTransform>().position;
-        Aorg = A.GetComponent<RectTransform>().position;
-        Dorg = D.GetComponent<RectTransform>().position;
+        Worg = W.transform.localPosition;
+        Aorg = A.transform.localPosition;
+        Dorg = D.transform.localPosition;
         timeA = timeD = timeW = Time.time;
         W.SetActive(false);
         A.SetActive(false);
@@ -36,8 +37,10 @@ public class Rythm_Manager : MonoBehaviour {
 
     private void Update()
     {
-        CheckInput();
+        Debug.Log(Whit + " " + Ahit + " " + Dhit);
         MoveImage();
+        CheckHit();
+        CheckInput();
     }
 
     void MoveImage()
@@ -48,14 +51,28 @@ public class Rythm_Manager : MonoBehaviour {
             W.SetActive(true);
             A.SetActive(true);
             D.SetActive(true);
-            W.GetComponent<RectTransform>().position = Worg;
-            A.GetComponent<RectTransform>().position = Aorg;
-            D.GetComponent<RectTransform>().position = Dorg;
+            lockA = lockD = lockW = false;
+            W.transform.localPosition = Worg;
+            D.transform.localPosition = Dorg;
+            A.transform.localPosition = Aorg;
         }
+        
+        W.transform.localPosition -= new Vector3(250 * Time.deltaTime, 0, 0);
+        D.transform.localPosition -= new Vector3(250 * Time.deltaTime, 0, 0);
+        A.transform.localPosition -= new Vector3(250 * Time.deltaTime, 0, 0);
+    }
 
-        W.GetComponent<RectTransform>().position -= new Vector3(100 * Time.deltaTime, 0, 0);
-        A.GetComponent<RectTransform>().position -= new Vector3(100 * Time.deltaTime, 0, 0);
-        D.GetComponent<RectTransform>().position -= new Vector3(100 * Time.deltaTime, 0, 0);
+    void CheckHit()
+    {
+        if (C1.transform.localPosition.x + offset > W.transform.localPosition.x && C1.transform.localPosition.x - offset < W.transform.localPosition.x)
+            Whit = true;
+        else Whit = false;
+        if (C2.transform.localPosition.x + offset > A.transform.localPosition.x && C2.transform.localPosition.x - offset < A.transform.localPosition.x)
+            Ahit = true;
+        else Ahit = false;
+        if (C3.transform.localPosition.x + offset > D.transform.localPosition.x && C3.transform.localPosition.x - offset < D.transform.localPosition.x)
+            Dhit = true;
+        else Dhit = false;
     }
 
     void CheckInput()
@@ -73,7 +90,7 @@ public class Rythm_Manager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.W) && !lockW)
             {
                 lockW = true;
-                C1.GetComponent<Animator>().SetBool("F", true);
+                C1.GetComponent<Animator>().SetBool("S", false);
             }
         }
 
@@ -90,7 +107,7 @@ public class Rythm_Manager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.A) && !lockA)
             {
                 lockW = true;
-                C2.GetComponent<Animator>().SetBool("F", true);
+                C2.GetComponent<Animator>().SetBool("S", false);
             }
         }
 
@@ -107,7 +124,7 @@ public class Rythm_Manager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.D) && !lockD)
             {
                 lockW = true;
-                C3.GetComponent<Animator>().SetBool("F", true);
+                C3.GetComponent<Animator>().SetBool("S", false);
             }
         }
     }
