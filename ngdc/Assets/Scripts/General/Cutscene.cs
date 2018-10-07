@@ -265,7 +265,8 @@ public class Cutscene : MonoBehaviour
 
     void DeathIsComing()
     {
-        if((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.LeftShift)))
+        d1.SetBool("out", true);
+        if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.LeftShift)))
         {
             inputtime = Time.time;
             timealert = 0;
