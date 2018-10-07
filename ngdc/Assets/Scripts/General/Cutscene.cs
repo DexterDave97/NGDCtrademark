@@ -20,8 +20,8 @@ public class Cutscene : MonoBehaviour
     Animator fadePanel;
     int maxScene, sceneAudioIndexOffset = 0;
     bool timebool,played;
-    float timealert = 0, inputtime = 0;
-    bool locked = true;
+    float timealert = 0, inputtime = 0, mytime;
+    bool locked = true, timelock = true, timelock2 = true;
     public static bool dying = false;
     //float a1, a2, a3;
     private Sounds audioList;
@@ -121,7 +121,7 @@ public class Cutscene : MonoBehaviour
         if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
-            if(SceneManager.GetActiveScene().name != "FallingBuildingScene" && SceneManager.GetActiveScene().name != "BuildingEnding")
+            if(SceneManager.GetActiveScene().name != "FallingBuildingScene" && SceneManager.GetActiveScene().name != "BuildingEnding" && SceneManager.GetActiveScene().name != "PianoScene")
             {
                 panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
                 cutsceneGameobject = panel.gameObject;
@@ -142,6 +142,9 @@ public class Cutscene : MonoBehaviour
             audioSc1.Play();
         }
 
+        if (SceneManager.GetActiveScene().name != "HouseAfterFire")
+            timelock = true;
+
         if (playCutscene)
         {
             if(!played)
@@ -156,11 +159,57 @@ public class Cutscene : MonoBehaviour
                 timebool = false;
             }
 
-            panel.enabled = true;
+            if (currentSprite == 5 && cutsceneIndex == 9)
+            {
+                timelock = false;
+                if(timelock2)
+                {
+                    timelock2 = false;
+                    mytime = Time.time;
+                }
+                if (mytime + 3.33 < Time.time)
+                {
+                    timelock2 = true;
+                    currentSprite = 6;
+                }
+            }
+
+            if (currentSprite == 6 && cutsceneIndex == 9)
+            {
+                timelock = false;
+                if (timelock2)
+                {
+                    timelock2 = false;
+                    mytime = Time.time;
+                }
+                if (mytime + 3.33 < Time.time)
+                {
+                    timelock2 = true;
+                    currentSprite = 7;
+                }
+            }
+
+            if (currentSprite == 7 && cutsceneIndex == 9)
+            {
+                timelock = false;
+                if (timelock2)
+                {
+                    timelock2 = false;
+                    mytime = Time.time;
+                }
+                if (mytime + 3.33 < Time.time)
+                {
+                    timelock2 = true;
+                    SceneManager.LoadScene("PianoScene");
+                }
+            }
+
+            if(SceneManager.GetActiveScene().name != "PianoScene")
+                panel.enabled = true;
 
             PlayerController.canmove = false;
 
-            if (Input.GetKeyUp(KeyCode.A))
+            if (Input.GetKeyUp(KeyCode.A) && timelock)
             {
                 sceneAudioIndexOffset--;
                 currentSprite--;
@@ -168,7 +217,7 @@ public class Cutscene : MonoBehaviour
                 audioSc2.Play();
                 audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
             }
-            if (Input.GetKeyUp(KeyCode.D) && currentSprite < maxScene)
+            if (Input.GetKeyUp(KeyCode.D) && currentSprite < maxScene && timelock)
             {
                 timeLol = Time.time;
                 timebool = true;
@@ -192,15 +241,11 @@ public class Cutscene : MonoBehaviour
                         CameraFollow.camfol.camXPosMin = 32.5f;
                         CameraFollow.camfol.camXPosMax = 93.5f;
                     }
-                    if (cutsceneIndex == 9)
-                    {
-                        SceneManager.LoadScene("PianoScene");
-                    }
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
                 }
             }
-            else if(Input.GetKeyUp(KeyCode.D) && currentSprite >= maxScene && ((Time.time - timeLol) > 1.2f))
+            else if(Input.GetKeyUp(KeyCode.D) && currentSprite >= maxScene && ((Time.time - timeLol) > 1.2f) && timelock)
             {                
                 timeLol = Time.time;
                 timebool = true;
@@ -244,10 +289,6 @@ public class Cutscene : MonoBehaviour
                     {
                         audioSc1.clip = audioList.audioDict["BGM"][3];
                         audioSc1.Play();
-                    }
-                    if(cutsceneIndex == 9)
-                    {
-                        SceneManager.LoadScene("PianoScene");
                     }
                     //if (cutsceneIndex != 4)
                     PlayerController.canmove = true;
