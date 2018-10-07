@@ -18,9 +18,9 @@ public class Rythm_Manager : MonoBehaviour {
 
     private void Awake()
     {
-        Worg = W.transform.position;
-        Aorg = A.transform.position;
-        Dorg = D.transform.position;
+        Worg = W.GetComponent<RectTransform>().position;
+        Aorg = A.GetComponent<RectTransform>().position;
+        Dorg = D.GetComponent<RectTransform>().position;
         timeA = timeD = timeW = Time.time;
         W.SetActive(false);
         A.SetActive(false);
@@ -48,14 +48,14 @@ public class Rythm_Manager : MonoBehaviour {
             W.SetActive(true);
             A.SetActive(true);
             D.SetActive(true);
-            W.transform.position = Worg;
-            A.transform.position = Aorg;
-            D.transform.position = Dorg;
+            W.GetComponent<RectTransform>().position = Worg;
+            A.GetComponent<RectTransform>().position = Aorg;
+            D.GetComponent<RectTransform>().position = Dorg;
         }
 
-        W.transform.position -= new Vector3(20 * Time.deltaTime, 0, 0);
-        A.transform.position -= new Vector3(20 * Time.deltaTime, 0, 0);
-        D.transform.position -= new Vector3(20 * Time.deltaTime, 0, 0);
+        W.GetComponent<RectTransform>().position -= new Vector3(100 * Time.deltaTime, 0, 0);
+        A.GetComponent<RectTransform>().position -= new Vector3(100 * Time.deltaTime, 0, 0);
+        D.GetComponent<RectTransform>().position -= new Vector3(100 * Time.deltaTime, 0, 0);
     }
 
     void CheckInput()
