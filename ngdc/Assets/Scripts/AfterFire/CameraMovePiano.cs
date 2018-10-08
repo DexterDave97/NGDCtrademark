@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CameraMovePiano : MonoBehaviour {
 
@@ -12,6 +13,21 @@ public class CameraMovePiano : MonoBehaviour {
     bool locked2 = true, locked = true;
     float time;
 
+
+    public string[] dailogues;
+    public RollText r;
+    public Text tx;
+    int index = 0;
+    float timer = 0;
+    bool trig = true, start = false;
+    public bool willStopPlayer = false;
+    public GameObject[] kuchbhi;
+
+    private void Start()
+    {
+        r = GetComponent<RollText>();
+    }
+
     private void Update()
     {
         if (startMoving)
@@ -19,8 +35,16 @@ public class CameraMovePiano : MonoBehaviour {
 
         if (!locked && Time.time > time)
         {
-            SceneManager.LoadScene("Credits");
+            SceneManager.LoadScene("Credits 1");
         }
+
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            timer = 0;
+        }
+
+        DisplayText();
     }
 
     void Move()
@@ -46,7 +70,48 @@ public class CameraMovePiano : MonoBehaviour {
             if(locked)
             {
                 locked = false;
-                time = Time.time + 5;
+                time = Time.time + 7;
+            }
+            start = true;
+        }
+    }
+
+    void DisplayText()
+    {
+        if (start)
+        {
+            if (trig && timer == 0)
+            {
+                if (willStopPlayer)
+                {
+                    PlayerController.canmove = false;
+                    PlayerController.jumpingAvailable = false;
+                    PlayerController.jumpoverride = false;
+                }
+                if (index == dailogues.Length)
+                {
+                    index++;
+                    tx.text = "";
+                    if (willStopPlayer)
+                    {
+                        PlayerController.canmove = true;
+                        PlayerController.jumpingAvailable = true;
+                        PlayerController.jumpoverride = true;
+                    }
+                }
+                else
+                {
+                    tx.text = "";
+                    StartCoroutine(r.rollText(dailogues[index], tx));
+                    trig = false;
+                }
+            }
+            if (r.ended)
+            {
+                index++;
+                trig = true;
+                r.ended = false;
+                timer = 2;
             }
         }
     }

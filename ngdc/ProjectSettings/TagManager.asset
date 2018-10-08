@@ -21,6 +21,8 @@ TagManager:
   - Death2
   - Death3
   - Thanks
+  - LeftButton
+  - RightButton
   layers:
   - Default
   - TransparentFX

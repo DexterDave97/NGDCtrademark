@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public static int Dir = 1, lives = 0;
     private float lastMove, acc = 0.1f, yComponentOfP, runSpeed, maxMoveSpeed = 12f;
     private bool lockShiftJump;
-    public static bool lockRun = false, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false, jumpoverride = true;
+    public static bool lockRun = true, jumpingAvailable = false, lockSuicide = false, shouldSuicideBool = false, isJumping = false, isGrounded = false, isMoving = false, jumpoverride = true;
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
 

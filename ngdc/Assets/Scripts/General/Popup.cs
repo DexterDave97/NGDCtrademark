@@ -12,6 +12,8 @@ public class Popup : MonoBehaviour {
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         button.enabled = false;
+        if (button.gameObject.transform.childCount > 0)
+            button.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         if (GetComponent<Zoom>() != null)
         {
             GetComponent<Zoom>().enabled = false;
@@ -28,6 +30,8 @@ public class Popup : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col)
     {
         button.enabled = true;
+        if (button.gameObject.transform.childCount > 0)
+            button.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         if (GetComponent<Zoom>()!=null)
         {
             GetComponent<Zoom>().enabled = true;
@@ -37,6 +41,8 @@ public class Popup : MonoBehaviour {
     void OnTriggerExit2D(Collider2D col)
     {
         button.enabled = false;
+        if (button.gameObject.transform.childCount > 0)
+            button.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         if (GetComponent<Zoom>() != null)
         {
             GetComponent<Zoom>().enabled = false;

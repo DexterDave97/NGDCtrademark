@@ -47,6 +47,8 @@ public class Cutscene : MonoBehaviour
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
         panel = GameObject.FindGameObjectWithTag("Cutscene").GetComponent<Image>();
         cutsceneGameobject = panel.gameObject;
+        cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+        cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
         sceneEnd = false;
         if (SceneManager.GetActiveScene().name == "House" && LevelTransition.playerPos == null)
         {
@@ -104,6 +106,7 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
+        
         if (SceneManager.GetActiveScene().name == "ToCafe")
         {
             d1 = GameObject.FindGameObjectWithTag("Death1").GetComponent<Animator>();
@@ -177,6 +180,8 @@ public class Cutscene : MonoBehaviour
 
             if (currentSprite == 5 && cutsceneIndex == 9)
             {
+                cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+                cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
                 timelock = false;
                 if(timelock2)
                 {
@@ -192,6 +197,8 @@ public class Cutscene : MonoBehaviour
 
             if (currentSprite == 6 && cutsceneIndex == 9)
             {
+                cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+                cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
                 timelock = false;
                 if (timelock2)
                 {
@@ -207,6 +214,8 @@ public class Cutscene : MonoBehaviour
 
             if (currentSprite == 7 && cutsceneIndex == 9)
             {
+                cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+                cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
                 timelock = false;
                 if (timelock2)
                 {
@@ -243,6 +252,8 @@ public class Cutscene : MonoBehaviour
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
+                    cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+                    cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
                     currentSprite--;
                     playCutscene = false;
                     StartCoroutine(TriggerCut());
@@ -253,6 +264,8 @@ public class Cutscene : MonoBehaviour
                     }
                     if(cutsceneIndex == 3)
                     {
+                        cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+                        cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
                         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(26, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
                         Camera.main.transform.position = new Vector3(32.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
                         PlayerController.lockRun = false;
@@ -263,7 +276,7 @@ public class Cutscene : MonoBehaviour
                     PlayerController.canmove = true;
                 }
             }
-            else if(Input.GetKeyUp(KeyCode.D) && currentSprite >= maxScene && ((Time.time - timeLol) > 1.2f) && timelock)
+            else if(Input.GetKeyUp(KeyCode.D) && currentSprite >= maxScene && ((Time.time - timeLol) > 1.5f) && timelock)
             {                
                 timeLol = Time.time;
                 timebool = true;
@@ -276,6 +289,8 @@ public class Cutscene : MonoBehaviour
                     audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][ next + sceneAudioIndexOffset]);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
+                    cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+                    cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
                     currentSprite--;
                     playCutscene = false;
                     StartCoroutine(TriggerCut());
@@ -286,6 +301,8 @@ public class Cutscene : MonoBehaviour
                     }
                     if (cutsceneIndex == 3)
                     {
+                        cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+                        cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
                         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(26, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
                         Camera.main.transform.position = new Vector3(32.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
                         PlayerController.lockRun = false;
@@ -330,6 +347,19 @@ public class Cutscene : MonoBehaviour
             maxScene = 0;
             if (cutsceneGameobject == true)
                 panel.enabled = false;
+        }
+
+        if (!panel.enabled)
+        {
+            cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+            cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
+
+        }
+        else
+        {
+            cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(true);
+            cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(true);
+
         }
     }
 
@@ -379,12 +409,16 @@ public class Cutscene : MonoBehaviour
 
     IEnumerator ChangeScene()
     {
+        cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+        cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Credits");
     }
 
     IEnumerator TriggerCut()
     {
+        cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
+        cutsceneGameobject.transform.GetChild(1).gameObject.SetActive(false);
         fadePanel.SetBool("out", false);
         Color tCol2;
         tCol2 = panel.color;

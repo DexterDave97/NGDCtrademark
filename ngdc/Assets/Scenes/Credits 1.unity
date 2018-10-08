@@ -242,7 +242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -516, y: 436}
+  m_AnchoredPosition: {x: -516, y: 417}
   m_SizeDelta: {x: 659, y: 83.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &728135712
@@ -345,8 +345,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 869, y: -319.5}
-  m_SizeDelta: {x: 1178.6, y: 214.8}
+  m_AnchoredPosition: {x: -211.55, y: -304}
+  m_SizeDelta: {x: 523.1, y: 170.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1042427368
 MonoBehaviour:
@@ -369,7 +369,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 0
@@ -380,7 +380,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You can still save David ...
+  m_Text: 'Thanks For Playing ...
 
     Press Escape to quit.'
 --- !u!222 &1042427369
@@ -573,8 +573,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030518, y: 16.792}
-  m_SizeDelta: {x: -282.1, y: -158.8}
+  m_AnchoredPosition: {x: 130, y: -17.900024}
+  m_SizeDelta: {x: -63.7, y: -35.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412566296
 MonoBehaviour:
