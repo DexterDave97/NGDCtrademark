@@ -118,7 +118,7 @@ public class Cutscene : MonoBehaviour
         }
         else dying = false;
 
-        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu")
+        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name != "Bedroom" && SceneManager.GetActiveScene().name != "SchoolBedroom" && SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "Credits")
         {
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
             if(SceneManager.GetActiveScene().name != "FallingBuildingScene" && SceneManager.GetActiveScene().name != "BuildingEnding" && SceneManager.GetActiveScene().name != "PianoScene")
@@ -362,7 +362,7 @@ public class Cutscene : MonoBehaviour
     IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Credits");
     }
 
     IEnumerator TriggerCut()

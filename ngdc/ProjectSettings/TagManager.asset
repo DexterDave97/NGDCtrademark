@@ -20,6 +20,7 @@ TagManager:
   - Death1
   - Death2
   - Death3
+  - Thanks
   layers:
   - Default
   - TransparentFX

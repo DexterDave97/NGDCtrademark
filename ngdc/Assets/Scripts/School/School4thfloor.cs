@@ -40,12 +40,12 @@ public class School4thfloor : MonoBehaviour {
         DavidAim.SetBool("DoorHit", false);
         if (doorCount==3)
         {
-            PlayerPrefs.SetFloat("BuildinEnding", -54);
+            PlayerPrefs.SetFloat("BuildinEnding", -12.6f);
             Cutscene.cutsceneIndex = 8;
         }
         else
         {
-            PlayerPrefs.SetFloat("BuildinEnding", -54);
+            PlayerPrefs.SetFloat("BuildinEnding", -12.6f);
             Cutscene.cutsceneIndex = 6;
         }
 

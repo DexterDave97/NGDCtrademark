@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIBUTTON : MonoBehaviour {
-
+    
+    GameObject thank;
     public static bool menu = false;
+
+    private void Awake()
+    {
+        if(SceneManager.GetActiveScene().name == "Credits")
+            thank = GameObject.FindGameObjectWithTag("Thanks");
+    }
 
     public void PlayMe()
     {
@@ -25,6 +33,10 @@ public class UIBUTTON : MonoBehaviour {
 
     private void Update()
     {
+        if (menu)
+            thank.SetActive(false);
+        else thank.SetActive(true);
+
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "Credits" && menu)
         {
             menu = false;
