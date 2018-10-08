@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraMovePiano : MonoBehaviour {
 
@@ -8,12 +9,18 @@ public class CameraMovePiano : MonoBehaviour {
     [SerializeField] GameObject Blackie;
     [SerializeField] GameObject Violin;
     public static bool startMoving = false;
-    bool locked2 = true;
+    bool locked2 = true, locked = true;
+    float time;
 
     private void Update()
     {
         if (startMoving)
             Move();
+
+        if (!locked && Time.time > time)
+        {
+            SceneManager.LoadScene("Credits");
+        }
     }
 
     void Move()
@@ -36,6 +43,11 @@ public class CameraMovePiano : MonoBehaviour {
             Blackie.SetActive(false);
             Violin.SetActive(false);
             startMoving = false;
+            if(locked)
+            {
+                locked = false;
+                time = Time.time + 5;
+            }
         }
     }
 }

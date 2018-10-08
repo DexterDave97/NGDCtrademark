@@ -156,10 +156,13 @@ public class Cutscene : MonoBehaviour
 
         if (playCutscene)
         {
+            int next;
+            next = GetSceneAudioIndex(cutsceneIndex);
             if (!played)
             {
                 played = true;
-                //audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
+                if(next!=-1)
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][next + sceneAudioIndexOffset]);
             }
             audioSc1.Pause();
             if(timebool)
@@ -229,7 +232,8 @@ public class Cutscene : MonoBehaviour
                 currentSprite--;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 audioSc2.Play();
-                //audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
+                if (next != -1)
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][next + sceneAudioIndexOffset]);
             }
             if (Input.GetKeyUp(KeyCode.D) && currentSprite < maxScene && timelock)
             {
@@ -268,7 +272,8 @@ public class Cutscene : MonoBehaviour
                 sceneAudioIndexOffset++;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 audioSc2.Play();
-                //audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
+                if (next != -1)
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][ next + sceneAudioIndexOffset]);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
                     currentSprite--;
@@ -440,18 +445,9 @@ public class Cutscene : MonoBehaviour
                 return 3;
             case 3:
                 return 8;
-            case 4:
-                return 14;
-            case 5:
-                return 23;
-            case 6:
-                return -1;
-            case 7:
-                return -1;
-            case 8:
-                return -1;
-            default:
-                return -1;
+            default: 
+                return-1;
+           
         }
     }
 }
