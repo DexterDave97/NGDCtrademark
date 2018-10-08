@@ -13,16 +13,18 @@ public class Rythm_Manager : MonoBehaviour
     [SerializeField]
     Animator david;
 
-    int[] a1 = { 0, 1, 1, 1, 0, 0, 1, 0 }, a2 = { 0, 1, 1, 0, 1, 1, 0, 1 }, a3 = { 1, 0, 1, 0, 0, 1, 1, 0 };
+    int[] a1 = { 0,0,0,1,0,1,0,0,0,1,1,0,0,0,0,1,1,0,0,0 }, a2 = { 1,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,0,1,0,1 }, a3 = { 0,1,1,0,0,0,1,0,0,0,0,1,0,1,1,0,0,0,1,0 };
     int index = -1;
     Color zero, one;
 
     Vector3 Worg, Aorg, Dorg;
 
-    bool Whit, Ahit, Dhit;
-    bool lockW = false, lockA = false, lockD = false;
+    bool Whit, Ahit, Dhit, play;
+    bool lockW = false, lockA = false, lockD = false, playbool = false;
 
     float timeW;
+
+    int musicindex;
 
     private void Awake()
     {
@@ -44,16 +46,23 @@ public class Rythm_Manager : MonoBehaviour
         C1.GetComponent<Animator>().SetBool("Idle", true);
         C2.GetComponent<Animator>().SetBool("Idle", true);
         C3.GetComponent<Animator>().SetBool("Idle", true);
+
+        musicindex = -1;
     }
 
     private void Update()
     {
         //Debug.Log((C1.transform.position.x + C1.GetComponent<RectTransform>().rect.width) + ","+ (C1.transform.position.x - C1.GetComponent<RectTransform>().rect.width));
-        if (index < 9)
+        if (index < 21)
         {
             MoveImage();
             CheckHit();
             CheckInput();
+            if(play && playbool)
+            {
+                playbool = false;
+                GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>().PlayOneShot(GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>().audioDict["Piano"][musicindex]);
+            }
         }
     }
 
@@ -66,11 +75,14 @@ public class Rythm_Manager : MonoBehaviour
             W.SetActive(true);
             A.SetActive(true);
             D.SetActive(true);
+            musicindex++;
+            playbool = true;
+            play = false;
             C1.GetComponent<Animator>().SetBool("Idle", true);
             C2.GetComponent<Animator>().SetBool("Idle", true);
             C3.GetComponent<Animator>().SetBool("Idle", true);
             david.SetBool("Playing", false);
-            if (index > 7)
+            if (index > 19)
             {
                 W.SetActive(false);
                 A.SetActive(false);
@@ -86,7 +98,7 @@ public class Rythm_Manager : MonoBehaviour
             A.transform.localPosition = Aorg;
         }
 
-        if (index != -1 && index < 8)
+        if (index != -1 && index <= 20)
         {
             if (a1[index] == 0)
                 W.GetComponent<Image>().color = zero;
@@ -126,6 +138,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockW = false;
                 C1.GetComponent<Animator>().SetBool("S", true);
                 C1.GetComponent<Animator>().SetBool("Idle", false);
+                play = true;
                 david.SetBool("Playing", true);
             }
         }
@@ -136,6 +149,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockW = false;
                 C1.GetComponent<Animator>().SetBool("S", false);
                 C1.GetComponent<Animator>().SetBool("Idle", false);
+                play = false;
                 david.SetBool("Playing", false);
             }
         }
@@ -147,6 +161,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockA = false;
                 C2.GetComponent<Animator>().SetBool("S", true);
                 C2.GetComponent<Animator>().SetBool("Idle", false);
+                play = true;
                 david.SetBool("Playing", true);
             }
         }
@@ -157,6 +172,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockA = false;
                 C2.GetComponent<Animator>().SetBool("S", false);
                 C2.GetComponent<Animator>().SetBool("Idle", false);
+                play = false;
                 david.SetBool("Playing", false);
             }
         }
@@ -168,6 +184,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockD = false;
                 C3.GetComponent<Animator>().SetBool("S", true);
                 C3.GetComponent<Animator>().SetBool("Idle", false);
+                play = true;
                 david.SetBool("Playing", true);
             }
         }
@@ -178,6 +195,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockD = false;
                 C3.GetComponent<Animator>().SetBool("S", false);
                 C3.GetComponent<Animator>().SetBool("Idle", false);
+                play = false;
                 david.SetBool("Playing", false);
             }
         }

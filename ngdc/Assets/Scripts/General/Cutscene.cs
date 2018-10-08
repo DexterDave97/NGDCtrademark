@@ -156,10 +156,10 @@ public class Cutscene : MonoBehaviour
 
         if (playCutscene)
         {
-            if(!played)
+            if (!played)
             {
                 played = true;
-                audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
+                //audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
             }
             audioSc1.Pause();
             if(timebool)
@@ -167,6 +167,10 @@ public class Cutscene : MonoBehaviour
                 timeLol = Time.time;
                 timebool = false;
             }
+
+            if (cutsceneIndex == 9 && currentSprite == 4)
+                GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>().clip = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>().audioDict["BGM"][5];
+
 
             if (currentSprite == 5 && cutsceneIndex == 9)
             {
@@ -225,7 +229,7 @@ public class Cutscene : MonoBehaviour
                 currentSprite--;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 audioSc2.Play();
-                audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
+                //audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
             }
             if (Input.GetKeyUp(KeyCode.D) && currentSprite < maxScene && timelock)
             {
@@ -264,7 +268,7 @@ public class Cutscene : MonoBehaviour
                 sceneAudioIndexOffset++;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 audioSc2.Play();
-                audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
+                //audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][GetSceneAudioIndex(cutsceneIndex) + sceneAudioIndexOffset]);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
                     currentSprite--;
