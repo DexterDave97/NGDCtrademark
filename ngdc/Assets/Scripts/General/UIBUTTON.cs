@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class UIBUTTON : MonoBehaviour {
     
     GameObject thank;
-    public static bool menu = false;
 
     private void Awake()
     {
@@ -27,23 +26,17 @@ public class UIBUTTON : MonoBehaviour {
 
     public void ToCredit()
     {
-        menu = true;
-        SceneManager.LoadScene("Credits");
+        SceneManager.LoadScene("Credits 2");
     }
 
     private void Update()
     {
-        if (menu && SceneManager.GetActiveScene().name == "Credits")
-            thank.SetActive(false);
-        else if (!menu && SceneManager.GetActiveScene().name == "Credits") thank.SetActive(true);
-
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "Credits" && menu)
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "Credits 2")
         {
-            menu = false;
             SceneManager.LoadScene("MainMenu");
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "Credits" && !menu)
+        if (Input.GetKeyDown(KeyCode.Escape) && (SceneManager.GetActiveScene().name == "Credits" || SceneManager.GetActiveScene().name == "Credits 1"))
         {
             Application.Quit();
         }
