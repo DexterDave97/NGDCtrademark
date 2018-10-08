@@ -11,7 +11,8 @@ public class Sounds : MonoBehaviour
     public List<AudioClip> Player = new List<AudioClip>();
     public List<AudioClip> Cutscenes = new List<AudioClip>();
     public List<AudioClip> SFX = new List<AudioClip>();
-    
+    public List<AudioClip> Notes = new List<AudioClip>();
+
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -29,5 +30,6 @@ public class Sounds : MonoBehaviour
         audioDict.Add("Player", Player);
         audioDict.Add("SFX", SFX);
         audioDict.Add("Cutscenes", Cutscenes);
+        audioDict.Add("Piano", Notes);
     }
 }

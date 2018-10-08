@@ -1928,6 +1928,7 @@ MonoBehaviour:
   r: {fileID: 1263883164}
   tx: {fileID: 538540660}
   willStopPlayer: 0
+  kuchbhi: []
 --- !u!4 &1263883166
 Transform:
   m_ObjectHideFlags: 0

@@ -19,9 +19,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public static bool canmove;
     [SerializeField] float moveSpeed = 5f;
 
+    [SerializeField]
+    AudioSource Steps;
+    [SerializeField]
+    Sounds s;
+
     private void Awake()
     {
         playerAnim = GetComponent<Animator>();
+        s = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>();
+        Steps = GameObject.FindGameObjectWithTag("Footstep").GetComponent<AudioSource>();
+
         if (SceneManager.GetActiveScene().buildIndex >= 1 && SceneManager.GetActiveScene().buildIndex <= 3)
         {
             playerAnim.SetBool("VTrigger", false);
@@ -37,8 +45,18 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("VTrigger", false);
             playerAnim.SetBool("FireTrigger", true);
         }
+        else if (SceneManager.GetActiveScene().buildIndex == 12)
+        {
+            playerAnim.SetBool("Black", true);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 13)
+        {
+            playerAnim.SetBool("VTrigger", false);
+            playerAnim.SetBool("FireTrigger", false);
+            playerAnim.SetBool("Black", false);
+        }
 
-        if(SceneManager.GetActiveScene().buildIndex > 4 && SceneManager.GetActiveScene().buildIndex < 12)
+            if (SceneManager.GetActiveScene().buildIndex > 4 && SceneManager.GetActiveScene().buildIndex < 12)
         {
             d1 = GameObject.FindGameObjectWithTag("Death1").GetComponent<Animator>();
             d2 = GameObject.FindGameObjectWithTag("Death2").GetComponent<Animator>();
@@ -57,6 +75,14 @@ public class PlayerController : MonoBehaviour
         playerRB = GetComponent<Rigidbody2D>();
         playerSp = GetComponent<SpriteRenderer>();
         fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
+
+        if ((SceneManager.GetActiveScene().buildIndex >= 1 && SceneManager.GetActiveScene().buildIndex <= 3) || (SceneManager.GetActiveScene().buildIndex >= 7 && SceneManager.GetActiveScene().buildIndex <= 9) || (SceneManager.GetActiveScene().buildIndex >= 13 && SceneManager.GetActiveScene().buildIndex <= 14))
+            Steps.clip = s.audioDict["Player"][0];
+        if ((SceneManager.GetActiveScene().buildIndex >= 4 && SceneManager.GetActiveScene().buildIndex <= 5) || SceneManager.GetActiveScene().buildIndex == 12)
+            Steps.clip = s.audioDict["Player"][1];
+        if (SceneManager.GetActiveScene().buildIndex == 11)
+            Steps.clip = s.audioDict["Player"][2];
+
         if (LevelTransition.playerPos != null && PlayerPrefs.HasKey(SceneManager.GetActiveScene().name))
         {
             gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name), gameObject.transform.position.y, gameObject.transform.position.z);

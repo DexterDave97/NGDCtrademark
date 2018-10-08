@@ -12,7 +12,9 @@ public class FireTriggerScript : MonoBehaviour {
         if(collision.tag == "Player" && !trig)
         {
             trig = true;
-            this.GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>().clip = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>().audioDict["Corridor"][6];
+            GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>().Play();
         }
     }
 

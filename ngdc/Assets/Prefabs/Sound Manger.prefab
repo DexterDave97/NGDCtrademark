@@ -421,14 +421,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5e0bda7020f31344a9efe136058a7fe4, type: 3}
   - {fileID: 8300000, guid: f01ba6eae424eea41839558b8cc128b6, type: 3}
   - {fileID: 8300000, guid: 72a531f79d09af746bfd7010beeff0b2, type: 3}
+  - {fileID: 8300000, guid: f5c251b2c4378f048a6d68ca764be5b9, type: 3}
   Corridor:
   - {fileID: 8300000, guid: 0c97c8992d8e4904780fb15f82d5a5f8, type: 3}
   - {fileID: 8300000, guid: 5c9a6c821133b3a48b11b6f3cf1a19ac, type: 3}
   - {fileID: 8300000, guid: 0a1a25f34aa17244e8f1786db09bdd50, type: 3}
   - {fileID: 8300000, guid: 7f547867b1aede5489dba9a89ffb76cd, type: 3}
   - {fileID: 8300000, guid: 45e27b1f411650a42956d76cce13adee, type: 3}
+  - {fileID: 8300000, guid: 4f056fa985350464180ec670feb24fc9, type: 3}
+  - {fileID: 8300000, guid: d5ca84b30a1b4d04cbaa52cfef18edf5, type: 3}
   Player:
-  - {fileID: 8300000, guid: 78c254f811cfd944c8cee61e0276ba0c, type: 3}
+  - {fileID: 8300000, guid: b45027117b417ef489eb3c64458c753d, type: 3}
+  - {fileID: 8300000, guid: 0c77cbf5bc0336d4892c744bd77da769, type: 3}
+  - {fileID: 8300000, guid: 5794a0cd55d36ad4c824e3244fbd83fc, type: 3}
   Cutscenes:
   - {fileID: 8300000, guid: 144976a638d6fd14d980ffa87d64215e, type: 3}
   - {fileID: 8300000, guid: 31a2098f96368f649a76be83091ef88f, type: 3}
@@ -447,3 +452,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: efff83d8546085946911ccdee041b78f, type: 3}
   SFX:
   - {fileID: 8300000, guid: 83ecf15fc69569b47badced2d3589577, type: 3}
+  - {fileID: 8300000, guid: 65783f9384503824f944f5c3a03211fe, type: 3}
+  - {fileID: 8300000, guid: 0ff021d75c8b581409f6f88becd22ce0, type: 3}
+  - {fileID: 8300000, guid: 77057518bd38fd94ab3bbbadbe9e2a8f, type: 3}

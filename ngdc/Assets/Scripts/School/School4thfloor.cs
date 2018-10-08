@@ -36,6 +36,7 @@ public class School4thfloor : MonoBehaviour {
     {
         fadePanel.SetBool("out", true);
         DavidAim.SetBool("DoorHit", true);
+        GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>().PlayOneShot(GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>().audioDict["SFX"][hit]);
         yield return new WaitForSeconds(1);
         DavidAim.SetBool("DoorHit", false);
         if (doorCount==3)
@@ -92,6 +93,7 @@ public class School4thfloor : MonoBehaviour {
         if (hit != 0)
         {
             DavidAim.SetBool("DoorHit", true);
+            GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>().PlayOneShot(GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>().audioDict["SFX"][hit]);
             Invoke("InvokingFun", 0.7f);
         }
         PlayerController.canmove = false;

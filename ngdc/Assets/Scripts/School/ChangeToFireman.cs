@@ -28,6 +28,9 @@ public class ChangeToFireman : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             triggered = true;
+            GameObject.FindGameObjectWithTag("Footstep").GetComponent<AudioSource>().clip = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>().audioDict["Player"][2];
+            GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>().clip = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>().audioDict["Corridor"][5];
+            GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>().Play();
             col.gameObject.GetComponent<Animator>().SetBool("FireTrigger", true);
             col.gameObject.GetComponent<Animator>().SetBool("VTrigger", false);
         }

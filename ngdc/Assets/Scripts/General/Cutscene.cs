@@ -37,7 +37,7 @@ public class Cutscene : MonoBehaviour
 
     void Start()
     {
-        audioList = FindObjectOfType<Sounds>();
+        audioList = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<Sounds>();
         audioSc1 = GameObject.FindGameObjectWithTag("Primary Audio").GetComponent<AudioSource>();
         audioSc2 = GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>();
         timebool = true;
@@ -134,6 +134,15 @@ public class Cutscene : MonoBehaviour
 
             audioSc2.clip = audioList.audioDict["Corridor"][3];
             audioSc2.Play();
+        }
+        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name == "School")
+        {
+            audioSc2.clip = audioList.audioDict["Corridor"][3];
+            audioSc2.Play();
+        }
+        if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name == "FallingBuildingScene")
+        {
+            audioSc1.PlayOneShot(audioList.audioDict["BGM"][4]);
         }
 
         if (Time.timeSinceLevelLoad <= Time.fixedDeltaTime && SceneManager.GetActiveScene().name == "ToCafe")
@@ -384,6 +393,7 @@ public class Cutscene : MonoBehaviour
         if (cutsceneIndex == 8)
         {
             PlayerController.jumpingAvailable = false;
+            GameObject.FindGameObjectWithTag("Secondary Audio").GetComponent<AudioSource>().clip = null;
             SceneManager.LoadScene("BuildingEnding");
         }
         yield return new WaitForSeconds(0.5f);
