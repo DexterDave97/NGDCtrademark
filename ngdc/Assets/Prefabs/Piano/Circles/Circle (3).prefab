@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224626830549475662}
   - component: {fileID: 222798119627438602}
   - component: {fileID: 114079812367506880}
-  - component: {fileID: 95872895781810692}
+  - component: {fileID: 95669366966448854}
   m_Layer: 5
   m_Name: Circle (3)
   m_TagString: Untagged
@@ -29,7 +29,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &95872895781810692
+--- !u!95 &95669366966448854
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1

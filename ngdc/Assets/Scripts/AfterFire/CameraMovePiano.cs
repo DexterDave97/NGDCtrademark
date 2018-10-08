@@ -7,16 +7,12 @@ public class CameraMovePiano : MonoBehaviour {
     [SerializeField] GameObject upscene;
     [SerializeField] GameObject Blackie;
     [SerializeField] GameObject Violin;
-    bool locked = false, locked2 = true;
+    public static bool startMoving = false;
+    bool locked2 = true;
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            locked = true;
-        }
-
-        if (locked)
+        if (startMoving)
             Move();
     }
 
@@ -39,6 +35,7 @@ public class CameraMovePiano : MonoBehaviour {
         {
             Blackie.SetActive(false);
             Violin.SetActive(false);
+            startMoving = false;
         }
     }
 }

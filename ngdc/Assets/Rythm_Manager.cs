@@ -24,8 +24,6 @@ public class Rythm_Manager : MonoBehaviour
 
     private void Awake()
     {
-        //ADD NO HIT ANIMATION SHAKE
-        //ADD IDLE RING
         Worg = W.transform.localPosition;
         Aorg = A.transform.localPosition;
         Dorg = D.transform.localPosition;
@@ -74,6 +72,10 @@ public class Rythm_Manager : MonoBehaviour
                 W.SetActive(false);
                 A.SetActive(false);
                 D.SetActive(false);
+                C1.SetActive(false);
+                C2.SetActive(false);
+                C3.SetActive(false);
+                CameraMovePiano.startMoving = true;
             }
             lockA = lockD = lockW = true;
             W.transform.localPosition = Worg;

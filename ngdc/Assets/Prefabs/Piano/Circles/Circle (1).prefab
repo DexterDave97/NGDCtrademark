@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224601408724363388}
   - component: {fileID: 222816472992840812}
   - component: {fileID: 114866631358905976}
-  - component: {fileID: 95920056487095442}
+  - component: {fileID: 95055585068131416}
   m_Layer: 5
   m_Name: Circle (1)
   m_TagString: Untagged
@@ -29,7 +29,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &95920056487095442
+--- !u!95 &95055585068131416
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -96,6 +96,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -340, y: 270}
+  m_AnchoredPosition: {x: -339.99997, y: 270}
   m_SizeDelta: {x: 125.666664, y: 138.33333}
   m_Pivot: {x: 0.5, y: 0.5}
