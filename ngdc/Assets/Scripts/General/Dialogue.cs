@@ -15,7 +15,7 @@ public class Dialogue : MonoBehaviour {
 
     void Start()
     {
-        r.GetComponent<RollText>();
+        r = GetComponent<RollText>();
     }
 
     private void Update()
@@ -31,7 +31,7 @@ public class Dialogue : MonoBehaviour {
 
     private void Trig()
     { 
-        RaycastHit2D col = Physics2D.Raycast(transform.position, -Vector3.up);
+        RaycastHit2D col = Physics2D.Raycast(transform.position, -Vector3.up, Mathf.Infinity);
         if (col.collider.tag == "Player" && !start)
         {            
             start = true;
@@ -41,17 +41,21 @@ public class Dialogue : MonoBehaviour {
         {
             if(trig && timer == 0)
             {
-                Debug.Log("hi");
+                if(index == 0)
+                    tx.text = "";
                 if(willStopPlayer)
                     PlayerController.canmove = false;
                 if (index == dailogues.Length)
                 {
                     index++;
                     tx.text = "";
-                    PlayerController.canmove = true;
+                    if (willStopPlayer)
+                        PlayerController.canmove = true;
+                    Destroy(this.gameObject);
                 }
                 else
                 {
+                    tx.text = "";
                     StartCoroutine(r.rollText(dailogues[index], tx));
                     trig = false;
                 }

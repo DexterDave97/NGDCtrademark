@@ -105,6 +105,9 @@ public class PlayerController : MonoBehaviour
 
         if(Time.timeSinceLevelLoad < 0.01f)
             fadePanel = GameObject.FindGameObjectWithTag("FadePanel").GetComponent<Animator>();
+
+        if (SceneManager.GetActiveScene().name == "House" || SceneManager.GetActiveScene().name == "SchoolHouse" || SceneManager.GetActiveScene().name == "HouseAfterFire")
+            jumpingAvailable = false;
     }
 
     private void FixedUpdate()
@@ -216,6 +219,12 @@ public class PlayerController : MonoBehaviour
         {
             runSpeed += acc;
             runSpeed = Mathf.Clamp(runSpeed, runSpeed, maxMoveSpeed);
+        }
+
+        if (maxMoveSpeed == 7 && runSpeed > 5f && Input.GetKey(KeyCode.LeftShift) == false)
+        {
+            runSpeed -= 0.05f;
+            runSpeed = Mathf.Clamp(runSpeed, runSpeed, moveSpeed);
         }
 
         if (runSpeed > 10f && Input.GetKey(KeyCode.LeftShift) == false)

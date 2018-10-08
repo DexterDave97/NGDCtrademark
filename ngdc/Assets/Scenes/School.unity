@@ -258,7 +258,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 408300576}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -992,6 +992,72 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d361d23dbed9f9f419c78214dda44acc, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &79671499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79671500}
+  - component: {fileID: 79671502}
+  - component: {fileID: 79671501}
+  m_Layer: 0
+  m_Name: TeacherWillGiveMePowerAfterHMMMMMMMM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &79671500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 79671499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 454770889}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &79671501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 79671499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcaf7e49b798d848a45c4e5a635ef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &79671502
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 79671499}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.66119087, y: 1.9394975}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.3223817, y: 7.7000866}
+  m_EdgeRadius: 0
 --- !u!4 &80219600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4025395114106658, guid: d361d23dbed9f9f419c78214dda44acc,
@@ -4436,9 +4502,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 28117460}
   - {fileID: 786321547}
   - {fileID: 2065454344}
-  - {fileID: 28117460}
   - {fileID: 1556978867}
   - {fileID: 905056112}
   m_Father: {fileID: 0}
@@ -5069,7 +5135,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -93.82, y: -1.97, z: 0}
   m_LocalScale: {x: -1.823613, y: 1.823613, z: 1.823613}
-  m_Children: []
+  m_Children:
+  - {fileID: 79671500}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5523,8 +5590,8 @@ MonoBehaviour:
   - 'Teacher: Thank God, Mr. Freeman you are here !'
   - 'David: It''s gonna be alright ma''am. I need you to tell me where the kids are,
     Claire is with them as well I hope.'
-  - Teacher:There could be kids stuck on the upper floors. I'm scared I couldn't do
-    anything. Please save them.
+  - 'Teacher: There could be kids stuck on the upper floors. I''m scared I couldn''t
+    do anything. Please save them.'
   - 'David: Don''t worry ma''am, just stand by near the end of the corridor. I will
     get the kids out. There are crane stations near the windows of this school. We
     will extract you from there.'
@@ -5538,7 +5605,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 484251538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -91.4, y: -2.52, z: -7.5}
+  m_LocalPosition: {x: -91.4, y: 7.4, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7828,7 +7895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6d29fd24f25aa40a8d0f93bfc95327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelname: House
+  levelname: SchoolHouse
   changable: 0
   anim: {fileID: 2065454345}
   shouldSave: 0
@@ -8337,7 +8404,7 @@ Prefab:
     - target: {fileID: 224862375581809248, guid: f9f0dbfc8d391ca4d88e1e8b758b3023,
         type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224862375581809248, guid: f9f0dbfc8d391ca4d88e1e8b758b3023,
         type: 2}
@@ -8907,7 +8974,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0000014305115, y: 1.5335443}
+  m_Offset: {x: -0.0000019073486, y: -0.10018015}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -8918,7 +8985,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.09671, y: 4.302686}
+  m_Size: {x: 16.09671, y: 7.570135}
   m_EdgeRadius: 0
 --- !u!212 &841315589
 SpriteRenderer:
@@ -20157,7 +20224,7 @@ MonoBehaviour:
   - 'Teacher: Mr Freeman'
   r: {fileID: 1791220938}
   tx: {fileID: 905056110}
-  willStopPlayer: 1
+  willStopPlayer: 0
 --- !u!4 &1791220940
 Transform:
   m_ObjectHideFlags: 0
@@ -20165,7 +20232,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1791220937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.6, y: -2.52, z: -7.5}
+  m_LocalPosition: {x: -34.6, y: 7.4, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -22348,7 +22415,7 @@ MonoBehaviour:
   - 'David: Anyone out there!!'
   r: {fileID: 1983738301}
   tx: {fileID: 905056110}
-  willStopPlayer: 1
+  willStopPlayer: 0
 --- !u!4 &1983738303
 Transform:
   m_ObjectHideFlags: 0
@@ -22356,7 +22423,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1983738300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14, y: -2.52, z: -7.5}
+  m_LocalPosition: {x: -15.6, y: -1.8, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -23468,7 +23535,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 408300576}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

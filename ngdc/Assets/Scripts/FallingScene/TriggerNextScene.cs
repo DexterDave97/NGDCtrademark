@@ -24,6 +24,7 @@ public class TriggerNextScene : MonoBehaviour {
         if(collision.gameObject.tag == "Player")
         {
             PlayerPrefs.SetFloat("SchoolHouse", 11.7f);
+            PlayerPrefs.SetFloat("SchoolBedroom", 8.15f);
             blackPanel.SetActive(true);
             mainCam.orthographicSize = 1f;
             mainCam.transform.localPosition = new Vector3(2.1f, mainCam.transform.localPosition.y, mainCam.transform.localPosition.z);

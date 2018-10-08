@@ -33,9 +33,9 @@ public class UIBUTTON : MonoBehaviour {
 
     private void Update()
     {
-        if (menu)
+        if (menu && SceneManager.GetActiveScene().name == "Credits")
             thank.SetActive(false);
-        else thank.SetActive(true);
+        else if (!menu && SceneManager.GetActiveScene().name == "Credits") thank.SetActive(true);
 
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "Credits" && menu)
         {

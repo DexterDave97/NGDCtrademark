@@ -501,7 +501,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2042180442}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -875,7 +875,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2042180442}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2871,7 +2871,9 @@ MonoBehaviour:
   dailogues:
   - Where are we heading today?
   - 'David: *sighs*'
+  r: {fileID: 0}
   tx: {fileID: 590187629}
+  willStopPlayer: 0
 --- !u!114 &1511198961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2883,6 +2885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39d5193d0d11b649816e6c22cb9f96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ended: 0
 --- !u!4 &1511198962
 Transform:
   m_ObjectHideFlags: 0
@@ -3735,8 +3738,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 321694447}
   - {fileID: 262849298}
+  - {fileID: 321694447}
   - {fileID: 413753743}
   - {fileID: 590187631}
   m_Father: {fileID: 0}

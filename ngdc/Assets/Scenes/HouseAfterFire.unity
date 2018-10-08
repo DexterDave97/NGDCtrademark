@@ -742,6 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39d5193d0d11b649816e6c22cb9f96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ended: 0
 --- !u!114 &348324449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,13 +767,13 @@ MonoBehaviour:
     of difference would it even make ? *sigh*'
   - 'David: I''m not a big fan of news cutouts but she told me to keep it ..... Just
     for her ...'
-  - 'David: Oh Clarry .... my baby .... daddy misses you everyday .... daddy misses
-    your smile ... Oh God ! .. No.'
+  - 'David: Oh Claire ...'
   gbArr:
   - {fileID: 242804320}
   - {fileID: 929112749}
   - {fileID: 1756023522}
   skip: 0
+  r: {fileID: 0}
 --- !u!114 &348324450
 MonoBehaviour:
   m_ObjectHideFlags: 0
