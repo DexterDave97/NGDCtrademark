@@ -26,6 +26,8 @@ public class ElevatorButton : MonoBehaviour
             if(Cutscene.cutsceneIndex < 3)
                 Lift.SetBool("CallElevator", true);
             PlayerController.canmove = false;
+            PlayerController.jumpingAvailable = false;
+            PlayerController.jumpoverride = false;
             Invoke("TempFun", 1.2f);
         }
     }
@@ -38,6 +40,8 @@ public class ElevatorButton : MonoBehaviour
     void TempFun()
     {
         PlayerController.canmove = true;
+        PlayerController.jumpingAvailable = true;
+        PlayerController.jumpoverride = true;
     }
 
     void OnTriggerEnter2D(Collider2D col)
