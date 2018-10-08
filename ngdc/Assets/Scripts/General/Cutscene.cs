@@ -22,7 +22,7 @@ public class Cutscene : MonoBehaviour
     bool timebool,played;
     float timealert = 0, inputtime = 0, mytime;
     bool locked = true, timelock = true, timelock2 = true;
-    public static bool dying = false;
+    public static bool dying = false, sceneloadbool = true;
     //float a1, a2, a3;
     private Sounds audioList;
     public List<Sprite> cutscene1 = new List<Sprite>();
@@ -167,7 +167,7 @@ public class Cutscene : MonoBehaviour
                     timelock2 = false;
                     mytime = Time.time;
                 }
-                if (mytime + 3.33 < Time.time)
+                if (mytime + 3.2 < Time.time)
                 {
                     timelock2 = true;
                     currentSprite = 6;
@@ -182,7 +182,7 @@ public class Cutscene : MonoBehaviour
                     timelock2 = false;
                     mytime = Time.time;
                 }
-                if (mytime + 3.33 < Time.time)
+                if (mytime + 3.2 < Time.time)
                 {
                     timelock2 = true;
                     currentSprite = 7;
@@ -197,9 +197,10 @@ public class Cutscene : MonoBehaviour
                     timelock2 = false;
                     mytime = Time.time;
                 }
-                if (mytime + 3.33 < Time.time)
+                if (mytime + 3.2 < Time.time && sceneloadbool)
                 {
                     timelock2 = true;
+                    sceneloadbool = false;
                     SceneManager.LoadScene("PianoScene");
                 }
             }

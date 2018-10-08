@@ -1,31 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Rythm_Manager : MonoBehaviour {
+public class Rythm_Manager : MonoBehaviour
+{
 
-    public float offset = 20f;
     [SerializeField]
     GameObject W, A, D;
     [SerializeField]
     GameObject C1, C2, C3;
+
+    int[] a1 = { 0, 1, 1, 1, 0, 0, 1, 0 }, a2 = { 0, 1, 1, 0, 1, 1, 0, 1 }, a3 = { 1, 0, 1, 0, 0, 1, 1, 0 };
+    int index = -1;
+    Color zero, one;
 
     Vector3 Worg, Aorg, Dorg;
 
     bool Whit, Ahit, Dhit;
     bool lockW = false, lockA = false, lockD = false;
 
-    float timeW, timeA, timeD;
+    float timeW;
 
     private void Awake()
     {
+        //ADD NO HIT ANIMATION SHAKE
+        //ADD IDLE RING
         Worg = W.transform.localPosition;
         Aorg = A.transform.localPosition;
         Dorg = D.transform.localPosition;
-        timeA = timeD = timeW = Time.time;
         W.SetActive(false);
         A.SetActive(false);
         D.SetActive(false);
+        zero.a = 0; one.a = 1;
     }
 
     private void Start()
@@ -33,44 +40,74 @@ public class Rythm_Manager : MonoBehaviour {
         Whit = false;
         Ahit = false;
         Dhit = false;
+        timeW = Time.time;
+        C1.GetComponent<Animator>().SetBool("Idle", true);
+        C2.GetComponent<Animator>().SetBool("Idle", true);
+        C3.GetComponent<Animator>().SetBool("Idle", true);
     }
 
     private void Update()
     {
-        Debug.Log(Whit + " " + Ahit + " " + Dhit);
-        MoveImage();
-        CheckHit();
-        CheckInput();
+        //Debug.Log((C1.transform.position.x + C1.GetComponent<RectTransform>().rect.width) + ","+ (C1.transform.position.x - C1.GetComponent<RectTransform>().rect.width));
+        if (index < 9)
+        {
+            MoveImage();
+            CheckHit();
+            CheckInput();
+        }
     }
 
     void MoveImage()
     {
-        if (timeW + 3.3 < Time.time)
+        if (timeW + 1.6 < Time.time)
         {
             timeW = Time.time;
+            index++;
             W.SetActive(true);
             A.SetActive(true);
             D.SetActive(true);
-            lockA = lockD = lockW = false;
+            C1.GetComponent<Animator>().SetBool("Idle", true);
+            C2.GetComponent<Animator>().SetBool("Idle", true);
+            C3.GetComponent<Animator>().SetBool("Idle", true);
+            if (index > 7)
+            {
+                W.SetActive(false);
+                A.SetActive(false);
+                D.SetActive(false);
+            }
+            lockA = lockD = lockW = true;
             W.transform.localPosition = Worg;
             D.transform.localPosition = Dorg;
             A.transform.localPosition = Aorg;
         }
-        
-        W.transform.localPosition -= new Vector3(250 * Time.deltaTime, 0, 0);
-        D.transform.localPosition -= new Vector3(250 * Time.deltaTime, 0, 0);
-        A.transform.localPosition -= new Vector3(250 * Time.deltaTime, 0, 0);
+
+        if (index != -1 && index < 8)
+        {
+            if (a1[index] == 0)
+                W.GetComponent<Image>().color = zero;
+            else W.GetComponent<Image>().color = one;
+            if (a2[index] == 0)
+                A.GetComponent<Image>().color = zero;
+            else A.GetComponent<Image>().color = one;
+            if (a3[index] == 0)
+                D.GetComponent<Image>().color = zero;
+            else D.GetComponent<Image>().color = one;
+        }
+
+        W.transform.localPosition -= new Vector3(350 * Time.deltaTime, 0, 0);
+        D.transform.localPosition -= new Vector3(350 * Time.deltaTime, 0, 0);
+        A.transform.localPosition -= new Vector3(350 * Time.deltaTime, 0, 0);
     }
 
     void CheckHit()
     {
-        if (C1.transform.localPosition.x + offset > W.transform.localPosition.x && C1.transform.localPosition.x - offset < W.transform.localPosition.x)
+        if (C1.transform.localPosition.x + C1.GetComponent<RectTransform>().rect.width / 2 > W.transform.localPosition.x && C1.transform.localPosition.x - C1.GetComponent<RectTransform>().rect.width / 2 < W.transform.localPosition.x)
             Whit = true;
         else Whit = false;
-        if (C2.transform.localPosition.x + offset > A.transform.localPosition.x && C2.transform.localPosition.x - offset < A.transform.localPosition.x)
+        if (C2.transform.localPosition.x + C2.GetComponent<RectTransform>().rect.width / 2 > A.transform.localPosition.x && C2.transform.localPosition.x - C2.GetComponent<RectTransform>().rect.width / 2 < A.transform.localPosition.x)
             Ahit = true;
         else Ahit = false;
-        if (C3.transform.localPosition.x + offset > D.transform.localPosition.x && C3.transform.localPosition.x - offset < D.transform.localPosition.x)
+        if (C3.transform.localPosition.x + C3.GetComponent<RectTransform>().rect.width / 2 > D.transform.localPosition.x && C3.transform.localPosition.x - C3.GetComponent<RectTransform>().rect.width / 2 < D.transform.localPosition.x)
             Dhit = true;
         else Dhit = false;
     }
@@ -79,52 +116,58 @@ public class Rythm_Manager : MonoBehaviour {
     {
         if (Whit)
         {
-            if (Input.GetKeyDown(KeyCode.W) && !lockW)
+            if (Input.GetKeyDown(KeyCode.W) && lockW && a1[index] == 1)
             {
-                lockW = true;
+                lockW = false;
                 C1.GetComponent<Animator>().SetBool("S", true);
+                C1.GetComponent<Animator>().SetBool("Idle", false);
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.W) && !lockW)
+            if (Input.GetKeyDown(KeyCode.W) && lockW)
             {
-                lockW = true;
+                lockW = false;
                 C1.GetComponent<Animator>().SetBool("S", false);
+                C1.GetComponent<Animator>().SetBool("Idle", false);
             }
         }
 
         if (Ahit)
         {
-            if (Input.GetKeyDown(KeyCode.A) && !lockA)
+            if (Input.GetKeyDown(KeyCode.A) && lockA && a2[index] == 1)
             {
-                lockW = true;
+                lockA = false;
                 C2.GetComponent<Animator>().SetBool("S", true);
+                C2.GetComponent<Animator>().SetBool("Idle", false);
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.A) && !lockA)
+            if (Input.GetKeyDown(KeyCode.A) && lockA)
             {
-                lockW = true;
+                lockA = false;
                 C2.GetComponent<Animator>().SetBool("S", false);
+                C2.GetComponent<Animator>().SetBool("Idle", false);
             }
         }
 
         if (Dhit)
         {
-            if (Input.GetKeyDown(KeyCode.D) && !lockD)
+            if (Input.GetKeyDown(KeyCode.D) && lockD && a3[index] == 1)
             {
-                lockW = true;
+                lockD = false;
                 C3.GetComponent<Animator>().SetBool("S", true);
+                C3.GetComponent<Animator>().SetBool("Idle", false);
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.D) && !lockD)
+            if (Input.GetKeyDown(KeyCode.D) && lockD)
             {
-                lockW = true;
+                lockD = false;
                 C3.GetComponent<Animator>().SetBool("S", false);
+                C3.GetComponent<Animator>().SetBool("Idle", false);
             }
         }
     }
