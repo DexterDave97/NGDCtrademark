@@ -10,6 +10,8 @@ public class Rythm_Manager : MonoBehaviour
     GameObject W, A, D;
     [SerializeField]
     GameObject C1, C2, C3;
+    [SerializeField]
+    Animator david;
 
     int[] a1 = { 0, 1, 1, 1, 0, 0, 1, 0 }, a2 = { 0, 1, 1, 0, 1, 1, 0, 1 }, a3 = { 1, 0, 1, 0, 0, 1, 1, 0 };
     int index = -1;
@@ -67,6 +69,7 @@ public class Rythm_Manager : MonoBehaviour
             C1.GetComponent<Animator>().SetBool("Idle", true);
             C2.GetComponent<Animator>().SetBool("Idle", true);
             C3.GetComponent<Animator>().SetBool("Idle", true);
+            david.SetBool("Playing", false);
             if (index > 7)
             {
                 W.SetActive(false);
@@ -123,6 +126,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockW = false;
                 C1.GetComponent<Animator>().SetBool("S", true);
                 C1.GetComponent<Animator>().SetBool("Idle", false);
+                david.SetBool("Playing", true);
             }
         }
         else
@@ -132,6 +136,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockW = false;
                 C1.GetComponent<Animator>().SetBool("S", false);
                 C1.GetComponent<Animator>().SetBool("Idle", false);
+                david.SetBool("Playing", false);
             }
         }
 
@@ -142,6 +147,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockA = false;
                 C2.GetComponent<Animator>().SetBool("S", true);
                 C2.GetComponent<Animator>().SetBool("Idle", false);
+                david.SetBool("Playing", true);
             }
         }
         else
@@ -151,6 +157,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockA = false;
                 C2.GetComponent<Animator>().SetBool("S", false);
                 C2.GetComponent<Animator>().SetBool("Idle", false);
+                david.SetBool("Playing", false);
             }
         }
 
@@ -161,6 +168,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockD = false;
                 C3.GetComponent<Animator>().SetBool("S", true);
                 C3.GetComponent<Animator>().SetBool("Idle", false);
+                david.SetBool("Playing", true);
             }
         }
         else
@@ -170,6 +178,7 @@ public class Rythm_Manager : MonoBehaviour
                 lockD = false;
                 C3.GetComponent<Animator>().SetBool("S", false);
                 C3.GetComponent<Animator>().SetBool("Idle", false);
+                david.SetBool("Playing", false);
             }
         }
     }
