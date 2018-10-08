@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(0.8f); 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Credits");
     }
 
     private void Update()

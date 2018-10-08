@@ -39,9 +39,15 @@ public class School4thfloor : MonoBehaviour {
         yield return new WaitForSeconds(1);
         DavidAim.SetBool("DoorHit", false);
         if (doorCount==3)
+        {
+            PlayerPrefs.SetFloat("BuildinEnding", -54);
             Cutscene.cutsceneIndex = 8;
+        }
         else
+        {
+            PlayerPrefs.SetFloat("BuildinEnding", -54);
             Cutscene.cutsceneIndex = 6;
+        }
 
         Cutscene.playCutscene = true;
         Destroy(this.gameObject);
