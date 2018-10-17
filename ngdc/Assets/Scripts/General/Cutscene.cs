@@ -163,6 +163,14 @@ public class Cutscene : MonoBehaviour
             next = GetSceneAudioIndex(cutsceneIndex);
             if (!played)
             {
+                if ((cutsceneIndex == 6 || cutsceneIndex == 7 || cutsceneIndex == 8) && currentSprite == 0)
+                {
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][15]);
+                }
+                if ((cutsceneIndex == 9) && currentSprite == 0)
+                {
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][18]);
+                }
                 played = true;
                 if(next!=-1)
                     audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][next + sceneAudioIndexOffset]);
@@ -228,27 +236,26 @@ public class Cutscene : MonoBehaviour
                     sceneloadbool = false;
                     SceneManager.LoadScene("PianoScene");
                 }
-            }
+            }         
 
-            if(SceneManager.GetActiveScene().name != "PianoScene")
+            if (SceneManager.GetActiveScene().name != "PianoScene")
                 panel.enabled = true;
 
             PlayerController.canmove = false;
 
-            if (Input.GetKeyUp(KeyCode.A) && timelock)
+            if (Input.GetKeyUp(KeyCode.A) && timelock && sceneAudioIndexOffset > 0)
             {
-                sceneAudioIndexOffset--;
+                    sceneAudioIndexOffset--;
                 currentSprite--;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 audioSc2.Play();
-                if (next != -1)
-                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][next + sceneAudioIndexOffset]);
             }
             if (Input.GetKeyUp(KeyCode.D) && currentSprite < maxScene && timelock)
             {
                 timeLol = Time.time;
                 timebool = true;
-                currentSprite++;                
+                currentSprite++;
+                sceneAudioIndexOffset++;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
@@ -282,11 +289,31 @@ public class Cutscene : MonoBehaviour
                 timebool = true;
                 currentSprite++;
                 maxScene = currentSprite;
+                
                 sceneAudioIndexOffset++;
                 currentSprite = Mathf.Clamp(currentSprite, 0, GetCutscene(cutsceneIndex).Count);
-                audioSc2.Play();
+                audioSc2.Play();                
                 if (next != -1)
-                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][ next + sceneAudioIndexOffset]);
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][ next + sceneAudioIndexOffset]);               
+
+                if ((cutsceneIndex == 8) && currentSprite == 5)
+                {
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][16]);
+                }
+
+                if ((cutsceneIndex == 8) && currentSprite == 6)
+                {
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][17]);
+                }
+
+                if ((cutsceneIndex == 9) && currentSprite == 1)
+                {
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][19]);
+                }
+                if ((cutsceneIndex == 9) && currentSprite == 2)
+                {
+                    audioSc2.PlayOneShot(audioList.audioDict["Cutscenes"][20]);
+                }
                 if (currentSprite == GetCutscene(cutsceneIndex).Count)
                 {
                     cutsceneGameobject.transform.GetChild(0).gameObject.SetActive(false);
@@ -335,7 +362,7 @@ public class Cutscene : MonoBehaviour
             Color tCol;
             tCol = panel.color;
             tCol.a = 1;
-            panel.color = tCol;
+            panel.color = tCol;          
 
         }
         else

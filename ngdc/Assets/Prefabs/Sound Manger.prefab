@@ -421,7 +421,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5e0bda7020f31344a9efe136058a7fe4, type: 3}
   - {fileID: 8300000, guid: f01ba6eae424eea41839558b8cc128b6, type: 3}
   - {fileID: 8300000, guid: 72a531f79d09af746bfd7010beeff0b2, type: 3}
-  - {fileID: 8300000, guid: f5c251b2c4378f048a6d68ca764be5b9, type: 3}
+  - {fileID: 8300000, guid: 9d69f9ebe91dea1419dd7b51b7853670, type: 3}
   - {fileID: 8300000, guid: 6b2162907315d2c48b7313acfa8b259e, type: 3}
   Corridor:
   - {fileID: 8300000, guid: 0c97c8992d8e4904780fb15f82d5a5f8, type: 3}
@@ -451,6 +451,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fc88982debb56c64aa6ff63f1c7a5f74, type: 3}
   - {fileID: 8300000, guid: 2943da054c5957f478974597af5ddddc, type: 3}
   - {fileID: 8300000, guid: efff83d8546085946911ccdee041b78f, type: 3}
+  - {fileID: 8300000, guid: c98721140958f994c848ee8d7f24a4c9, type: 3}
+  - {fileID: 8300000, guid: 12bde56eee0b4b742ba6eb76043c6e73, type: 3}
+  - {fileID: 8300000, guid: ac59d12d0352df74eb9feaf4692c99db, type: 3}
+  - {fileID: 8300000, guid: 2609e5c6c6db91649a88a648bacae065, type: 3}
+  - {fileID: 8300000, guid: a2acc2b8370140841b8333fcda308650, type: 3}
+  - {fileID: 8300000, guid: 992796be8d098de4c9eb897315d565f8, type: 3}
   SFX:
   - {fileID: 8300000, guid: 83ecf15fc69569b47badced2d3589577, type: 3}
   - {fileID: 8300000, guid: 65783f9384503824f944f5c3a03211fe, type: 3}
